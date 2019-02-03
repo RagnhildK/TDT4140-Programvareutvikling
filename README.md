@@ -34,7 +34,7 @@ import foobar
 ## Laget av
 
 
-## Kommentar
-[MIT](https://choosealicense.com/licenses/mit/)
+## Kommentarer
+
 
 
