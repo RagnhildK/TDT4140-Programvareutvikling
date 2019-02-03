@@ -2,15 +2,16 @@
 
 Dette er en applikasjon som gjør det mulig for studenter å booke saltider hos studass.
 
-###Mål
+### Mål
 
--Effektivsere saltidbooking
--Forbedre kommunikasjon mellom studass, student, og faglærere
+* Effektivsere saltidbooking
+* Forbedre kommunikasjon mellom studass, student, og faglærere
+
 
 
 ## Hvordan bruke det
 
-###Installasjon
+### Installasjon
 
 ```bash
 pip install foobar
