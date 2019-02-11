@@ -1,5 +1,6 @@
 public class Main {
 
+    //This is the main class
     public String helloWorld() {
         return "Hello World!";
     }
