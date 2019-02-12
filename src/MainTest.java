@@ -20,6 +20,7 @@ public class MainTest {
     void add() {
         Main m = new Main();
         assertEquals(3,m.add(1,2));
+        //fnrfrf
     }
 
 
