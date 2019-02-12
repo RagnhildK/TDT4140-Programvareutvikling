@@ -313,7 +313,7 @@ public class Database {
         //System.out.println("Goodbye!");
 
     }
-    public static void addBooking(int bookingID, String student, String studasspåsal) {
+    public static void addBooking(int bookingID, String student, String dato, String tidspunkt, String studass ) {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -326,7 +326,7 @@ public class Database {
             //System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+studasspåsal+"')";
+            sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"')";
             stmt.executeUpdate(sql);
 
             //STEP 5: Extract data from result set
@@ -370,7 +370,7 @@ public class Database {
         updateRolle("TMA4100","dustin", "student");
         //addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
         //addStudassPåSal("2019-02-14","12:00", "bob", 15);
-        addBooking(2,"dustin", "bob");
+        addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
     }
 
 }

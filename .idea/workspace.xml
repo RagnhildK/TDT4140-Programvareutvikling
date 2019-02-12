@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4cc7141a-6038-48ea-95ab-85a769aefe00" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PU16/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PU16/Database.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PU16/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PU16/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,7 +52,7 @@
         <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/c6bcd077-06ba-4f52-8237-7f6fbed263ab/console.sql">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="25" selection-start-column="25" selection-end-column="25" />
+              <caret column="26" selection-start-column="26" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -64,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Database.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="457">
-              <caret line="373" column="5" lean-forward="true" selection-start-line="373" selection-start-column="5" selection-end-line="373" selection-end-column="5" />
+            <state relative-caret-position="359">
+              <caret line="372" column="48" selection-start-line="372" selection-start-column="48" selection-end-line="372" selection-end-column="48" />
               <folding>
                 <element signature="method#checkLogin#0;class#Database#0" />
                 <element signature="method#addBruker#0;class#Database#0" />
@@ -74,7 +70,6 @@
                 <element signature="method#addUser#1;class#Database#0" />
                 <element signature="method#addEmne#1;class#Database#0" />
                 <element signature="method#addSaltid#1;class#Database#0" />
-                <element signature="method#addStudassPåSal#1;class#Database#0" />
               </folding>
             </state>
           </provider>
@@ -157,13 +152,13 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550002598096" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550003638824" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.Arquillian JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="create.test.in.the.same.root" value="true" />
-    <property name="database.console.LAST_STATE" value="false" />
+    <property name="database.console.LAST_STATE" value="true" />
     <property name="database.data.extractors.current.id" value="Comma-separated (CSV)_id" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="D:/Program Files (x86)/mysql-connector-java-8.0.15/mysql-connector.jar!/" />
@@ -192,7 +187,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.Database">
     <configuration name="Database" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Database" />
       <module name="PU16" />
@@ -244,8 +239,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.Database" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.MainTest.main" />
         <item itemvalue="JUnit.PersonTest" />
         <item itemvalue="JUnit.MainTest" />
@@ -264,7 +259,7 @@
       <updated>1549533974329</updated>
       <workItem from="1549533979768" duration="6901000" />
       <workItem from="1549550493968" duration="1865000" />
-      <workItem from="1549993140874" duration="9052000" />
+      <workItem from="1549993140874" duration="10092000" />
     </task>
     <task id="LOCAL-00001" summary="Added multiply method.">
       <created>1549545867218</created>
@@ -323,7 +318,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33759000" />
+    <option name="totallyTimeSpent" value="34799000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -338,7 +333,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.29685807" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.29685807" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.36827195" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -349,7 +344,7 @@
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.3297546" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32827735" />
-      <window_info anchor="bottom" id="Database Console" order="13" weight="0.30444205" />
+      <window_info active="true" anchor="bottom" id="Database Console" order="13" visible="true" weight="0.30444205" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -466,14 +461,14 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/c6bcd077-06ba-4f52-8237-7f6fbed263ab/console.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="25" selection-start-column="25" selection-end-column="25" />
+          <caret column="26" selection-start-column="26" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="457">
-          <caret line="373" column="5" lean-forward="true" selection-start-line="373" selection-start-column="5" selection-end-line="373" selection-end-column="5" />
+        <state relative-caret-position="359">
+          <caret line="372" column="48" selection-start-line="372" selection-start-column="48" selection-end-line="372" selection-end-column="48" />
           <folding>
             <element signature="method#checkLogin#0;class#Database#0" />
             <element signature="method#addBruker#0;class#Database#0" />
@@ -482,7 +477,6 @@
             <element signature="method#addUser#1;class#Database#0" />
             <element signature="method#addEmne#1;class#Database#0" />
             <element signature="method#addSaltid#1;class#Database#0" />
-            <element signature="method#addStudassPåSal#1;class#Database#0" />
           </folding>
         </state>
       </provider>
