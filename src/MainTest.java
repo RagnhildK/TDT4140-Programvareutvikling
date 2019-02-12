@@ -21,7 +21,6 @@ public class MainTest {
         Main m = new Main();
         assertEquals(3,m.add(1,2));
         //fnrfrf
-        //comment
     }
 
 
