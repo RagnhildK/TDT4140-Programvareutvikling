@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 
 
 public class Main {
-
+    private String rolle = "";
     //This is the main class
     public String helloWorld() {
         return "Hello World!";
@@ -22,11 +22,10 @@ public class Main {
         return x * y;
     }
 
-    public String Input(String what) throws IOException{
+    public static String Input(String what) throws IOException{
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Enter " + what + ":");
-            String s = br.readLine();
-            return s;
+            return br.readLine();
             /*
             System.out.print("Enter Integer:");
             try{
@@ -37,24 +36,32 @@ public class Main {
     }
 
 
+
+
     public static void main(String[] args) throws IOException{
+        checkLogin();
+
+
+    }
+
+    private static void checkLogin() throws IOException {
         Main m = new Main();
         Database db = new Database();
         while (true){
-            String username = m.Input("username");
+            String username = Input("username");
             if (username.equals("quit")){
                 break;
             }
-            String password = m.Input("password");
-            System.out.print(username+":"+password);
+            String password = Input("password");
             if(db.checkLogin(username,password)){
-                System.out.print("Login success!");
+                System.out.println("Login success!");
+                if(username.equals("admin")){
+                    m.rolle = "admin";
+                }
             }
             else {
-                System.out.print("Login failed!");
+                System.out.println("Login failed!");
             }
         }
-
-
     }
 }

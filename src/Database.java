@@ -8,36 +8,29 @@ public class Database {
     static final String USER = "root";
     static final String PASS = "pu16";
 
-    public boolean checkLogin(String username, String password) {
+    public static boolean checkLogin(String brukernavn, String passord) {
         Connection conn = null;
         Statement stmt = null;
-        String passord = "password";
-
+        String pass = "";
         try {
             //STEP 3: Open a connection
             Class.forName(JDBC_DRIVER);
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT Passord FROM Bruker WHERE BrukerNavn = 'admin'";
+            sql = "SELECT Passord FROM Bruker WHERE BrukerNavn = '"+brukernavn+"'";
             ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
-            passord = rs.getString("Passord");
-
-            /*
             while(rs.next()){
                 //Retrieve by column name
-                String navn = rs.getString("Navn");
+                pass = rs.getString("Passord");
 
-                //Display values
-                System.out.println("Navn: " + navn);
             }
-            */
 
         }catch(SQLException se){
             //Handle errors for JDBC
@@ -59,40 +52,29 @@ public class Database {
                 se.printStackTrace();
             }//end finally try
         }//end try
-        System.out.println("Goodbye!");
-        if (passord.equals(password)) {
+        //System.out.println("Goodbye!");
+        if(pass.equals(passord)){
             return true;
         }
-        else {
+        else{
             return false;
         }
     }
-    /*
-    public static void main(String[] args) {
+    public static void addBruker(String brukernavn, String navn, String passord) {
         Connection conn = null;
         Statement stmt = null;
-
         try {
             //STEP 3: Open a connection
             Class.forName(JDBC_DRIVER);
-            System.out.println("Connecting to database...");
+            //System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             //STEP 4: Execute a query
-            System.out.println("Creating statement...");
+            //System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT Navn FROM Bruker WHERE Rolle = 'admin'";
-            ResultSet rs = stmt.executeQuery(sql);
-
-            //STEP 5: Extract data from result set
-            while(rs.next()){
-                //Retrieve by column name
-                String navn = rs.getString("Navn");
-
-                //Display values
-                System.out.println("Navn: " + navn);
-            }
+            sql = "INSERT INTO Bruker VALUES ('"+brukernavn+"','"+navn+"','"+passord+"')";
+            stmt.executeUpdate(sql);
 
         }catch(SQLException se){
             //Handle errors for JDBC
@@ -114,8 +96,281 @@ public class Database {
                 se.printStackTrace();
             }//end finally try
         }//end try
-        System.out.println("Goodbye!");
+        //System.out.println("Goodbye!");
+    }
+    public static void addRolle(String emneid, String brukernavn, String rolle) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
-    }*/
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO BrukerIEmne VALUES ('"+emneid+"','"+brukernavn+"','"+rolle+"')";
+            stmt.executeUpdate(sql);
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        //System.out.println("Goodbye!");
+    }
+    public static void updateRolle(String emneid, String brukernavn, String rolle) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "UPDATE BrukerIEmne SET rolle = '"+rolle+"' WHERE BrukerNavn = '"+brukernavn+"' and EmneID ='"+emneid+"'";
+            stmt.executeUpdate(sql);
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        //System.out.println("Goodbye!");
+
+    }
+    public static void addEmne(String emneid, String navn) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO Emne VALUES ('"+emneid+"','"+navn+"')";
+            stmt.executeUpdate(sql);
+
+            //STEP 5: Extract data from result set
+            /*while(rs.next()){
+                //Retrieve by column name
+                String pass = rs.getString("Passord");
+
+            }*/
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        //System.out.println("Goodbye!");
+
+    }
+    public static void addSaltid(String dato, String fra, String til, String emneid, int varighet, String faglærer) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO Saltid VALUES ('"+dato+"','"+fra+"','"+til+"','"+emneid+"','"+varighet+"','"+faglærer+"')";
+            stmt.executeUpdate(sql);
+
+            //STEP 5: Extract data from result set
+            /*while(rs.next()){
+                //Retrieve by column name
+                String pass = rs.getString("Passord");
+
+            }*/
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        //System.out.println("Goodbye!");
+
+    }
+    public static void addStudassPåSal(String dato, String tidspunkt, String studass, int varighet) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+studass+"','"+varighet+"')";
+            stmt.executeUpdate(sql);
+
+            //STEP 5: Extract data from result set
+            /*while(rs.next()){
+                //Retrieve by column name
+                String pass = rs.getString("Passord");
+
+            }*/
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        //System.out.println("Goodbye!");
+
+    }
+    public static void addBooking(int bookingID, String student, String studasspåsal) {
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            //STEP 4: Execute a query
+            //System.out.println("Creating statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+studasspåsal+"')";
+            stmt.executeUpdate(sql);
+
+            //STEP 5: Extract data from result set
+            /*while(rs.next()){
+                //Retrieve by column name
+                String pass = rs.getString("Passord");
+
+            }*/
+
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        //System.out.println("Goodbye!");
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println(checkLogin("admin","12345"));
+        //addBruker("eric", "Eric", "12345");
+        //addBruker("dustin", "Dustin", "12345");
+        //addEmne("TMA4100", "Matte 1");
+        //addRolle("TMA4100", "eric", "faglærer");
+        //addRolle("TMA4100","dustin", "studass");
+        updateRolle("TMA4100","dustin", "student");
+        //addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
+        //addStudassPåSal("2019-02-14","12:00", "bob", 15);
+        addBooking(2,"dustin", "bob");
+    }
 
 }
