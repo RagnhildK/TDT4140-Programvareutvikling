@@ -5,7 +5,7 @@ initialize
 	- git init: i riktig mapappe
 	- git add -A / relevant fil
 	- git commit -m "melding"
-	- git remote add orgin https://gitlab.com/atoft/test2.git
+	- git remote add orgin https://gitlab.com/...
 	- git push orgin master
 
 lagg til fil
