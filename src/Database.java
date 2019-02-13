@@ -3,9 +3,9 @@ import java.sql.*;
 public class Database {
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/studass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+    static final String DB_URL = "jdbc:mysql://mysql.stud.ntnu.no/ingebrin_pu?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-    static final String USER = "root";
+    static final String USER = "ingebrin";
     static final String PASS = "pu16";
 
     public static boolean checkLogin(String brukernavn, String passord) {
@@ -367,10 +367,10 @@ public class Database {
         //addEmne("TMA4100", "Matte 1");
         //addRolle("TMA4100", "eric", "faglærer");
         //addRolle("TMA4100","dustin", "studass");
-        updateRolle("TMA4100","dustin", "student");
+        //updateRolle("TMA4100","dustin", "student");
         //addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
         //addStudassPåSal("2019-02-14","12:00", "bob", 15);
-        addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
+        //addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
     }
 
 }
