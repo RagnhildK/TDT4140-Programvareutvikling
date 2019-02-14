@@ -3,6 +3,7 @@ import java.sql.*;
 public class Database {
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+    //com.mysql.cj.jdbc.Driver
     static final String DB_URL = "jdbc:mysql://mysql.stud.ntnu.no/ingebrin_pu?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
     static final String USER = "ingebrin";
@@ -361,7 +362,7 @@ public class Database {
     }
 
     public static void main(String[] args) {
-        System.out.println(checkLogin("admin","12345"));
+        System.out.println(checkLogin("admin","admin"));
         //addBruker("eric", "Eric", "12345");
         //addBruker("dustin", "Dustin", "12345");
         //addEmne("TMA4100", "Matte 1");
