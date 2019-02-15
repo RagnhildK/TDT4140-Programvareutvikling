@@ -1,6 +1,10 @@
+
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class Main {
@@ -38,30 +42,9 @@ public class Main {
 
 
 
-    public static void main(String[] args) throws IOException{
-        checkLogin();
-
-
+    public static void main(String[] args) {
+        UserManager.main();
     }
 
-    private static void checkLogin() throws IOException {
-        Main m = new Main();
-        Database db = new Database();
-        while (true){
-            String username = Input("username");
-            if (username.equals("quit")){
-                break;
-            }
-            String password = Input("password");
-            if(db.checkLogin(username,password)){
-                System.out.println("Login success!");
-                if(username.equals("admin")){
-                    m.rolle = "admin";
-                }
-            }
-            else {
-                System.out.println("Login failed!");
-            }
-        }
-    }
+
 }
