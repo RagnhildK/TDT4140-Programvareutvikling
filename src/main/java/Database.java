@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 public class Database {
-    // TODO : LAGE GENERELL METODE FOR Å HENTE FRA DATABASE MED ||LISTE||
+
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     //com.mysql.cj.jdbc.Driver

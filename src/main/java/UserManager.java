@@ -1,13 +1,17 @@
+import javax.xml.crypto.Data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserManager {
 
-    public static String _rolle = "";
+    public static String _bruker = "";
+    public static ArrayList<ArrayList<String>> _rolle = new ArrayList<ArrayList<String>>();
+
 
     public static String Input(String what) {
         BufferedReader br = null;
@@ -48,25 +52,24 @@ public class UserManager {
 
                 }else{
                     String rolle = "||Rolle: ";
-                    ArrayList<String> roller = new ArrayList<String>();
+                    ArrayList<ArrayList<String>> roller = new ArrayList<ArrayList<String>>();
                     for (HashMap<String,ArrayList<String>> set : dbOutput) {
                         for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                            _bruker = entry.getKey();
                             ArrayList<String> values = entry.getValue();
-                            roller.add(values.get(1));
+                            ArrayList<String> r = new ArrayList<String>();
+                            r.add(values.get(2));
+                            r.add(values.get(1));
+                            roller.add(r);
                         }
                     }
-                    for (String r : roller){
-                        rolle += r + ", ";
+                    for (ArrayList<String> role : roller){
+                        for (String r : role){
+                            rolle += r + ": ";
+                        }
+                        rolle += "| ";
                     }
-                    if (roller.contains("admin")){
-                        _rolle = "admin";
-                    }else if (roller.contains("faglærer")){
-                        _rolle = "faglærer";
-                    }else if (roller.contains("studass")){
-                        _rolle = "studass";
-                    }else if (roller.contains("student")){
-                        _rolle = "student";
-                    }
+                    _rolle = roller;
                     System.out.println(rolle);
                     Database.rsToString(dbOutput);
                 }
@@ -75,5 +78,49 @@ public class UserManager {
                 System.out.println("|Login failed!");
             }
         }
+    }
+    public static boolean checkLogin(String username, String password) {
+
+        if(Database.checkLogin(username,password)){
+            System.out.println("|Login success!");
+            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(username);
+            if (dbOutput.isEmpty()){
+                System.err.println("Enda ikke lagt til en rolle til et fag.");
+
+            }else{
+                String rolle = "||Rolle: ";
+                ArrayList<ArrayList<String>> roller = new ArrayList<ArrayList<String>>();
+                for (HashMap<String,ArrayList<String>> set : dbOutput) {
+                    for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                        _bruker = entry.getKey();
+                        ArrayList<String> values = entry.getValue();
+                        ArrayList<String> r = new ArrayList<String>();
+                        r.add(values.get(2));
+                        r.add(values.get(1));
+                        roller.add(r);
+                    }
+                }
+                for (ArrayList<String> role : roller){
+                    for (String r : role){
+                        rolle += r + ": ";
+                    }
+                    rolle += "| ";
+                }
+                _rolle = roller;
+
+                System.out.println(rolle);
+                Database.rsToString(dbOutput);
+                return true;
+            }
+        }
+        else {
+            System.out.println("|Login failed!");
+            return false;
+        }
+        return false;
+    }
+
+    public static void booking(String dato, String tidspunkt, String studass){
+       Database.addBooking(10, _bruker, dato, tidspunkt, studass);
     }
 }
