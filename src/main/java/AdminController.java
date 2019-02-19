@@ -46,6 +46,7 @@ public class AdminController {
         openScene();
 
     }
+
     @FXML protected void openScene() throws Exception {
         Stage stage = (Stage) addUserBtn.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));

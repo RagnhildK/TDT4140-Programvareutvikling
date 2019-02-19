@@ -129,15 +129,27 @@ public class UserManager {
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> val = entry.getValue();
-                Date d1 = new Date(val.get(0));
-                Date d2 = new Date(val.get(1));
-                Date denne = new Date(tidspunkt);
+                if (checkTime(val.get(0).substring(0,2), tidspunkt.substring(0,2))
+                    && checkTime(val.get(0).substring(3), tidspunkt.substring(3))
+                    && checkTime(tidspunkt.substring(0,2), val.get(1).substring(0,2))
+                    && checkTime(tidspunkt.substring(3), val.get(1).substring(3))){
 
+                    Database.addStudassPåSal(dato, tidspunkt, emneid, _bruker, varighet);
+
+                }
             }
         }
 
-        return Database.addStudassPåSal(dato, tidspunkt, emneid, _bruker, varighet);
+        return false;
     }
+
+    private static boolean checkTime(String før, String etter) {
+        System.out.println("Før: " + før + " Etter: " + etter);
+        return Integer.parseInt(før) <= Integer.parseInt(etter);
+    }
+
+
+
     public static boolean addSaltid(String dato, String fra, String til, String emneid, String tid) {
         return (Database.addSaltid(dato, fra, til, emneid, Integer.parseInt(tid) , _bruker));
     }

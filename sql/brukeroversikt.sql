@@ -1,0 +1,2 @@
+Select BrukerNavn, Bruker.Navn as Bruker, Bruker.Passord as Passord, Rolle, Emne.EmneID, Emne.Navn as Emne
+From Bruker natural join BrukerIEmne join Emne on (BrukerIEmne.EmneID = Emne.EmneID) order by BrukerNavn asc;
