@@ -46,6 +46,11 @@
         <Button text="Add user" fx:id="addTidBtn"
                 onAction="#addTid"/>
     </HBox>
+    <HBox spacing="10" alignment="bottom_right"
+          GridPane.columnIndex="0" GridPane.rowIndex="5">
+        <Button text="Vis tider" fx:id="showTidBtn"
+                onAction="#showTid"/>
+    </HBox>
 
 
     <Text fx:id="status"

@@ -54,4 +54,6 @@
         <Button text="Log out" fx:id="logoutBtn"
                 onAction="#logout"/>
     </HBox>
+
+
 </GridPane>
