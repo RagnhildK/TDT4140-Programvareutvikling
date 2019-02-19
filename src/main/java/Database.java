@@ -216,6 +216,20 @@ public class Database {
         }
         return sendQuery(sql);
     }
+    public static int getBookingID(){
+        int id = 0;
+        String sql = "SELECT BookingID FROM Booking " +
+                "WHERE BookingID = (SELECT MAX(BookingID) FROM Booking);";
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = sendQuery(sql);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                id = Integer.parseInt(key);
+
+            }
+        }
+        return id + 1;
+    }
 
 
     public static void main(String[] args) {
@@ -233,7 +247,7 @@ public class Database {
         //addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
         //addStudassPåSal("2019-02-14","12:00", "bob", 15);
         //addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
-        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getUser("");
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getUser("all");
         rsToString(dbOutput);
 
 
