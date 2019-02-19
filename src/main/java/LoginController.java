@@ -29,7 +29,11 @@ public class LoginController {
         if (UserManager._rolle.get(0).get(0).equals("admin")){
             root = FXMLLoader.load(getClass().getResource("admin.fxml"));
             stage.setTitle("Admin");
-        }else {
+        }else if (UserManager._rolle.get(0).get(0).equals("faglærer")){
+            root = FXMLLoader.load(getClass().getResource("faglærer.fxml"));
+            stage.setTitle("Faglærer");
+        }
+        else {
             root = FXMLLoader.load(getClass().getResource("student.fxml"));
             stage.setTitle("Booking");
         }

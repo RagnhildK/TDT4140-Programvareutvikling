@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -122,6 +123,20 @@ public class UserManager {
 
     public static boolean booking(String dato, String tidspunkt, String studass){
        return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
+    }
+    public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, int varighet) {
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, emneid);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                ArrayList<String> val = entry.getValue();
+                Date d1 = new Date(val.get(0));
+                Date d2 = new Date(val.get(1));
+                Date denne = new Date(tidspunkt);
+
+            }
+        }
+
+        return Database.addStudassPåSal(dato, tidspunkt, emneid, _bruker, varighet);
     }
     public static boolean addSaltid(String dato, String fra, String til, String emneid, String tid) {
         return (Database.addSaltid(dato, fra, til, emneid, Integer.parseInt(tid) , _bruker));
