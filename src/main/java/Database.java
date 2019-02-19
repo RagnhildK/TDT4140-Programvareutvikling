@@ -198,8 +198,8 @@ public class Database {
         String sql = "INSERT INTO Saltid VALUES ('"+dato+"','"+fra+"','"+til+"','"+emneid+"','"+varighet+"','"+faglærer+"')";
         return sendUpdate(sql);
     }
-    public static boolean addStudassPåSal(String dato, String tidspunkt, String studass, int varighet) {
-        String sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+studass+"','"+varighet+"')";
+    public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, String studass, int varighet) {
+        String sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+emneid+"','"+studass+"','"+varighet+"')";
         return sendUpdate(sql);
     }
     public static boolean addBooking(int bookingID, String student, String dato, String tidspunkt, String studass ) {
@@ -214,6 +214,11 @@ public class Database {
         }else{
             sql += " order by BrukerNavn asc";
         }
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getSaltid(String dato, String emneid) {
+        String sql = "SELECT * FROM Saltid Where Dato = '"+dato+"' and '"+emneid+"'";
+
         return sendQuery(sql);
     }
     public static int getBookingID(){
@@ -234,19 +239,22 @@ public class Database {
 
     public static void main(String[] args) {
         System.out.println(checkLogin("admin","admin"));
-        //addBruker("xerox","Xerox", "123");
-        //addBruker("eric", "Eric", "12345");
-        //addBruker("dustin", "Dustin", "12345");
-        //addEmne("TMA4100", "Matte 1");
-        //addEmne("admin", "admin");
-        //addRolle("admin", "admin", "admin");
-        //addRolle("TMA4100", "eric", "faglærer");
-        //addRolle("TMA4100","dustin", "studass");
-        //addRolle("TDT4100","dustin", "studass");
-        //updateRolle("TMA4100","dustin", "student");
-        //addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
-        //addStudassPåSal("2019-02-14","12:00", "bob", 15);
-        //addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
+        /*addBruker("xerox","Xerox", "123");
+        addBruker("eric", "Eric", "12345");
+        addBruker("dustin", "Dustin", "12345");
+        addEmne("TMA4100", "Matte 1");
+        addEmne("admin", "admin");
+        addRolle("admin", "admin", "admin");
+        addRolle("TMA4100", "eric", "faglærer");ø
+        addRolle("TMA4100","dustin", "studass");
+        addRolle("TDT4100","dustin", "studass");
+        updateRolle("TMA4100","dustin", "student");
+        addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
+        addStudassPåSal("2019-02-14","12:00", "TMA4100", "bob", 15);
+        addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
+        addStudassPåSal("2019-02-19","12:00", "TMA4100", "bob", 15);
+        addStudassPåSal("2019-02-19","14:00", "TMA4100", "bob", 15);
+        addStudassPåSal("2019-02-19","16:00", "TMA4100", "bob", 15);*/
         ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getUser("all");
         rsToString(dbOutput);
 

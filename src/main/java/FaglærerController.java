@@ -21,13 +21,13 @@ public class FaglærerController {
 
 
     public boolean check() {
-        Integer.parseInt(txtDate.substring(0,4));
+        /*Integer.parseInt(txtDate.substring(0,4));
         Integer.parseInt(txtDate.substring(5,7));
         Integer.parseInt(txtDate.substring(7,9));
 
         if(txtDate.substring(4,5).equals("-") && txtDate.substring(7,8).equals("-") && txtDate.length() == 10) {
             return true;
-        }
+        }*/
         return false;
     }
 
