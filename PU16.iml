@@ -70,11 +70,11 @@
     </orderEntry>
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:win:11-ea+25" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:11-ea+25" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:11-ea+25" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:mac:11-ea+25" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:11-ea+25" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:11-ea+25" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:mac:11-ea+25" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:11-ea+25" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:11-ea+25" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:mac:11-ea+25" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:mac:11-ea+25" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.15" level="project" />
     <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.6.1" level="project" />

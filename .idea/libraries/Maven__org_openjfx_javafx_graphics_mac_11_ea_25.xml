@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="Maven: org.openjfx:javafx-graphics:win:11-ea+25">
+  <library name="Maven: org.openjfx:javafx-graphics:mac:11-ea+25">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11-ea+25/javafx-graphics-11-ea+25-win.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11-ea+25/javafx-graphics-11-ea+25-mac.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/11-ea+25/javafx-graphics-11-ea+25-javadoc.jar!/" />
