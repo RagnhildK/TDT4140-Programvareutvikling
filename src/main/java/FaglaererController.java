@@ -9,8 +9,17 @@ import javafx.stage.Stage;
 
 import java.time.format.DateTimeFormatter;
 
-public class FaglaererController {//
-
+public class FaglaererController {
+    /*
+     *  Klassen som er koblet opp mot faglaerer.fxml
+     *
+     *  Metoder:
+     *      check()
+     *          -Sjekker at dato er på rett format
+     *      addSaltid(ActionEvent event)
+     *          -Sender en saltid request til UserManager når man trykker på tilhørende knapp
+     *
+     */
     @FXML public TextField txtDate;
     @FXML public TextField txtFra;
     @FXML public TextField txtTil;
@@ -21,25 +30,38 @@ public class FaglaererController {//
 
 
     public boolean check() {
-        Integer.parseInt(txtDate.getText().substring(0,4));
-        Integer.parseInt(txtDate.getText().substring(5,7));
-        Integer.parseInt(txtDate.getText().substring(7,9));
-
-        if(txtDate.getText().substring(4,5).equals("-") && txtDate.getText().substring(7,8).equals("-") && txtDate.getText().length() == 10) {
-            return true;
+        boolean bool = false;
+        try {
+            Integer.parseInt(txtDate.getText().substring(0,4));
+            Integer.parseInt(txtDate.getText().substring(5,7));
+            Integer.parseInt(txtDate.getText().substring(8));
+            if(txtDate.getText().substring(4,5).equals("-") && txtDate.getText().substring(7,8).equals("-") && txtDate.getText().length() == 10) {
+                bool = true;
+            }
         }
-        return false;
+        catch (Exception e){
+            lblStatus.setText("|Dato skrevet på feil format!");
+            bool = false;
+        }finally {
+            return bool;
+        }
     }
 
-    @FXML protected void addUser(ActionEvent event) throws Exception {
-
-
-        if (UserManager.addSaltid(txtDate.getText(),txtFra.getText(),txtTil.getText(), txtEmneID.getText(), txtTidPerStudent.getText())) {
-            lblStatus.setText("|Add success!");
+    @FXML protected void addSaltid(ActionEvent event) throws Exception {
+        if (check()){
+            if (UserManager.addSaltid(txtDate.getText(),txtFra.getText(),txtTil.getText(), txtEmneID.getText(), txtTidPerStudent.getText())) {
+                lblStatus.setText("|Add success!");
+            }else {
+                lblStatus.setText("|Add failed!");
+            }
         }else {
-            lblStatus.setText("|Add failed!");
+            lblStatus.setText("|Dato skrevet på feil format!");
         }
+    }
 
+    @FXML protected void logout(ActionEvent event) throws Exception {
+        LoginController l = new LoginController();
+        l.logout(btnLeggTil);
 
     }
 

@@ -9,10 +9,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserManager {
+    /*
+     *  Klassen som holder styr på brukeren som er innlogget.
+     *  Variabler:
+     *      _bruker - Innlogget brukernavn
+     *      _rolle - Roller en bruker har. Liste på formen: [[EmneID,Rolle][EmneID,Rolle]..]
+     *      _aktivtEmne - Aktivt emne
+     *  Metoder:
+     *      checkLogin(username, password)
+     *          -Sjekker om brukernavn og passord stemmer overens med det som ligger i databasen
+     *      booking(String dato, String tidspunkt, String studass)
+     *          -Booker for gjeldende bruker
+     *      addStudassPåSal(String dato, String tidspunkt, String emneid, String varighet)
+     *          -Legger til tid på sal for studass og sjekker at dette ligger innenfor oppgitt saltid.
+     *      checkTime(String før, String etter)
+     *          -Sjekker hva som er først av tidspunkt
+     *      addSaltid(String dato, String fra, String til, String emneid, String tid)
+     *          -Legger til saltid     *
+     */
+    //TODO: Implementere valg av emne ved innlogging og endre aktivtEmne
+    //      slik at man får den infoen man skal ha for hvert emne
 
     public static String _bruker = "";
     public static ArrayList<ArrayList<String>> _rolle = new ArrayList<ArrayList<String>>();
-
+    public static String _aktivtEmne = "TDT4100";
 
     public static String Input(String what) {
         BufferedReader br = null;
@@ -124,18 +144,14 @@ public class UserManager {
     public static boolean booking(String dato, String tidspunkt, String studass){
        return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
     }
-    public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, int varighet) {
+    public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, String varighet) {
         ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, emneid);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> val = entry.getValue();
-                if (checkTime(val.get(0).substring(0,2), tidspunkt.substring(0,2))
-                    && checkTime(val.get(0).substring(3), tidspunkt.substring(3))
-                    && checkTime(tidspunkt.substring(0,2), val.get(1).substring(0,2))
-                    && checkTime(tidspunkt.substring(3), val.get(1).substring(3))){
-
-                    Database.addStudassPåSal(dato, tidspunkt, emneid, _bruker, varighet);
-
+                if (checkTime(val.get(0), tidspunkt) && checkTime(tidspunkt, val.get(1))){
+                    //System.out.println("Success");
+                    return Database.addStudassPåSal(dato, tidspunkt, emneid, _bruker, Integer.parseInt(varighet));
                 }
             }
         }
@@ -144,11 +160,17 @@ public class UserManager {
     }
 
     private static boolean checkTime(String før, String etter) {
-        System.out.println("Før: " + før + " Etter: " + etter);
-        return Integer.parseInt(før) <= Integer.parseInt(etter);
+        //System.out.println("Før; " + før + " Etter: " + etter);
+        if (Integer.parseInt(før.substring(0,2)) < Integer.parseInt(etter.substring(0,2))) {
+            return true;
+        }
+        else if (Integer.parseInt(før.substring(0,2)) == Integer.parseInt(etter.substring(0,2))
+            && (Integer.parseInt(før.substring(3)) <= Integer.parseInt(etter.substring(3)))){
+            return true;
+        }
+
+        return false;
     }
-
-
 
     public static boolean addSaltid(String dato, String fra, String til, String emneid, String tid) {
         return (Database.addSaltid(dato, fra, til, emneid, Integer.parseInt(tid) , _bruker));

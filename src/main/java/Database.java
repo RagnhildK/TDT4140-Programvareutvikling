@@ -6,7 +6,19 @@ import java.util.Map;
 
 
 public class Database {
-
+    /*
+     *  Klassen som kobler opp mot databasen og setter inn/oppdaterer og henter fra den.
+     *  Variabler:
+     *      Diverse variabler for å koble til IDI sin MySQL database.
+     *  Metoder:
+     *      sendUpdate(String update)
+     *          -Sender en update/sett inn query til databasen
+     *      sendQuery(String query)
+     *          -Henter fra databasen ved å sende en select query
+     *      Resten er ulike querries for å sette inn og hente fra databasen.
+     *      Metode navnene og sql spørringene forklarer seg stort sett selv.
+     *
+     */
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     //com.mysql.cj.jdbc.Driver
@@ -217,8 +229,11 @@ public class Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getSaltid(String dato, String emneid) {
-        String sql = "SELECT * FROM Saltid Where Dato = '"+dato+"' and '"+emneid+"'";
-
+        String sql = "SELECT * FROM Saltid Where Dato = '"+dato+"' and EmneID = '"+emneid+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getStudassPåSal(String dato, String emneid) {
+        String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and EmneID = '"+emneid+"'";
         return sendQuery(sql);
     }
     public static int getBookingID(){
@@ -238,7 +253,7 @@ public class Database {
 
 
     public static void main(String[] args) {
-        System.out.println(checkLogin("admin","admin"));
+        //System.out.println(checkLogin("admin","admin"));
         /*addBruker("xerox","Xerox", "123");
         addBruker("eric", "Eric", "12345");
         addBruker("dustin", "Dustin", "12345");
@@ -256,7 +271,7 @@ public class Database {
         addStudassPåSal("2019-02-19","14:00", "TMA4100", "bob", 15);
         addStudassPåSal("2019-02-19","16:00", "TMA4100", "bob", 15);*/
 
-        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getUser("all");
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
         rsToString(dbOutput);
 
 

@@ -9,30 +9,62 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class StudentController {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-    @FXML public Text actiontarget;
+public class StudentController {
+    /*
+     *  Klassen som er koblet opp mot student.fxml
+     *
+     *  Metoder:
+     *      book(ActionEvent event)
+     *          -Sender en booking request til UserManager når man trykker på tilhørende knapp
+     *      showTid(ActionEvent event)
+     *          -Viser saltider for studasser når man trykker på tilhørende knapp
+     *
+     *
+     */
+    @FXML public Text status;
     @FXML public TextField studassField;
     @FXML public TextField datoField;
     @FXML public TextField tidspunktField;
-    @FXML public Button bookBtn ;
+    @FXML public Button bookBtn;
 
 
-    @FXML protected void handleSubmitButtonAction(ActionEvent event) throws Exception {
-        UserManager.booking(datoField.getText(), tidspunktField.getText(), studassField.getText());
-        actiontarget.setText("|Booking success!");
+    @FXML protected void book(ActionEvent event) throws Exception {
+        if (UserManager.booking(datoField.getText(), tidspunktField.getText(), studassField.getText())){
+            status.setText("|Booking success!");
+        }else {
+            status.setText("|Booking failed!");
+        }
+
 
     }
+
+    @FXML protected void showTid(ActionEvent event) throws Exception {
+
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(datoField.getText(), UserManager._aktivtEmne);
+        String str = "|| Dato \t||\t Tidspunkt \t||\t Emne \t||\t Studass \t||\t Varighet \t||\t \n";
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                ArrayList<String> values = entry.getValue();
+                str += "|| " + key + " \t||\t";
+                for (String v : values) {
+                    str += " " + v + " \t||\t";
+                }
+                str += "\n";
+            }
+        }
+        status.setText(str);
+
+    }
+
     @FXML protected void logout(ActionEvent event) throws Exception {
-        openScene();
+        LoginController l = new LoginController();
+        l.logout(bookBtn);
 
     }
-    @FXML protected void openScene() throws Exception {
-        Stage stage = (Stage) bookBtn.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Scene scene =  new Scene(root, 300 ,275);
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.show();
-    }
+
 }

@@ -37,11 +37,16 @@
     <HBox spacing="10" alignment="bottom_right"
           GridPane.columnIndex="1" GridPane.rowIndex="4">
         <Button text="Book" fx:id="bookBtn"
-                onAction="#handleSubmitButtonAction"/>
+                onAction="#book"/>
+    </HBox>
+    <HBox spacing="10" alignment="bottom_right"
+          GridPane.columnIndex="0" GridPane.rowIndex="4">
+        <Button text="Vis tider" fx:id="showTidBtn"
+                onAction="#showTid"/>
     </HBox>
 
 
-    <Text fx:id="actiontarget"
+    <Text fx:id="status"
           GridPane.columnIndex="1" GridPane.rowIndex="6"/>
 
     <HBox spacing="10" alignment="bottom_right"

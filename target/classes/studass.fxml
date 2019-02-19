@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<GridPane fx:controller="StudassController"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+    <gridLinesVisible>false</gridLinesVisible>
+
+    <Text text="Studass side"
+          GridPane.columnIndex="0" GridPane.rowIndex="0"
+          GridPane.columnSpan="2"/>
+
+    <Label text="Dato:"
+           GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+    <TextField fx:id="datoField"
+               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+    <Label text="Tidspunkt:"
+           GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+
+    <TextField fx:id="tidspunktField"
+               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+    <Label text="Emne:"
+           GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+
+    <TextField fx:id="emneField"
+               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+    <Label text="Varighet:"
+           GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+
+    <TextField fx:id="varighetField"
+               GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <HBox spacing="10" alignment="bottom_right"
+          GridPane.columnIndex="1" GridPane.rowIndex="5">
+        <Button text="Add user" fx:id="addTidBtn"
+                onAction="#addTid"/>
+    </HBox>
+
+
+    <Text fx:id="status"
+          GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    <HBox spacing="10" alignment="top_right"
+          GridPane.columnIndex="2" GridPane.rowIndex="0">
+        <Button text="Log out" fx:id="logoutBtn"
+                onAction="#logout"/>
+    </HBox>
+
+</GridPane>

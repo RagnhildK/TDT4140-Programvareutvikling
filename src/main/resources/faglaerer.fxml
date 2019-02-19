@@ -18,7 +18,12 @@
          </font>
       </Label>
       <TextField fx:id="txtTidPerStudent" layoutX="29.0" layoutY="193.0" prefHeight="27.0" prefWidth="296.0" promptText="Tid per student" />
-      <Button fx:id="btnLeggTil" layoutX="116.0" layoutY="238.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="119.0" text="Legg til">
+      <Button fx:id="btnLeggTil" onAction="#addSaltid" layoutX="116.0" layoutY="238.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="119.0" text="Legg til">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnLogout" onAction="#logout" layoutX="350.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="119.0" text="Logg ut">
          <font>
             <Font size="14.0" />
          </font>
