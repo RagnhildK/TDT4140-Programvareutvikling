@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.time.format.DateTimeFormatter;
 
-public class FaglærerController {
+public class FaglaererController {
 
     @FXML public TextField txtDate;
     @FXML public TextField txtFra;

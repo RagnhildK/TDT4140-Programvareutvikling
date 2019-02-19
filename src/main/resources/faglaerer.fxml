@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="328.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Faglærer">
+<AnchorPane prefHeight="328.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FaglaererController">
    <children>
       <TextField fx:id="txtFra" layoutX="29.0" layoutY="99.0" prefHeight="27.0" prefWidth="146.0" promptText="Fra" />
       <TextField fx:id="txtTil" layoutX="183.0" layoutY="99.0" prefHeight="27.0" prefWidth="146.0" promptText="Til" />
