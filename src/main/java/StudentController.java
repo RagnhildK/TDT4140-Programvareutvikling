@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class DefaultController {
+public class StudentController {
 
     @FXML public Text actiontarget;
     @FXML public TextField studassField;

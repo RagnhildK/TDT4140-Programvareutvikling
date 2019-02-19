@@ -9,8 +9,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
-import java.awt.*;
-
 public class LoginController {
     @FXML public Text actiontarget;
     @FXML public TextField userField;
@@ -32,7 +30,7 @@ public class LoginController {
             root = FXMLLoader.load(getClass().getResource("admin.fxml"));
             stage.setTitle("Admin");
         }else {
-            root = FXMLLoader.load(getClass().getResource("default.fxml"));
+            root = FXMLLoader.load(getClass().getResource("student.fxml"));
             stage.setTitle("Booking");
         }
         Scene scene =  new Scene(root, 500 ,275);
