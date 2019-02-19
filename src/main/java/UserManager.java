@@ -122,5 +122,5 @@ public class UserManager {
 
     public static boolean booking(String dato, String tidspunkt, String studass){
        return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
-    }
+    } // grgre
 }
