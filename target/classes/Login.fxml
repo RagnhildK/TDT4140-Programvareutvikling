@@ -17,13 +17,13 @@
           GridPane.columnIndex="0" GridPane.rowIndex="0"
           GridPane.columnSpan="2"/>
 
-    <Label text="User Name:"
+    <Label text="Brukernavn:"
            GridPane.columnIndex="0" GridPane.rowIndex="1"/>
 
     <TextField fx:id="userField"
                GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-    <Label text="Password:"
+    <Label text="Passord:"
            GridPane.columnIndex="0" GridPane.rowIndex="2"/>
 
     <PasswordField fx:id="passwordField"

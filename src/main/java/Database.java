@@ -15,7 +15,7 @@ public class Database {
     static final String USER = "ingebrin";
     static final String PASS = "pu16";
 
-    public static void sendUpdate(String update) {
+    public static boolean sendUpdate(String update) {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -28,7 +28,7 @@ public class Database {
             //System.out.println("Creating statement...");
             stmt = conn.createStatement();
             stmt.executeUpdate(update);
-
+            return true;
         }catch(SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();
@@ -49,7 +49,7 @@ public class Database {
                 se.printStackTrace();
             }//end finally try
         }//end try
-        //System.out.println("Goodbye!");
+        return false;
     }
     public static String sendQueryString(String query) {
         Connection conn = null;
@@ -178,33 +178,33 @@ public class Database {
             return false;
         }
     }
-    public static void addBruker(String brukernavn, String navn, String passord) {
+    public static boolean addBruker(String brukernavn, String navn, String passord) {
         String sql = "INSERT INTO Bruker VALUES ('"+brukernavn+"','"+navn+"','"+passord+"')";
-        sendUpdate(sql);
+        return sendUpdate(sql);
     }
-    public static void addRolle(String emneid, String brukernavn, String rolle) {
+    public static boolean addRolle(String emneid, String brukernavn, String rolle) {
         String sql = "INSERT INTO BrukerIEmne VALUES ('"+emneid+"','"+brukernavn+"','"+rolle+"')";
-        sendUpdate(sql);
+        return sendUpdate(sql);
     }
-    public static void updateRolle(String emneid, String brukernavn, String rolle) {
+    public static boolean updateRolle(String emneid, String brukernavn, String rolle) {
         String sql = "UPDATE BrukerIEmne SET rolle = '"+rolle+"' WHERE BrukerNavn = '"+brukernavn+"' and EmneID ='"+emneid+"'";
-        sendUpdate(sql);
+        return sendUpdate(sql);
     }
-    public static void addEmne(String emneid, String navn) {
+    public static boolean addEmne(String emneid, String navn) {
         String sql = "INSERT INTO Emne VALUES ('"+emneid+"','"+navn+"')";
-        sendUpdate(sql);
+        return sendUpdate(sql);
     }
-    public static void addSaltid(String dato, String fra, String til, String emneid, int varighet, String faglærer) {
+    public static boolean addSaltid(String dato, String fra, String til, String emneid, int varighet, String faglærer) {
         String sql = "INSERT INTO Saltid VALUES ('"+dato+"','"+fra+"','"+til+"','"+emneid+"','"+varighet+"','"+faglærer+"')";
-        sendUpdate(sql);
+        return sendUpdate(sql);
     }
-    public static void addStudassPåSal(String dato, String tidspunkt, String studass, int varighet) {
+    public static boolean addStudassPåSal(String dato, String tidspunkt, String studass, int varighet) {
         String sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+studass+"','"+varighet+"')";
-        sendUpdate(sql);
+        return sendUpdate(sql);
     }
-    public static void addBooking(int bookingID, String student, String dato, String tidspunkt, String studass ) {
+    public static boolean addBooking(int bookingID, String student, String dato, String tidspunkt, String studass ) {
         String sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"')";
-        sendUpdate(sql);
+        return sendUpdate(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getUser(String brukernavn) {
         String sql = "Select BrukerNavn, Bruker.Navn as Bruker, Rolle, Emne.EmneID, Emne.Navn as Emne" +

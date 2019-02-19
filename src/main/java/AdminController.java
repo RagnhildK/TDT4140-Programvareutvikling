@@ -15,12 +15,31 @@ public class AdminController {
     @FXML public TextField userField;
     @FXML public TextField nameField;
     @FXML public PasswordField passwordField;
-    @FXML public Button addBtn ;
+    @FXML public Button addUserBtn ;
+
+    @FXML public TextField emneField;
+    @FXML public TextField enameField;
+    @FXML public TextField faglærerField;
+    @FXML public Button addEmneBtn ;
 
 
-    @FXML protected void handleSubmitButtonAction(ActionEvent event) throws Exception {
-        Database.addBruker(userField.getText(),nameField.getText(),passwordField.getText());
-        actiontarget.setText("|Add success!");
+    @FXML protected void addUser(ActionEvent event) throws Exception {
+        if (Database.addBruker(userField.getText(),nameField.getText(),passwordField.getText())) {
+            actiontarget.setText("|Add success!");
+        }else {
+            actiontarget.setText("|Add failed!");
+        }
+
+
+    }
+    @FXML protected void addEmne(ActionEvent event) throws Exception {
+        if (Database.addEmne(emneField.getText(),enameField.getText()) &&
+        Database.addRolle(emneField.getText(), faglærerField.getText(), "faglærer")) {
+            actiontarget.setText("|Add success!");
+        }else{
+            actiontarget.setText("|Add failed!");
+        }
+
 
     }
     @FXML protected void logout(ActionEvent event) throws Exception {
@@ -28,7 +47,7 @@ public class AdminController {
 
     }
     @FXML protected void openScene() throws Exception {
-        Stage stage = (Stage) addBtn.getScene().getWindow();
+        Stage stage = (Stage) addUserBtn.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
         Scene scene =  new Scene(root, 300 ,275);
         stage.setTitle("Login");

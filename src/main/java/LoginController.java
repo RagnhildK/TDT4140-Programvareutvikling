@@ -35,7 +35,7 @@ public class LoginController {
             root = FXMLLoader.load(getClass().getResource("default.fxml"));
             stage.setTitle("Booking");
         }
-        Scene scene =  new Scene(root, 300 ,500);
+        Scene scene =  new Scene(root, 500 ,275);
         stage.setScene(scene);
         stage.show();
     }

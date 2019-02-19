@@ -13,7 +13,7 @@
     <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
     <gridLinesVisible>false</gridLinesVisible>
 
-    <Text text="Booking Site"
+    <Text text="Booking Side"
           GridPane.columnIndex="0" GridPane.rowIndex="0"
           GridPane.columnSpan="2"/>
 
