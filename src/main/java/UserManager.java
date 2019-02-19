@@ -120,7 +120,7 @@ public class UserManager {
         return false;
     }
 
-    public static void booking(String dato, String tidspunkt, String studass){
-       Database.addBooking(10, _bruker, dato, tidspunkt, studass);
+    public static boolean booking(String dato, String tidspunkt, String studass){
+       return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
     }
 }
