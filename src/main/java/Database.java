@@ -255,6 +255,7 @@ public class Database {
         addStudassPåSal("2019-02-19","12:00", "TMA4100", "bob", 15);
         addStudassPåSal("2019-02-19","14:00", "TMA4100", "bob", 15);
         addStudassPåSal("2019-02-19","16:00", "TMA4100", "bob", 15);*/
+
         ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getUser("all");
         rsToString(dbOutput);
 
