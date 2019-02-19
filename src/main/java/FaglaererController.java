@@ -21,19 +21,13 @@ public class FaglaererController {//
 
 
     public boolean check() {
-<<<<<<< HEAD
         Integer.parseInt(txtDate.getText().substring(0,4));
         Integer.parseInt(txtDate.getText().substring(5,7));
         Integer.parseInt(txtDate.getText().substring(7,9));
-=======
-        /*Integer.parseInt(txtDate.substring(0,4));
-        Integer.parseInt(txtDate.substring(5,7));
-        Integer.parseInt(txtDate.substring(7,9));
->>>>>>> 1e8e3f796d5b0c855a7eec3e3f7cca445f1a91a7
 
         if(txtDate.getText().substring(4,5).equals("-") && txtDate.getText().substring(7,8).equals("-") && txtDate.getText().length() == 10) {
             return true;
-        }*/
+        }
         return false;
     }
 
