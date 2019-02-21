@@ -51,11 +51,7 @@ public class StudentController {
                 String key = entry.getKey();
                 ArrayList<String> values = entry.getValue();
                 ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
-                try {
-                    if(booking.get(0) != null) {
-                        continue;
-                    }
-                }catch (Exception e) {
+                if (booking.isEmpty()){
                     str += "|| " + key + " \t||\t";
                     for (String v : values) {
                         str += " " + v + " \t||\t";
