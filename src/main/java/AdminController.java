@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class AdminController {
     /*
      *  Klassen som er koblet opp mot admin.fxml
@@ -32,6 +35,10 @@ public class AdminController {
     @FXML public TextField enameField;
     @FXML public TextField faglærerField;
     @FXML public Button addEmneBtn ;
+    @FXML public TextField enameField1;
+    @FXML public TextField nameField1;
+    @FXML public TextField roleField;
+    @FXML public Button addRolebtn;
 
 
     @FXML protected void addUser(ActionEvent event) throws Exception {
@@ -53,6 +60,25 @@ public class AdminController {
 
 
     }
+
+    @FXML protected void addRolle (ActionEvent event) throws Exception {
+        if(Database.getRolle(nameField1.getText(), enameField1.getText())!= ""){
+            if(Database.updateRolle(enameField1.getText(),nameField1.getText(), roleField.getText())) {
+                actiontarget.setText(nameField1.getText()+" har fått rollen "+roleField.getText());
+            }else{
+                actiontarget.setText("|Update failed!");
+            }
+        }
+        else{
+            if(Database.addRolle(enameField1.getText(),nameField1.getText(), roleField.getText())){
+                actiontarget.setText(nameField1.getText()+" har fått rollen "+roleField.getText());
+            }else{
+                actiontarget.setText("|Add failed!");
+            }
+        }
+
+    }
+
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();
         l.logout(addEmneBtn);
