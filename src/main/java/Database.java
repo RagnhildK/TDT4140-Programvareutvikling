@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 
-public class Database {
+public class
+Database {
     /*
      *  Klassen som kobler opp mot databasen og setter inn/oppdaterer og henter fra den.
      *  Variabler:
