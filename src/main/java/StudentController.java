@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class StudentController {
      *
      *
      */
-    @FXML public Label status;
+    @FXML public Text status;
     @FXML public TextField studassField;
     @FXML public TextField datoField;
     @FXML public TextField tidspunktField;
