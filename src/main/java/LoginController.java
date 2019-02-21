@@ -53,7 +53,7 @@ public class LoginController {
             root = FXMLLoader.load(getClass().getResource("student.fxml"));
             stage.setTitle("Booking");
         }
-        Scene scene =  new Scene(root, 500 ,300);
+        Scene scene =  new Scene(root, 700 ,500);
         stage.setScene(scene);
         stage.show();
     }
@@ -61,7 +61,7 @@ public class LoginController {
     @FXML public void logout(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Scene scene =  new Scene(root, 300 ,275);
+        Scene scene =  new Scene(root, 700 ,500);
         stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
