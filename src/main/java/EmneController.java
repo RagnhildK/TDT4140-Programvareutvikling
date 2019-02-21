@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -12,9 +13,22 @@ import javafx.scene.control.Button;
 public class EmneController {
 
     @FXML public Text actiontarget;
-    @FXML public TextField emneField;
-    @FXML private Button addEmneBtn ;
-    @FXML private Button emneBtn ;
+    @FXML public TextField txtEmne;
+    @FXML public Button btnLeggTilEmne;
+    @FXML public Label lblBrukerNavn;
+    @FXML public Label lblEmne;
+    @FXML public Button btnEmne1 ;
+    @FXML public Button btnEmne2 ;
+    @FXML public Button btnEmne3 ;
+    @FXML public Button btnEmne4 ;
+
+    @FXML protected void initialize() {
+        lblEmne.setText(UserManager._rolle.toString());
+
+    }
+    @FXML protected void addEmne(ActionEvent event){
+
+    }
 
 
     /*
