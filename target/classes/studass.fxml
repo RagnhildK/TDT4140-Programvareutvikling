@@ -47,7 +47,7 @@
                 onAction="#addTid"/>
     </HBox>
     <HBox spacing="10" alignment="bottom_right"
-          GridPane.columnIndex="0" GridPane.rowIndex="4">
+          GridPane.columnIndex="0" GridPane.rowIndex="5">
         <Button text="Vis tider" fx:id="showTidBtn"
                 onAction="#showTid"/>
     </HBox>
