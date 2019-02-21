@@ -9,7 +9,7 @@ public class Main {
         //UserManager.main();
     }
 
-    public int add(int x, int y) {
+    public static int add(int x, int y) {
         return x + y;
     }
 

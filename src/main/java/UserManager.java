@@ -143,12 +143,8 @@ public class UserManager {
 
     public static boolean booking(String dato, String tidspunkt, String studass){
         ArrayList<HashMap<String,ArrayList<String>>> booking = Database.getUnikBooking(dato, tidspunkt, studass);
-        try {
-            if (booking.get(0) != null) {
-                return false;
-            }
-        }catch (Exception e) {
-
+        if (!booking.isEmpty()){
+            return false;
         }
         return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
     }

@@ -195,6 +195,10 @@ Database {
         String sql = "INSERT INTO Bruker VALUES ('"+brukernavn+"','"+navn+"','"+passord+"')";
         return sendUpdate(sql);
     }
+    public static boolean deleteBruker(String brukernavn) {
+        String sql = "DELETE FROM Bruker Where BrukerNavn = '"+brukernavn+"')";
+        return sendUpdate(sql);
+    }
     public static boolean addRolle(String emneid, String brukernavn, String rolle) {
         String sql = "INSERT INTO BrukerIEmne VALUES ('"+emneid+"','"+brukernavn+"','"+rolle+"')";
         return sendUpdate(sql);
