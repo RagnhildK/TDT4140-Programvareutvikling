@@ -5,8 +5,21 @@ import java.util.Iterator;
 import java.util.Map;
 
 
-public class Database {
-
+public class
+Database {
+    /*
+     *  Klassen som kobler opp mot databasen og setter inn/oppdaterer og henter fra den.
+     *  Variabler:
+     *      Diverse variabler for å koble til IDI sin MySQL database.
+     *  Metoder:
+     *      sendUpdate(String update)
+     *          -Sender en update/sett inn query til databasen
+     *      sendQuery(String query)
+     *          -Henter fra databasen ved å sende en select query
+     *      Resten er ulike querries for å sette inn og hente fra databasen.
+     *      Metode navnene og sql spørringene forklarer seg stort sett selv.
+     *
+     */
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     //com.mysql.cj.jdbc.Driver
@@ -198,8 +211,8 @@ public class Database {
         String sql = "INSERT INTO Saltid VALUES ('"+dato+"','"+fra+"','"+til+"','"+emneid+"','"+varighet+"','"+faglærer+"')";
         return sendUpdate(sql);
     }
-    public static boolean addStudassPåSal(String dato, String tidspunkt, String studass, int varighet) {
-        String sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+studass+"','"+varighet+"')";
+    public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, String studass, int varighet) {
+        String sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+emneid+"','"+studass+"','"+varighet+"')";
         return sendUpdate(sql);
     }
     public static boolean addBooking(int bookingID, String student, String dato, String tidspunkt, String studass ) {
@@ -216,6 +229,24 @@ public class Database {
         }
         return sendQuery(sql);
     }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getSaltid(String dato, String emneid) {
+        String sql = "SELECT * FROM Saltid Where Dato = '"+dato+"' and EmneID = '"+emneid+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getStudassPåSal(String dato, String emneid) {
+        String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and EmneID = '"+emneid+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikStudassPåSal(String dato, String emneid, String tidspunkt, String studass) {
+        String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and Tidspunkt = '"+tidspunkt+"' and EmneID = '"+studass+"' and EmneID = '"+emneid+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikBooking(String dato, String student, String tidspunkt, String studass) {
+        String sql = "SELECT * FROM Booking Where StudassPåSalDato = '"+dato+"' and StudassPåSalTidspunkt = '"+tidspunkt+"' and StudassPåSalStudass = '"+studass+"' and Student = '"+student+"' ";
+        return sendQuery(sql);
+    }
+
+
     public static int getBookingID(){
         int id = 0;
         String sql = "SELECT BookingID FROM Booking " +
@@ -233,21 +264,25 @@ public class Database {
 
 
     public static void main(String[] args) {
-        System.out.println(checkLogin("admin","admin"));
-        //addBruker("xerox","Xerox", "123");
-        //addBruker("eric", "Eric", "12345");
-        //addBruker("dustin", "Dustin", "12345");
-        //addEmne("TMA4100", "Matte 1");
-        //addEmne("admin", "admin");
-        //addRolle("admin", "admin", "admin");
-        //addRolle("TMA4100", "eric", "faglærer");
-        //addRolle("TMA4100","dustin", "studass");
-        //addRolle("TDT4100","dustin", "studass");
-        //updateRolle("TMA4100","dustin", "student");
-        //addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
-        //addStudassPåSal("2019-02-14","12:00", "bob", 15);
-        //addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
-        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getUser("all");
+        //System.out.println(checkLogin("admin","admin"));
+        /*addBruker("xerox","Xerox", "123");
+        addBruker("eric", "Eric", "12345");
+        addBruker("dustin", "Dustin", "12345");
+        addEmne("TMA4100", "Matte 1");
+        addEmne("admin", "admin");
+        addRolle("admin", "admin", "admin");
+        addRolle("TMA4100", "eric", "faglærer");ø
+        addRolle("TMA4100","dustin", "studass");
+        addRolle("TDT4100","dustin", "studass");
+        updateRolle("TMA4100","dustin", "student");
+        addSaltid("2019-02-13","12:00", "16:00", "TMA4100", 15, "charlie");
+        addStudassPåSal("2019-02-14","12:00", "TMA4100", "bob", 15);
+        addBooking(2,"dustin", "2019-02-14", "12:00", "bob");
+        addStudassPåSal("2019-02-19","12:00", "TMA4100", "bob", 15);
+        addStudassPåSal("2019-02-19","14:00", "TMA4100", "bob", 15);
+        addStudassPåSal("2019-02-19","16:00", "TMA4100", "bob", 15);*/
+
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
         rsToString(dbOutput);
 
 

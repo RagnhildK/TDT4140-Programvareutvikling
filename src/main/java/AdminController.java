@@ -10,6 +10,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class AdminController {
+    /*
+     *  Klassen som er koblet opp mot admin.fxml
+     *
+     *  Metoder:
+     *      addUser(ActionEvent event)
+     *          -Legger til en bruker i databasen
+     *      addEmne(ActionEvent event)
+     *          -Legger til et emne i databasen
+     *      logout(Button b)
+     *          -Gjør at en kan logge ut fra andre fxml filer og åpne Login.fxml
+     */
 
     @FXML public Text actiontarget;
     @FXML public TextField userField;
@@ -43,15 +54,8 @@ public class AdminController {
 
     }
     @FXML protected void logout(ActionEvent event) throws Exception {
-        openScene();
+        LoginController l = new LoginController();
+        l.logout(addEmneBtn);
 
-    }
-    @FXML protected void openScene() throws Exception {
-        Stage stage = (Stage) addUserBtn.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Scene scene =  new Scene(root, 300 ,275);
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.show();
     }
 }
