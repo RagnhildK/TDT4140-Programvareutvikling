@@ -1,13 +1,8 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +20,7 @@ public class StudentController {
      *
      *
      */
-    @FXML public Text status;
+    @FXML public Label status;
     @FXML public TextField studassField;
     @FXML public TextField datoField;
     @FXML public TextField tidspunktField;
@@ -33,15 +28,18 @@ public class StudentController {
 
 
     @FXML protected void book(ActionEvent event) throws Exception {
-        if (UserManager.booking(datoField.getText(), tidspunktField.getText(), studassField.getText())){
-            status.setText("|Booking success!");
-        }else {
-            status.setText("|Booking failed!");
+        if (Check.checkDato(datoField.getText()) && Check.checkTidspunkt(tidspunktField.getText())){
+            if (UserManager.booking(datoField.getText(), tidspunktField.getText(), studassField.getText())){
+                status.setText("|Booking success!");
+            }else {
+                status.setText("|Booking failed!");
+            }
         }
 
 
+
     }
-    //TODO: Legge til sjekk om studasspåsal tid er booket allerede..
+
     @FXML protected void showTid(ActionEvent event) throws Exception {
 
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(datoField.getText(), UserManager._aktivtEmne);

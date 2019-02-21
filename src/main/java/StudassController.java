@@ -23,11 +23,14 @@ public class StudassController {
     @FXML public Button addTidBtn ;
 
     @FXML protected void addTid(ActionEvent event) throws Exception {
-        if (UserManager.addStudassPåSal(datoField.getText(),tidspunktField.getText(),emneField.getText(),varighetField.getText())) {
-            status.setText("|Add success!");
-        }else {
-            status.setText("|Add failed!");
+        if (Check.checkDato(datoField.getText()) && Check.checkTidspunkt(tidspunktField.getText())){
+            if (UserManager.addStudassPåSal(datoField.getText(),tidspunktField.getText(),emneField.getText(),varighetField.getText())) {
+                status.setText("|Add success!");
+            }else {
+                status.setText("|Add failed!");
+            }
         }
+
     }
 
     @FXML protected void showTid(ActionEvent event) throws Exception {
