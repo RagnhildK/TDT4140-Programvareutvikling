@@ -241,8 +241,8 @@ Database {
         String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and Tidspunkt = '"+tidspunkt+"' and EmneID = '"+studass+"' and EmneID = '"+emneid+"'";
         return sendQuery(sql);
     }
-    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikBooking(String dato, String student, String tidspunkt, String studass) {
-        String sql = "SELECT * FROM Booking Where StudassPåSalDato = '"+dato+"' and StudassPåSalTidspunkt = '"+tidspunkt+"' and StudassPåSalStudass = '"+studass+"' and Student = '"+student+"' ";
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikBooking(String dato, String tidspunkt, String studass) {
+        String sql = "SELECT * FROM Booking Where StudassPåSalDato = '"+dato+"' and StudassPåSalTidspunkt = '"+tidspunkt+"' and StudassPåSalStudass = '"+studass+"' ";
         return sendQuery(sql);
     }
 
