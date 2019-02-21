@@ -41,7 +41,7 @@ public class StudentController {
 
 
     }
-
+    //TODO: Legge til sjekk om studasspåsal tid er booket allerede..
     @FXML protected void showTid(ActionEvent event) throws Exception {
 
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(datoField.getText(), UserManager._aktivtEmne);
@@ -50,11 +50,19 @@ public class StudentController {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
                 ArrayList<String> values = entry.getValue();
-                str += "|| " + key + " \t||\t";
-                for (String v : values) {
-                    str += " " + v + " \t||\t";
+                ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
+                try {
+                    if(booking.get(0) != null) {
+                        continue;
+                    }
+                }catch (Exception e) {
+                    str += "|| " + key + " \t||\t";
+                    for (String v : values) {
+                        str += " " + v + " \t||\t";
+                    }
+                    str += "\n";
                 }
-                str += "\n";
+
             }
         }
         status.setText(str);

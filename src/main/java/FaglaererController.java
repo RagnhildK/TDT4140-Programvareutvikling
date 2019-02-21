@@ -29,7 +29,27 @@ public class FaglaererController {
     @FXML public Label lblStatus;
 
 
-    public boolean check() {
+
+    public boolean checkFraTil() {
+        boolean bool = false;
+        try{
+            Integer.parseInt(txtFra.getText().substring(0,2));
+            Integer.parseInt(txtFra.getText().substring(3));
+            Integer.parseInt(txtTil.getText().substring(0,2));
+            Integer.parseInt(txtTil.getText().substring(3));
+            if(txtFra.getText().substring(2,3).equals(":") && txtFra.getText().length() == 5 && txtTil.getText().substring(2,3).equals(":") && txtTil.getText().length() == 5) {
+                bool = true;
+            }
+        }
+        catch (Exception e){
+            lblStatus.setText("|Klokkeslett skrevet på feil format!");
+            bool = false;
+        }finally {
+            return bool;
+        }
+    }
+
+    public boolean checkDato() {
         boolean bool = false;
         try {
             Integer.parseInt(txtDate.getText().substring(0,4));
@@ -48,14 +68,14 @@ public class FaglaererController {
     }
 
     @FXML protected void addSaltid(ActionEvent event) throws Exception {
-        if (check()){
+        if (checkDato() && checkFraTil()){
             if (UserManager.addSaltid(txtDate.getText(),txtFra.getText(),txtTil.getText(), txtEmneID.getText(), txtTidPerStudent.getText())) {
                 lblStatus.setText("|Add success!");
             }else {
                 lblStatus.setText("|Add failed!");
             }
         }else {
-            lblStatus.setText("|Dato skrevet på feil format!");
+            lblStatus.setText("|Dato og/eller klokkeslett skrevet på feil format!");
         }
     }
 

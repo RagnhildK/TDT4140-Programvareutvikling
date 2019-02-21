@@ -140,9 +140,9 @@ public class UserManager {
         return false;
     }
 
-    //TODO: Legge til sjekk for om booking eksisterer
+
     public static boolean booking(String dato, String tidspunkt, String studass){
-        ArrayList<HashMap<String,ArrayList<String>>> booking = Database.getUnikBooking(dato, _bruker, tidspunkt, studass);
+        ArrayList<HashMap<String,ArrayList<String>>> booking = Database.getUnikBooking(dato, tidspunkt, studass);
         try {
             if (booking.get(0) != null) {
                 return false;
