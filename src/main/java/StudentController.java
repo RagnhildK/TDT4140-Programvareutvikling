@@ -42,13 +42,13 @@ public class StudentController {
     }
 
     @FXML protected void showTid(ActionEvent event) throws Exception {
-
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(datoField.getText(), UserManager._aktivtEmne);
         String str = "|| Dato \t||\t Tidspunkt \t||\t Emne \t||\t Studass \t||\t Varighet \t||\t \n";
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
                 ArrayList<String> values = entry.getValue();
+                System.out.println(key+":"+values.get(0)+":"+values.get(2));
                 ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
                 if (booking.isEmpty()){
                     str += "|| " + key + " \t||\t";
@@ -61,7 +61,6 @@ public class StudentController {
             }
         }
         status.setText(str);
-
     }
 
     @FXML protected void logout(ActionEvent event) throws Exception {

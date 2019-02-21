@@ -5,15 +5,22 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.text.Font?>
 <AnchorPane fx:id="txtUser" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="EmneController">
     <children>
         <Label fx:id="lblEmne" layoutX="14.0" layoutY="109.0" prefHeight="33.0" prefWidth="85.0" text="Mine emner" />
-        <Label fx:id="lblBrukerNavn" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="85.0" text="Brukernavn" />
-        <Button fx:id="btnEmne1" layoutX="16.0" layoutY="142.0" mnemonicParsing="false" text="Button" visible="false" />
-        <TextField fx:id="txtEmne" layoutX="16.0" layoutY="49.0" prefHeight="25.0" prefWidth="113.0" promptText="Emne " />
-        <Button fx:id="btnLeggTilEmne" layoutX="16.0" layoutY="84.0" mnemonicParsing="false" text="Legg til" />
-        <Button fx:id="btnEmne2" layoutX="16.0" layoutY="175.0" mnemonicParsing="false" text="Button" visible="false" />
-        <Button fx:id="btnEmne3" layoutX="16.0" layoutY="207.0" mnemonicParsing="false" text="Button" visible="false" />
-        <Button fx:id="btnEmne4" layoutX="16.0" layoutY="238.0" mnemonicParsing="false" text="Button" visible="false" />
+        <Label fx:id="status" layoutX="120.0" layoutY="109.0" prefHeight="33.0" prefWidth="85.0" text="" />
+        <Label fx:id="lblBrukerNavn" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="85.0" text="Meld opp i emne" />
+        <Button fx:id="btnEmne1" onAction="#setAktivtEmne" layoutX="16.0" layoutY="142.0" mnemonicParsing="false" text="Button" visible="false" />
+        <TextField fx:id="txtEmne"  layoutX="16.0" layoutY="49.0" prefHeight="25.0" prefWidth="113.0" promptText="Emne " />
+        <Button fx:id="btnLeggTilEmne" onAction="#addEmne" layoutX="16.0" layoutY="84.0" mnemonicParsing="false" text="Legg til" />
+        <Button fx:id="btnEmne2" onAction="#setAktivtEmne" layoutX="16.0" layoutY="175.0" mnemonicParsing="false" text="Button" visible="false" />
+        <Button fx:id="btnEmne3" onAction="#setAktivtEmne" layoutX="16.0" layoutY="207.0" mnemonicParsing="false" text="Button" visible="false" />
+        <Button fx:id="btnEmne4" onAction="#setAktivtEmne" layoutX="16.0" layoutY="238.0" mnemonicParsing="false" text="Button" visible="false" />
+        <Button fx:id="btnLogout" onAction="#logout" layoutX="350.0" layoutY="40.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="119.0" text="Logg ut">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
     </children>
 </AnchorPane>

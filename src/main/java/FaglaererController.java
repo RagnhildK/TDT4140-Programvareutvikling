@@ -24,7 +24,7 @@ public class FaglaererController {
 
     @FXML protected void addSaltid(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDate.getText()) && Check.checkTidspunkt(txtFra.getText()) && Check.checkTidspunkt(txtTil.getText())){
-            if (UserManager.addSaltid(txtDate.getText(),txtFra.getText(),txtTil.getText(), txtEmneID.getText(), txtTidPerStudent.getText())) {
+            if (UserManager.addSaltid(txtDate.getText(),txtFra.getText(),txtTil.getText(), txtTidPerStudent.getText())) {
                 lblStatus.setText("|Add success!");
             }else {
                 lblStatus.setText("|Add failed!");

@@ -38,21 +38,20 @@ public class LoginController {
     @FXML protected void openScene() throws Exception {
         Parent root;
         Stage stage = (Stage) loginBtn.getScene().getWindow();
-        if (UserManager._rolle.get(0).get(1).equals("admin")){
-            root = FXMLLoader.load(getClass().getResource("admin.fxml"));
-            stage.setTitle("Admin");
-        }else if (UserManager._rolle.get(0).get(1).equals("faglærer")){
-            root = FXMLLoader.load(getClass().getResource("faglaerer.fxml"));
-            stage.setTitle("Faglærer");
-        }
-        else if (UserManager._rolle.get(0).get(1).equals("studass")){
-            root = FXMLLoader.load(getClass().getResource("studass.fxml"));
-            stage.setTitle("Studass");
-        }
-        else {
-            root = FXMLLoader.load(getClass().getResource("student.fxml"));
+        try {
+            if (UserManager._rolle.get(0).get(1).equals("admin")){
+                root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+                stage.setTitle("Admin");
+            }
+            else {
+                root = FXMLLoader.load(getClass().getResource("Emne.fxml"));
+                stage.setTitle("Booking");
+            }
+        }catch (Exception e) {
+            root = FXMLLoader.load(getClass().getResource("Emne.fxml"));
             stage.setTitle("Booking");
         }
+
         Scene scene =  new Scene(root, 700 ,500);
         stage.setScene(scene);
         stage.show();

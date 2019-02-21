@@ -27,12 +27,13 @@ public class UserManager {
      *      addSaltid(String dato, String fra, String til, String emneid, String tid)
      *          -Legger til saltid     *
      */
-    //TODO: Implementere valg av emne ved innlogging og endre aktivtEmne
+    //TODO: Implementere valg av emne ved innlogging og endre aktivtEmne og aktivRolle
     //      slik at man får den infoen man skal ha for hvert emne
 
     public static String _bruker = "";
+    public static String _aktivtEmne = "";
+    public static String _aktivRolle = "";
     public static ArrayList<ArrayList<String>> _rolle = new ArrayList<ArrayList<String>>();
-    public static String _aktivtEmne = "TDT4100";
 
     public static String Input(String what) {
         BufferedReader br = null;
@@ -48,12 +49,8 @@ public class UserManager {
         return input;
     }
 
-    public static void main() {
-        getUser();
-        checkLogin();
-    }
-    public static void getUser()  {
-        String username = Input("username to search for");
+
+    public static void getUser(String username)  {
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(username);
         Database.rsToString(dbOutput);
     }
@@ -130,16 +127,36 @@ public class UserManager {
 
                 System.out.println(rolle);
                 Database.rsToString(dbOutput);
-                return true;
             }
+            return true;
         }
         else {
             System.out.println("|Login failed!");
             return false;
         }
-        return false;
     }
 
+    public static boolean updateRoller() {
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(_bruker);
+        if (dbOutput.isEmpty()) {
+            return false;
+
+        } else {
+            ArrayList<ArrayList<String>> roller = new ArrayList<ArrayList<String>>();
+            for (HashMap<String, ArrayList<String>> set : dbOutput) {
+                for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                    _bruker = entry.getKey();
+                    ArrayList<String> values = entry.getValue();
+                    ArrayList<String> r = new ArrayList<String>();
+                    r.add(values.get(2));
+                    r.add(values.get(1));
+                    roller.add(r);
+                }
+            }
+            _rolle = roller;
+            return true;
+        }
+    }
 
     public static boolean booking(String dato, String tidspunkt, String studass){
         ArrayList<HashMap<String,ArrayList<String>>> booking = Database.getUnikBooking(dato, tidspunkt, studass);
@@ -148,14 +165,14 @@ public class UserManager {
         }
         return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
     }
-    public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, String varighet) {
-        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, emneid);
+    public static boolean addStudassPåSal(String dato, String tidspunkt, String varighet) {
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, _aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> val = entry.getValue();
                 if (checkTime(val.get(0), tidspunkt) && checkTime(tidspunkt, val.get(1))){
                     //System.out.println("Success");
-                    return Database.addStudassPåSal(dato, tidspunkt, emneid, _bruker, Integer.parseInt(varighet));
+                    return Database.addStudassPåSal(dato, tidspunkt, _aktivtEmne, _bruker, Integer.parseInt(varighet));
                 }
             }
         }
@@ -176,7 +193,7 @@ public class UserManager {
         return false;
     }
 
-    public static boolean addSaltid(String dato, String fra, String til, String emneid, String tid) {
-        return (Database.addSaltid(dato, fra, til, emneid, Integer.parseInt(tid) , _bruker));
+    public static boolean addSaltid(String dato, String fra, String til, String tid) {
+        return (Database.addSaltid(dato, fra, til, _aktivtEmne, Integer.parseInt(tid) , _bruker));
     }
 }

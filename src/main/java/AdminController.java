@@ -76,7 +76,6 @@ public class AdminController {
                 actiontarget.setText("|Add failed!");
             }
         }
-
     }
 
     @FXML protected void logout(ActionEvent event) throws Exception {
