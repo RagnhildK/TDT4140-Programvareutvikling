@@ -48,7 +48,6 @@ public class UserManager {
         return input;
     }
 
-
     public static void main() {
         getUser();
         checkLogin();
