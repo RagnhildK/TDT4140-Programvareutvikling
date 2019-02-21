@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 
-public class Database {
+public class
+Database {
     /*
      *  Klassen som kobler opp mot databasen og setter inn/oppdaterer og henter fra den.
      *  Variabler:
@@ -236,6 +237,16 @@ public class Database {
         String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and EmneID = '"+emneid+"'";
         return sendQuery(sql);
     }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikStudassPåSal(String dato, String emneid, String tidspunkt, String studass) {
+        String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and Tidspunkt = '"+tidspunkt+"' and EmneID = '"+studass+"' and EmneID = '"+emneid+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikBooking(String dato, String student, String tidspunkt, String studass) {
+        String sql = "SELECT * FROM Booking Where StudassPåSalDato = '"+dato+"' and StudassPåSalTidspunkt = '"+tidspunkt+"' and StudassPåSalStudass = '"+studass+"' and Student = '"+student+"' ";
+        return sendQuery(sql);
+    }
+
+
     public static int getBookingID(){
         int id = 0;
         String sql = "SELECT BookingID FROM Booking " +
