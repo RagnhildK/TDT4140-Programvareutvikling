@@ -261,7 +261,10 @@ Database {
         }
         return id + 1;
     }
-
+    public static String getRolle(String brukernavn, String emneid){
+        String sql = "SELECT Rolle FROM BrukerIEmne Where BrukerNavn = '"+brukernavn+"' and EmneID = '"+emneid+"'";
+        return sendQueryString(sql);
+    }
 
     public static void main(String[] args) {
         //System.out.println(checkLogin("admin","admin"));
