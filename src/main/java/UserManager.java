@@ -141,8 +141,17 @@ public class UserManager {
         return false;
     }
 
+    //TODO: Legge til sjekk for om booking eksisterer
     public static boolean booking(String dato, String tidspunkt, String studass){
-       return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
+        ArrayList<HashMap<String,ArrayList<String>>> booking = Database.getUnikBooking(dato, _bruker, tidspunkt, studass);
+        try {
+            if (booking.get(0) != null) {
+                return false;
+            }
+        }catch (Exception e) {
+
+        }
+        return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass);
     }
     public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, String varighet) {
         ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, emneid);
