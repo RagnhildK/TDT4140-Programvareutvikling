@@ -48,7 +48,6 @@ public class StudentController {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
                 ArrayList<String> values = entry.getValue();
-                System.out.println(key+":"+values.get(0)+":"+values.get(2));
                 ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
                 if (booking.isEmpty()){
                     str += "|| " + key + " \t||\t";
@@ -57,11 +56,12 @@ public class StudentController {
                     }
                     str += "\n";
                 }
-
             }
         }
         status.setText(str);
     }
+
+
 
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();

@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AdminController {
     /*
@@ -39,6 +41,7 @@ public class AdminController {
     @FXML public TextField nameField1;
     @FXML public TextField roleField;
     @FXML public Button addRolebtn;
+    @FXML public Label lblUser;
 
 
     @FXML protected void addUser(ActionEvent event) throws Exception {
@@ -76,6 +79,25 @@ public class AdminController {
                 actiontarget.setText("|Add failed!");
             }
         }
+    }
+
+    @FXML protected void showUsers(ActionEvent event) throws Exception {
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser("all");
+        String str = "|| BrukerNavn \t||\t Bruker \t||\t Passord \t||\t Rolle \t||\t EmneID \t||\t Emne\n";
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                ArrayList<String> values = entry.getValue();
+
+                str += "|| " + key + " \t||\t";
+                for (String v : values) {
+                    str += " " + v + " \t||\t";
+                }
+                str += "\n";
+
+            }
+        }
+        lblUser.setText(str);
     }
 
     @FXML protected void logout(ActionEvent event) throws Exception {

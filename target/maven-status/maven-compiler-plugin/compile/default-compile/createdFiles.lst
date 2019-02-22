@@ -1,6 +1,12 @@
+FXMLMain.class
 Database.class
+StudassController.class
+FaglaererController.class
 StudentController.class
 Main.class
 UserManager.class
+LoginController1.class
 Check.class
+AdminController.class
 LoginController.class
+EmneController.class

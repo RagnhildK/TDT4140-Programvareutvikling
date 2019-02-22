@@ -50,9 +50,10 @@ public class UserManager {
     }
 
 
-    public static void getUser(String username)  {
+    public static ArrayList<HashMap<String, ArrayList<String>>> getUser(String username)  {
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(username);
         Database.rsToString(dbOutput);
+        return dbOutput;
     }
     public static void checkLogin() {
         while (true){

@@ -295,7 +295,7 @@ Database {
 
     }
 
-    public static void rsToString(ArrayList<HashMap<String, ArrayList<String>>> dbOutput) {
+    public static String rsToString(ArrayList<HashMap<String, ArrayList<String>>> dbOutput) {
         String str = "";
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -309,6 +309,7 @@ Database {
             }
         }
         System.out.println(str);
+        return str;
     }
 
 }

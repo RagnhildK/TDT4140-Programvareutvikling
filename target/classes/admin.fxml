@@ -55,6 +55,11 @@
     <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="5" GridPane.rowIndex="4">
         <Button fx:id="addEmneBtn" onAction="#addEmne" text="Legg til Emne" />
     </HBox>
+    <HBox alignment="bottom_right" spacing="10" GridPane.columnIndex="5" GridPane.rowIndex="5">
+        <Button fx:id="btnShow" onAction="#showUsers" text="Vis brukere" />
+    </HBox>
+    <Label fx:id="lblUser" text="" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+
    <Label text="Brukernavn:" GridPane.rowIndex="7" />
    <Button fx:id="addRolebtn" mnemonicParsing="false" onAction="#addRolle" text="Legg til rolle" GridPane.columnIndex="1" GridPane.rowIndex="10" />
    <TextField fx:id="roleField" text="Student/studass/faglærer" GridPane.columnIndex="1" GridPane.rowIndex="9" />
