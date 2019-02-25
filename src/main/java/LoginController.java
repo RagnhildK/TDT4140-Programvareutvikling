@@ -59,8 +59,8 @@ public class LoginController {
 
     @FXML public void logout(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
-        Scene scene =  new Scene(root, 700 ,500);
+        Parent root = FXMLLoader.load(getClass().getResource("Login2.fxml"));
+        Scene scene =  new Scene(root, 300 ,275);
         stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();

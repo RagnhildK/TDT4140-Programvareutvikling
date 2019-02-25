@@ -1,4 +1,44 @@
-.jfx-text-field
-{
+.pane {
+    -fx-background-color: #2b2927;
+ }
+.label{
+    -fx-text-fill: #d3cbc2;
+}
+.jfx-text-field, .jfx-password-field
+{   -fx-text-fill: #d3cbc2;
+    -fx-prompt-text-fill:  #d3cbc2;
+    -jfx-focus-color: #d3cbc2;
+    -jfx-unfocus-color: #d3cbc2;
 
+}
+
+.jfx-button {
+    -fx-text-fill: #d3cbc2;
+    -fx-border-color:  #d3cbc2;
+    -fx-border-radius: 5%;
+}
+
+.table-view
+{   -fx-text-fill: #d3cbc2;
+    -fx-background-color: #2b2927;
+
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: #2b2927;
+}
+.table-cell {
+    -fx-text-fill: #d3cbc2;
+    -fx-background-color: #2b2927;
+}
+.table-cell:filled {
+    -fx-text-fill: #d3cbc2;
+    -fx-background-color: #2b2927;
+}
+.table-row-cell:selected>.table-cell:filled,
+.table-cell:selected:filled {
+    -fx-text-fill: #d3cbc2;
+    -fx-background-color: #2b2927;
 }
