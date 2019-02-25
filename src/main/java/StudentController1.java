@@ -92,8 +92,6 @@ public class StudentController1 {
 
 
         table.getItems().add(1,"Hello");
-
-
     }
 
 

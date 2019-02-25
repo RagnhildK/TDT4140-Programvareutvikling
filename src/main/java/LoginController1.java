@@ -45,12 +45,12 @@ public class LoginController1 {
                 stage.setTitle("Admin");
             }
             else {
-                root = FXMLLoader.load(getClass().getResource("Emne.fxml"));
+                root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
                 stage.setTitle("Booking");
             }
         }catch (Exception e) {
-            root = FXMLLoader.load(getClass().getResource("Emne.fxml"));
-            stage.setTitle("Booking");
+            root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
+            stage.setTitle("Emne");
         }
 
         Scene scene =  new Scene(root, 700 ,500);
