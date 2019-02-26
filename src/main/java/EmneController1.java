@@ -1,20 +1,18 @@
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class EmneController1 {
 
@@ -29,6 +27,13 @@ public class EmneController1 {
     @FXML public Button btnEmne4 ;
     public ArrayList<Button> btns = new ArrayList<>();
 
+    @FXML private TableView<List<StringProperty>> table;
+    @FXML private TableColumn<List<StringProperty>, String> studentColumn = new TableColumn<>("Dato");
+    @FXML private TableColumn<List<StringProperty>, String> datoColumn = new TableColumn<>("Tidspunkt");
+    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn = new TableColumn<>("Emne");
+    @FXML private TableColumn<List<StringProperty>, String> studassColumn = new TableColumn<>("Studass");
+
+
     @FXML protected void initialize() {
         lblBrukernavn.setText(UserManager._bruker);
         btns.add(btnEmne1);
@@ -36,7 +41,7 @@ public class EmneController1 {
         btns.add(btnEmne3);
         btns.add(btnEmne4);
         showButtons();
-        showTid();
+        showTable();
     }
 
     private void showButtons(){
@@ -74,14 +79,44 @@ public class EmneController1 {
 
     }
 
+    private void showTable() {
+        studentColumn.setCellValueFactory(param -> param.getValue().get(0));
+        datoColumn.setCellValueFactory(param -> param.getValue().get(1));
+        tidspunktColumn.setCellValueFactory(param -> param.getValue().get(2));
+        studassColumn.setCellValueFactory(param -> param.getValue().get(3));
+        table.setItems(getData());
+    }
+    public ObservableList<List<StringProperty>> getData()  {
+        ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBooking(UserManager._bruker);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                List<StringProperty> row = new ArrayList<>();
+                ArrayList<String> values = entry.getValue();
+                SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
+                Calendar calendar = Calendar.getInstance();
+                String nu = defaultF.format(calendar.getTime());
+                String b = values.get(1);
+                if (Integer.parseInt(nu.substring(0,4)) <= Integer.parseInt(b.substring(0,4))
+                        && Integer.parseInt(nu.substring(5,7)) <= Integer.parseInt(b.substring(5,7))
+                        && Integer.parseInt(nu.substring(8)) <= Integer.parseInt(b.substring(8))){
+                    for (String v : values) {
+                        row.add(new SimpleStringProperty(v));
+                    }
+                    data.add(row);
+                }
+            }
+        }
+        return data;
+    }
+
     protected void showTid() {
 
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBooking(UserManager._bruker);
+        /*ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBooking(UserManager._bruker);
         String str = "|| Student \t||\t Dato \t||\t Tidspunkt \t||\t Studass \t||\t \n";
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
-
                 SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
                 Calendar calendar = Calendar.getInstance();
                 String nu = defaultF.format(calendar.getTime());
@@ -101,7 +136,7 @@ public class EmneController1 {
 
             }
         }
-        lblTid.setText(str);
+        lblTid.setText(str);*/
     }
 
     @FXML protected void logout(ActionEvent event) throws Exception {
@@ -131,6 +166,15 @@ public class EmneController1 {
         stage.show();
     }
 
+    public void back(Button b) throws Exception {
+        Stage stage = (Stage) b.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
+        Scene scene =  new Scene(root, 700 ,500);
+        stage.setTitle("Emne");
+        stage.setScene(scene);
+        stage.show();
+
+    }
 }
 
 

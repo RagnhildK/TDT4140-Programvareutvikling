@@ -39,6 +39,7 @@ public class TableController {
         studassColumn.setCellValueFactory(param -> param.getValue().get(3));
         varighetColumn.setCellValueFactory(param -> param.getValue().get(4));
 
+        calendar = Calendar.getInstance();
 
         System.out.println("hei");
 
@@ -51,11 +52,13 @@ public class TableController {
 
 
     public ObservableList<List<StringProperty>> getData() throws Exception  {
-        System.out.println("ja");
+
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
+
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+
                 String key = entry.getKey();
                 List<StringProperty> row = new ArrayList<>();
                 ArrayList<String> values = entry.getValue();
@@ -69,6 +72,7 @@ public class TableController {
                 }
             }
         }
+        System.out.println(data);
         return data;
     }
 

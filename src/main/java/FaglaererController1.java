@@ -64,12 +64,8 @@ public class FaglaererController1 {
     }
 
     @FXML protected void back(ActionEvent event) throws Exception {
-        Stage stage = (Stage) btnAddSaltid.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
-        Scene scene =  new Scene(root, 700 ,500);
-        stage.setTitle("Emne");
-        stage.setScene(scene);
-        stage.show();
+        EmneController1 ec = new EmneController1();
+        ec.back(btnAddSaltid);
 
     }
 

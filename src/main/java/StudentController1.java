@@ -1,3 +1,5 @@
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -39,7 +41,13 @@ public class StudentController1 {
     @FXML public TextField txtDato;
     @FXML public TextField txtTidspunkt;
     @FXML public Button btnBook;
-    @FXML public TableView table;
+
+    @FXML private TableView<List<StringProperty>> table;
+    @FXML private TableColumn<List<StringProperty>, String> datoColumn = new TableColumn<>("Dato");
+    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn = new TableColumn<>("Tidspunkt");
+    @FXML private TableColumn<List<StringProperty>, String> emneColumn = new TableColumn<>("Emne");
+    @FXML private TableColumn<List<StringProperty>, String> studassColumn = new TableColumn<>("Studass");
+    @FXML private TableColumn<List<StringProperty>, String> varighetColumn = new TableColumn<>("Varighet");
 
     private Calendar calendar;
     private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,6 +65,8 @@ public class StudentController1 {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         if(increment){
             calendar.add(Calendar.DAY_OF_MONTH, 1);
+        } else {
+            calendar.add(Calendar.DAY_OF_MONTH, -1);
         }
         lblDato.setText(sdf.format(calendar.getTime()));
     }
@@ -72,48 +82,35 @@ public class StudentController1 {
         initialize();
     }
 
-    @FXML protected void showBookinger(){
-        try{
-            FXMLLoader bookinger = new FXMLLoader(getClass().getResource("table.fxml"));
-            Parent root1 = (Parent) bookinger.load();
-            Stage stage = new Stage();
-            stage.setTitle("Bookinger");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        }
-        catch (Exception e){
+    private void showTable() {
+        datoColumn.setCellValueFactory(param -> param.getValue().get(0));
+        tidspunktColumn.setCellValueFactory(param -> param.getValue().get(1));
+        emneColumn.setCellValueFactory(param -> param.getValue().get(2));
+        studassColumn.setCellValueFactory(param -> param.getValue().get(3));
+        varighetColumn.setCellValueFactory(param -> param.getValue().get(4));
 
-        }
-
-
+        table.setItems(getData());
     }
 
-    private void showTable() {
-        List<String> list = new ArrayList();
-        list.add(0, "en");
-        list.add(1, "to");
-        list.add(2, "tre");
-        ObservableList<String> data = FXCollections.observableArrayList();
-        data.add("Hei");
-        table.setItems(data);
-
-
-
-        TableColumn datoCol = new TableColumn("Dato");
-        TableColumn tidspunktCol = new TableColumn("Tidspunkt");
-        TableColumn emneCol = new TableColumn("Emne");
-        TableColumn studassCol = new TableColumn("Studass");
-        TableColumn varighetCol = new TableColumn("Varighet");
-        datoCol.setMinWidth(100);
-        tidspunktCol.setMinWidth(100);
-        emneCol.setMinWidth(100);
-        studassCol.setMinWidth(100);
-        varighetCol.setMinWidth(100);
-        table.setEditable(true);
-        table.getColumns().addAll(datoCol, tidspunktCol, emneCol, studassCol, varighetCol);
-        ;
-
-        table.getItems().add(1,"Hello");
+    public ObservableList<List<StringProperty>> getData()  {
+        ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                List<StringProperty> row = new ArrayList<>();
+                String key = entry.getKey();
+                ArrayList<String> values = entry.getValue();
+                ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
+                if (booking.isEmpty()){
+                    row.add(new SimpleStringProperty(key));
+                    for (String v : values) {
+                        row.add(new SimpleStringProperty(v));
+                    }
+                    data.add(row);
+                }
+            }
+        }
+        return data;
     }
 
 
@@ -121,8 +118,9 @@ public class StudentController1 {
     @FXML protected void showTid(ActionEvent event) throws Exception  {
         showDate(true);
         txtDato.setText(defaultF.format(calendar.getTime()));
+        showTable();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
-        String str = "|| Dato \t||\t Tidspunkt \t||\t Emne \t||\t Studass \t||\t Varighet \t||\t \n";
+        /*String str = "|| Dato \t||\t Tidspunkt \t||\t Emne \t||\t Studass \t||\t Varighet \t||\t \n";
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
@@ -137,16 +135,12 @@ public class StudentController1 {
                 }
             }
         }
-        lblTid.setText(str);
+        lblTid.setText(str);*/
     }
 
     @FXML protected void back(ActionEvent event) throws Exception {
-        Stage stage = (Stage) btnBook.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Emne.fxml"));
-        Scene scene =  new Scene(root, 300 ,275);
-        stage.setTitle("Emne");
-        stage.setScene(scene);
-        stage.show();
+        EmneController1 ec = new EmneController1();
+        ec.back(btnBook);
 
     }
 
