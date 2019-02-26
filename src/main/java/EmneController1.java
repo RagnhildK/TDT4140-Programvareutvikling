@@ -32,7 +32,11 @@ public class EmneController1 {
     @FXML private TableColumn<List<StringProperty>, String> datoColumn;
     @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn;
     @FXML private TableColumn<List<StringProperty>, String> studassColumn;
-
+    @FXML private TableView<List<StringProperty>> table1;
+    @FXML private TableColumn<List<StringProperty>, String> datoColumn1;
+    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn1;
+    @FXML private TableColumn<List<StringProperty>, String> emneidColumn1;
+    @FXML private TableColumn<List<StringProperty>, String> varighetColumn1;
 
     @FXML protected void initialize() {
         lblBrukernavn.setText(UserManager._bruker);
@@ -50,7 +54,6 @@ public class EmneController1 {
                 btns.get(i).setText(UserManager._rolle.get(i).get(0)+": "+UserManager._rolle.get(i).get(1));
                 btns.get(i).visibleProperty().setValue(true);
             }catch(Exception e){
-
             }
         }
     }
@@ -80,24 +83,51 @@ public class EmneController1 {
     }
 
     private void showTable() {
+
         studentColumn.setCellValueFactory(param -> param.getValue().get(0));
         datoColumn.setCellValueFactory(param -> param.getValue().get(1));
         tidspunktColumn.setCellValueFactory(param -> param.getValue().get(2));
         studassColumn.setCellValueFactory(param -> param.getValue().get(3));
-        table.setItems(getData());
+        table.setItems(getBooking());
+
+        table1.visibleProperty().setValue(false);
+        /*for (ArrayList list : UserManager._rolle){
+            if(list.get(1)=="studass"){
+                table1.visibleProperty().setValue(true);
+            }
+        }*//*
+        datoColumn1.setCellValueFactory(param -> param.getValue().get(0));
+        tidspunktColumn1.setCellValueFactory(param -> param.getValue().get(1));
+        emneidColumn1.setCellValueFactory(param -> param.getValue().get(2));
+        varighetColumn1.setCellValueFactory(param -> param.getValue().get(3));
+        table1.setItems(getStudassPåSal());*/
     }
-    public ObservableList<List<StringProperty>> getData()  {
+    public ObservableList<List<StringProperty>> getStudassPåSal()  {
+        ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMineStudassPåSal(UserManager._bruker);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                List<StringProperty> row = new ArrayList<>();
+                ArrayList<String> values = entry.getValue();
+                String key = entry.getKey();
+                if (Check.future(key)){
+                    for (String v : values) {
+                        row.add(new SimpleStringProperty(v));
+                    }
+                    data.add(row);
+                }
+            }
+        }
+        return data;
+    }
+    public ObservableList<List<StringProperty>> getBooking()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBooking(UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();
                 ArrayList<String> values = entry.getValue();
-                SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar calendar = Calendar.getInstance();
-                String nu = defaultF.format(calendar.getTime());
-                String b = values.get(1);
-                if (Check.future(nu,b)){
+                if (Check.future(values.get(1))){
                     for (String v : values) {
                         row.add(new SimpleStringProperty(v));
                     }

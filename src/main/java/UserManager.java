@@ -27,8 +27,7 @@ public class UserManager {
      *      addSaltid(String dato, String fra, String til, String emneid, String tid)
      *          -Legger til saltid     *
      */
-    //TODO: Implementere valg av emne ved innlogging og endre aktivtEmne og aktivRolle
-    //      slik at man får den infoen man skal ha for hvert emne
+
 
     public static String _bruker = "";
     public static String _aktivtEmne = "";
@@ -49,54 +48,6 @@ public class UserManager {
         return input;
     }
 
-
-    public static ArrayList<HashMap<String, ArrayList<String>>> getUser(String username)  {
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(username);
-        Database.rsToString(dbOutput);
-        return dbOutput;
-    }
-    public static void checkLogin() {
-        while (true){
-            String username = Input("username");
-            if (username.equals("quit")){
-                break;
-            }
-            String password = Input("password");
-            if(Database.checkLogin(username,password)){
-                System.out.println("|Login success!");
-                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(username);
-                if (dbOutput.isEmpty()){
-                    System.err.println("Enda ikke lagt til en rolle til et fag.");
-
-                }else{
-                    String rolle = "||Rolle: ";
-                    ArrayList<ArrayList<String>> roller = new ArrayList<ArrayList<String>>();
-                    for (HashMap<String,ArrayList<String>> set : dbOutput) {
-                        for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                            _bruker = entry.getKey();
-                            ArrayList<String> values = entry.getValue();
-                            ArrayList<String> r = new ArrayList<String>();
-                            r.add(values.get(2));
-                            r.add(values.get(1));
-                            roller.add(r);
-                        }
-                    }
-                    for (ArrayList<String> role : roller){
-                        for (String r : role){
-                            rolle += r + ": ";
-                        }
-                        rolle += "| ";
-                    }
-                    _rolle = roller;
-                    System.out.println(rolle);
-                    Database.rsToString(dbOutput);
-                }
-            }
-            else {
-                System.out.println("|Login failed!");
-            }
-        }
-    }
     public static boolean checkLogin(String username, String password) {
 
         if(Database.checkLogin(username,password)){
@@ -197,4 +148,4 @@ public class UserManager {
     public static boolean addSaltid(String dato, String fra, String til, String tid) {
         return (Database.addSaltid(dato, fra, til, _aktivtEmne, Integer.parseInt(tid) , _bruker));
     }
-}
+    }

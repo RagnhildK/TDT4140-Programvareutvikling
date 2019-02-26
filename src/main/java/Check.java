@@ -1,5 +1,8 @@
 import javafx.scene.control.Label;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Check {
     public Check() {
     }
@@ -33,7 +36,10 @@ public class Check {
             return bool;
         }
     }
-    public static boolean future(String nu, String b) {
+    public static boolean future(String b) {
+        SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+        String nu = defaultF.format(calendar.getTime());
         boolean ok = false;
         if (Integer.parseInt(nu.substring(0,4)) < Integer.parseInt(b.substring(0,4))){
             ok = true;

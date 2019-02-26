@@ -90,11 +90,7 @@ public class StudassController1 {
                 List<StringProperty> row = new ArrayList<>();
                 ArrayList<String> values = entry.getValue();
                 String key = entry.getKey();
-                SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
-                Calendar c = Calendar.getInstance();
-                String nu = defaultF.format(c.getTime());
-                String b = key;
-                if (Check.future(nu,b)){
+                if (Check.future(key)){
                     row.add(new SimpleStringProperty(key));
                     for (String v : values) {
                         row.add(new SimpleStringProperty(v));

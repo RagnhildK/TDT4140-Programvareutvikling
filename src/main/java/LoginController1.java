@@ -40,13 +40,17 @@ public class LoginController1 {
         Parent root;
         Stage stage = (Stage) lblStatus.getScene().getWindow();
         try {
-            if (UserManager._rolle.get(0).get(1).equals("admin")){
+            if (UserManager._rolle.isEmpty()){
+                root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
+                stage.setTitle("Emne");
+            }
+            else if (UserManager._rolle.get(0).get(1).equals("admin")){
                 root = FXMLLoader.load(getClass().getResource("admin.fxml"));
                 stage.setTitle("Admin");
             }
             else {
                 root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
-                stage.setTitle("Booking");
+                stage.setTitle("Emne");
             }
         }catch (Exception e) {
             root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));

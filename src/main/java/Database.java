@@ -241,6 +241,10 @@ Database {
         String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and EmneID = '"+emneid+"'";
         return sendQuery(sql);
     }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getMineStudassPåSal(String brukernavn) {
+        String sql = "SELECT Dato, Tidspunkt, EmneID, Varighet FROM StudassPåSal Where Studass = '"+brukernavn+"' order by Dato, Tidspunkt";
+        return sendQuery(sql);
+    }
     public static ArrayList<HashMap<String,ArrayList<String>>> getUnikStudassPåSal(String dato, String emneid, String tidspunkt, String studass) {
         String sql = "SELECT * FROM StudassPåSal Where Dato = '"+dato+"' and Tidspunkt = '"+tidspunkt+"' and EmneID = '"+studass+"' and EmneID = '"+emneid+"'";
         return sendQuery(sql);
