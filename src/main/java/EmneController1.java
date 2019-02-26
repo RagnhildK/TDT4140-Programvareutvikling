@@ -59,21 +59,21 @@ public class EmneController1 {
     }
     //TODO: Klikker når det ikke er lagt til noen fag fra tidligere.
     @FXML protected void addEmne(ActionEvent event){
+
         if(Database.getRolle(UserManager._bruker, txtEmne.getText())!= ""){
             lblStatus.setText("|Allerede meldt opp!");
         }
-        else{
-            if(Database.addRolle(txtEmne.getText(),UserManager._bruker, "student")){
-                lblStatus.setText(UserManager._bruker+" meldt opp i "+txtEmne.getText());
-
-            }else{
+        else {
+            if (Database.addRolle(txtEmne.getText(), UserManager._bruker, "student")) {
+                lblStatus.setText(UserManager._bruker + " meldt opp i " + txtEmne.getText());
+            } else {
                 lblStatus.setText("|Klarte ikke legge til!");
             }
         }
         UserManager.updateRoller();
         showButtons();
     }
-    //TODO: Sette aktivt emne i UM og gå videre til booking side
+
     @FXML protected void setAktivtEmne(ActionEvent event) throws Exception{
         String text = ((Button)event.getSource()).getText();
         UserManager._aktivtEmne = text.substring(0,7);

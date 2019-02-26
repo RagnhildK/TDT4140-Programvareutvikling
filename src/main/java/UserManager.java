@@ -55,6 +55,10 @@ public class UserManager {
             ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(username);
             if (dbOutput.isEmpty()){
                 System.err.println("Enda ikke lagt til en rolle til et fag.");
+                _bruker = username;
+                _aktivRolle = "";
+                _aktivtEmne = "";
+                _rolle = new ArrayList<ArrayList<String>>();
 
             }else{
                 String rolle = "||Rolle: ";

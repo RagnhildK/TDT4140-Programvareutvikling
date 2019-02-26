@@ -17,7 +17,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtStudass" focusColor="#d3cbc2" labelFloat="true" layoutX="27.0" layoutY="60.0" promptText="EmneID" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+        <JFXTextField fx:id="txtEmne" focusColor="#d3cbc2" labelFloat="true" layoutX="27.0" layoutY="60.0" promptText="EmneID" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
         <JFXButton fx:id="btnLeggTilEmne" alignment="CENTER" layoutX="27.0" layoutY="97.0" onAction="#addEmne" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Legg til emne" textFill="#d3cbc2">
             <font>
                 <Font size="14.0" />
