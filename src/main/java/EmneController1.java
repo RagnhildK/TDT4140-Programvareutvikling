@@ -154,7 +154,7 @@ public class EmneController1 {
             stage.setTitle("Faglærer");
         }
         else if (UserManager._aktivRolle.equals("studass")){
-            root = FXMLLoader.load(getClass().getResource("studass.fxml"));
+            root = FXMLLoader.load(getClass().getResource("studass1.fxml"));
             stage.setTitle("Studass");
         }
         else {
