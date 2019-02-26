@@ -63,7 +63,7 @@
       <TableView fx:id="table" layoutX="248.0" layoutY="102.0" prefHeight="242.0" prefWidth="402.0">
          <columns>
             <TableColumn fx:id="datoColumn" prefWidth="83.0" text="Dato" />
-            <TableColumn fx:id="tidspunktColumn" text="Tidspunkt" />
+            <TableColumn fx:id="tidspunktColumn" prefWidth="72.0" text="Tidspunkt" />
             <TableColumn fx:id="emneColumn" prefWidth="72.0" text="Emne" />
             <TableColumn fx:id="studassColumn" prefWidth="85.0" text="Studass" />
             <TableColumn fx:id="varighetColumn" prefWidth="87.0" text="Varighet" />

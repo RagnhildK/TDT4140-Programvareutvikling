@@ -18,7 +18,6 @@ public class Check {
             return bool;
         }
     }
-
     public static boolean checkDato(String dato) {
         boolean bool = false;
         try {
@@ -34,4 +33,20 @@ public class Check {
             return bool;
         }
     }
+    public static boolean future(String nu, String b) {
+        boolean ok = false;
+        if (Integer.parseInt(nu.substring(0,4)) < Integer.parseInt(b.substring(0,4))){
+            ok = true;
+        }else if (Integer.parseInt(nu.substring(0,4)) == Integer.parseInt(b.substring(0,4))){
+            if (Integer.parseInt(nu.substring(5,7)) < Integer.parseInt(b.substring(5,7))){
+                ok = true;
+            }else if (Integer.parseInt(nu.substring(5,7)) == Integer.parseInt(b.substring(5,7))){
+                if (Integer.parseInt(nu.substring(8)) <= Integer.parseInt(b.substring(8))){
+                    ok = true;
+                }
+            }
+        }
+        return ok;
+    }
+
 }

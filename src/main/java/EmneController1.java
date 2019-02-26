@@ -28,10 +28,10 @@ public class EmneController1 {
     public ArrayList<Button> btns = new ArrayList<>();
 
     @FXML private TableView<List<StringProperty>> table;
-    @FXML private TableColumn<List<StringProperty>, String> studentColumn = new TableColumn<>("Dato");
-    @FXML private TableColumn<List<StringProperty>, String> datoColumn = new TableColumn<>("Tidspunkt");
-    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn = new TableColumn<>("Emne");
-    @FXML private TableColumn<List<StringProperty>, String> studassColumn = new TableColumn<>("Studass");
+    @FXML private TableColumn<List<StringProperty>, String> studentColumn;
+    @FXML private TableColumn<List<StringProperty>, String> datoColumn;
+    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn;
+    @FXML private TableColumn<List<StringProperty>, String> studassColumn;
 
 
     @FXML protected void initialize() {
@@ -97,9 +97,7 @@ public class EmneController1 {
                 Calendar calendar = Calendar.getInstance();
                 String nu = defaultF.format(calendar.getTime());
                 String b = values.get(1);
-                if (Integer.parseInt(nu.substring(0,4)) <= Integer.parseInt(b.substring(0,4))
-                        && Integer.parseInt(nu.substring(5,7)) <= Integer.parseInt(b.substring(5,7))
-                        && Integer.parseInt(nu.substring(8)) <= Integer.parseInt(b.substring(8))){
+                if (Check.future(nu,b)){
                     for (String v : values) {
                         row.add(new SimpleStringProperty(v));
                     }
@@ -109,6 +107,8 @@ public class EmneController1 {
         }
         return data;
     }
+
+
 
     protected void showTid() {
 

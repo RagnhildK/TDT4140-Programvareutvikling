@@ -5,6 +5,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -28,11 +30,6 @@
                 <Font size="14.0" />
             </font>
         </JFXButton>
-        <Label fx:id="lblTid" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="240.0" layoutY="104.0" prefHeight="292.0" prefWidth="477.0" textFill="#d3cbc2">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
         <Label fx:id="lblBrukernavn" alignment="CENTER_RIGHT" layoutX="463.0" layoutY="14.0" prefHeight="20.0" prefWidth="114.0" stylesheets="@Styles.css" text="Brukernavn">
             <font>
                 <Font size="14.0" />
@@ -59,6 +56,14 @@
             </font>
         </JFXButton>
       <JFXTextField fx:id="txtTidPerStudent" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="209.0" promptText="Tid per student" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+        <TableView fx:id="table" layoutX="248.0" layoutY="102.0" prefHeight="242.0" prefWidth="315.0">
+            <columns>
+                <TableColumn fx:id="datoColumn" prefWidth="83.0" text="Dato" />
+                <TableColumn fx:id="fraColumn" prefWidth="72.0" text="Fra" />
+                <TableColumn fx:id="tilColumn" prefWidth="72.0" text="Til" />
+                <TableColumn fx:id="tpsColumn" prefWidth="85.0" text="Tid/student" />
+            </columns>
+        </TableView>
 
     </children>
 </AnchorPane>

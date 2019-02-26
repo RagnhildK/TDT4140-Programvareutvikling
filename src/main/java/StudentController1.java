@@ -43,11 +43,11 @@ public class StudentController1 {
     @FXML public Button btnBook;
 
     @FXML private TableView<List<StringProperty>> table;
-    @FXML private TableColumn<List<StringProperty>, String> datoColumn = new TableColumn<>("Dato");
-    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn = new TableColumn<>("Tidspunkt");
-    @FXML private TableColumn<List<StringProperty>, String> emneColumn = new TableColumn<>("Emne");
-    @FXML private TableColumn<List<StringProperty>, String> studassColumn = new TableColumn<>("Studass");
-    @FXML private TableColumn<List<StringProperty>, String> varighetColumn = new TableColumn<>("Varighet");
+    @FXML private TableColumn<List<StringProperty>, String> datoColumn;
+    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn;
+    @FXML private TableColumn<List<StringProperty>, String> emneColumn;
+    @FXML private TableColumn<List<StringProperty>, String> studassColumn;
+    @FXML private TableColumn<List<StringProperty>, String> varighetColumn;
 
     private Calendar calendar;
     private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
