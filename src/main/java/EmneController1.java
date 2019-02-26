@@ -115,7 +115,7 @@ public class EmneController1 {
         Parent root;
         Stage stage = (Stage) btnEmne1.getScene().getWindow();
         if (UserManager._aktivRolle.equals("faglærer")){
-            root = FXMLLoader.load(getClass().getResource("faglaerer.fxml"));
+            root = FXMLLoader.load(getClass().getResource("faglaerer1.fxml"));
             stage.setTitle("Faglærer");
         }
         else if (UserManager._aktivRolle.equals("studass")){
