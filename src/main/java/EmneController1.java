@@ -84,14 +84,21 @@ public class EmneController1 {
 
                 SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
                 Calendar calendar = Calendar.getInstance();
-                String s = defaultF.format(calendar.getTime());
+                String nu = defaultF.format(calendar.getTime());
+                String b = values.get(1);
 
-
-
-                for (String v : values) {
-                    str += " " + v + " \t||\t";
+                if (Integer.parseInt(nu.substring(0,4)) <= Integer.parseInt(b.substring(0,4))
+                    && Integer.parseInt(nu.substring(5,7)) <= Integer.parseInt(b.substring(5,7))
+                    && Integer.parseInt(nu.substring(8)) <= Integer.parseInt(b.substring(8))){
+                    str += "||";
+                    for (String v : values) {
+                        str += " " + v + " \t||\t";
+                    }
+                    str += "\n";
                 }
-                str += "\n";
+
+
+
             }
         }
         lblTid.setText(str);
