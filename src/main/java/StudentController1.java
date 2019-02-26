@@ -49,8 +49,8 @@ public class StudentController1 {
         calendar = Calendar.getInstance();
         showDate(false);
         showTid(new ActionEvent());
-        table.visibleProperty().setValue(false);
-        //showTable();
+        table.visibleProperty().setValue(true);
+        showTable();
     }
 
     private void showDate(boolean increment) {
@@ -72,12 +72,29 @@ public class StudentController1 {
         initialize();
     }
 
+    @FXML protected void showBookinger(){
+        try{
+            FXMLLoader bookinger = new FXMLLoader(getClass().getResource("table.fxml"));
+            Parent root1 = (Parent) bookinger.load();
+            Stage stage = new Stage();
+            stage.setTitle("Bookinger");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        }
+        catch (Exception e){
+
+        }
+
+
+    }
+
     private void showTable() {
         List<String> list = new ArrayList();
         list.add(0, "en");
         list.add(1, "to");
         list.add(2, "tre");
-        ObservableList<String> data = FXCollections.observableList(list);
+        ObservableList<String> data = FXCollections.observableArrayList();
+        data.add("Hei");
         table.setItems(data);
 
 
@@ -87,9 +104,14 @@ public class StudentController1 {
         TableColumn emneCol = new TableColumn("Emne");
         TableColumn studassCol = new TableColumn("Studass");
         TableColumn varighetCol = new TableColumn("Varighet");
+        datoCol.setMinWidth(100);
+        tidspunktCol.setMinWidth(100);
+        emneCol.setMinWidth(100);
+        studassCol.setMinWidth(100);
+        varighetCol.setMinWidth(100);
         table.setEditable(true);
         table.getColumns().addAll(datoCol, tidspunktCol, emneCol, studassCol, varighetCol);
-
+        ;
 
         table.getItems().add(1,"Hello");
     }
