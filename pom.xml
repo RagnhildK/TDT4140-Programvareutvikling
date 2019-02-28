@@ -12,7 +12,7 @@
 
     <groupId>com.pu16</groupId>
     <artifactId>PU16</artifactId>
-    <version>BookBoard 0.1</version>
+    <version>BookBoard 1.0.1</version>
 
     <build>
         <plugins>
@@ -38,33 +38,33 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <configuration>
+                   <source>8</source>
+                   <target>8</target>
+               </configuration>
+           </plugin>
+       </plugins>
+   </build>
 
 
 
-    <dependencies>
-        <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-fxml</artifactId>
-        <version>11.0.1</version>
-        <classifier>win</classifier>
-        </dependency>
+   <dependencies>
+       <dependency>
+       <groupId>org.openjfx</groupId>
+       <artifactId>javafx-fxml</artifactId>
+       <version>11.0.1</version>
+       <classifier>win</classifier>
+       </dependency>
 
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-fxml</artifactId>
-            <version>11.0.1</version>
-            <classifier>mac</classifier>
-        </dependency>
-        <!---->
+       <dependency>
+           <groupId>org.openjfx</groupId>
+           <artifactId>javafx-fxml</artifactId>
+           <version>11.0.1</version>
+           <classifier>mac</classifier>
+       </dependency>
+       <!---->
 
         <dependency>
             <groupId>com.jfoenix</groupId>

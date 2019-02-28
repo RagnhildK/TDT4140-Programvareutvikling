@@ -123,21 +123,43 @@ public class UserManager {
     }
     public static boolean addStudassPåSal(String dato, String tidspunkt, String varighet) {
         ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, _aktivtEmne);
+        int lengde = Integer.parseInt(varighet);
+        boolean ok = false;
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> val = entry.getValue();
-                if (checkTime(val.get(0), tidspunkt) && checkTime(tidspunkt, val.get(1))){
-                    //System.out.println("Success");
-                    return Database.addStudassPåSal(dato, tidspunkt, _aktivtEmne, _bruker, Integer.parseInt(varighet));
+                int intervall = Integer.parseInt(val.get(2));
+                while(lengde >= intervall){
+                    if (checkTime(val.get(0), tidspunkt) && checkTime(tidspunkt, val.get(1))){
+                        ok = Database.addStudassPåSal(dato, tidspunkt, _aktivtEmne, _bruker, intervall);
+
+                        lengde -= intervall;
+                        int hh = Integer.parseInt(tidspunkt.substring(0,2));
+                        int mm = Integer.parseInt(tidspunkt.substring(3));
+                        mm += intervall;
+                        if (mm >= 60){
+                            mm = mm-60;
+                            hh += 1;
+                        }
+                        if (mm == 0){
+                            tidspunkt = hh + ":00";
+                        }else {
+                            tidspunkt = hh + ":" + mm;
+                        }
+
+                    }else {
+                        break;
+                    }
                 }
+                return ok;
             }
         }
 
         return false;
     }
-
+    // HH:mm
     private static boolean checkTime(String før, String etter) {
-        //System.out.println("Før; " + før + " Etter: " + etter);
+
         if (Integer.parseInt(før.substring(0,2)) < Integer.parseInt(etter.substring(0,2))) {
             return true;
         }
