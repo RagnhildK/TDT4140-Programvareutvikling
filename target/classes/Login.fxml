@@ -1,41 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<!-- avenir font? -->
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="LoginController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
-    <gridLinesVisible>false</gridLinesVisible>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Text text="Login"
-          GridPane.columnIndex="0" GridPane.rowIndex="0"
-          GridPane.columnSpan="2"/>
-
-    <Label text="Brukernavn:"
-           GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-
-    <TextField fx:id="userField"
-               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-    <Label text="Passord:"
-           GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-
-    <PasswordField fx:id="passwordField"
-                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-
-    <HBox spacing="10" alignment="bottom_right"
-          GridPane.columnIndex="1" GridPane.rowIndex="4">
-        <Button text="Login" fx:id="loginBtn"
-                onAction="#login"/>
-    </HBox>
-
-
-    <Text fx:id="actiontarget"
-          GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-</GridPane>
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="300.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginController">
+    <children>
+        <Label layoutX="83.0" layoutY="51.0" stylesheets="@Styles.css" text="Login:">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtUser" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="90.0" promptText="Brukernavn" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+        <JFXPasswordField fx:id="txtPassword" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="138.0" promptText="Passord" style="-fx-prompt-text-fill: #d3cbc2; -jfx-focus-color: #d3cbc2; -jfx-unfocus-color: #d3cbc2;" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+        <JFXButton fx:id="btnLogin" alignment="CENTER" layoutX="83.0" layoutY="181.0" onAction="#login" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Logg inn" textFill="#d3cbc2">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <Label fx:id="lblStatus" layoutX="83.0" layoutY="217.0" textFill="#d3cbc2">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

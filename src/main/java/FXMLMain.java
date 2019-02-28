@@ -9,11 +9,11 @@ public class FXMLMain extends Application{
     /*
      *  Klassen som starter Login FXMLen.
      *  Metoder:
-     *      Start() - Starter Login.fxml
+     *      Start() - Starter login.fxml
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("login2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
         primaryStage.setTitle("Login");
         primaryStage.setScene(new Scene(root, 300, 275));
         primaryStage.show();

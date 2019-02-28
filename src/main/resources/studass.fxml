@@ -1,65 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<!-- avenir font? -->
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="StudassController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-    <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
-    <gridLinesVisible>false</gridLinesVisible>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-    <Text text="Studass side"
-          GridPane.columnIndex="0" GridPane.rowIndex="0"
-          GridPane.columnSpan="2"/>
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StudassController">
+    <children>
+        <Label layoutX="83.0" layoutY="51.0" stylesheets="@Styles.css" text="Sudass På Sal">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXTextField fx:id="txtDato" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="80.0" promptText="Dato" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+        <JFXTextField fx:id="txtTidspunkt" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="125.0" promptText="Tidspunkt" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+        <JFXTextField fx:id="txtVarighet" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="166.0" promptText="Varighet" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+        <JFXButton fx:id="btnAddTid" alignment="CENTER" layoutX="83.0" layoutY="252.0" onAction="#addTid" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Legg til tid" textFill="#d3cbc2">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <JFXButton fx:id="btnShowTid" alignment="CENTER" layoutX="229.0" layoutY="50.0" onAction="#showTid" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Neste dag" textFill="#d3cbc2">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <Label fx:id="lblBrukernavn" alignment="CENTER_RIGHT" layoutX="463.0" layoutY="14.0" prefHeight="20.0" prefWidth="114.0" stylesheets="@Styles.css" text="Brukernavn">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXButton fx:id="btnLoggut" alignment="CENTER" layoutX="586.0" layoutY="13.0" onAction="#logout" prefHeight="22.0" prefWidth="100.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Logg ut" textFill="#d3cbc2">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <Label fx:id="lblDato" layoutX="383.0" layoutY="51.0" stylesheets="@Styles.css" text="Dato">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblStatus" layoutX="83.0" layoutY="292.0" prefHeight="62.0" prefWidth="158.0" stylesheets="@Styles.css">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <JFXButton fx:id="btnBack" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="13.0" onAction="#back" prefHeight="24.0" prefWidth="51.0" ripplerFill="#2b2927" style="-fx-border-radius: 20;" stylesheets="@Styles.css" text="←" textFill="#d3cbc2">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </JFXButton>
+        <TableView fx:id="table" layoutX="248.0" layoutY="102.0" prefHeight="242.0" prefWidth="315.0">
+            <columns>
+                <TableColumn fx:id="datoColumn" prefWidth="83.0" text="Dato" />
+                <TableColumn fx:id="fraColumn" prefWidth="72.0" text="Fra" />
+                <TableColumn fx:id="tilColumn" prefWidth="72.0" text="Til" />
+                <TableColumn fx:id="tpsColumn" prefWidth="85.0" text="Tid/student" />
+            </columns>
+        </TableView>
 
-    <Label text="Dato:"
-           GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-
-    <TextField fx:id="datoField"
-               GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-    <Label text="Tidspunkt:"
-           GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-
-    <TextField fx:id="tidspunktField"
-               GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-
-    <Label text="Emne:"
-           GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-
-    <TextField fx:id="emneField"
-               GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-
-    <Label text="Varighet:"
-           GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-
-    <TextField fx:id="varighetField"
-               GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-
-    <HBox spacing="10" alignment="bottom_right"
-          GridPane.columnIndex="1" GridPane.rowIndex="5">
-        <Button text="Add user" fx:id="addTidBtn"
-                onAction="#addTid"/>
-    </HBox>
-    <HBox spacing="10" alignment="bottom_right"
-          GridPane.columnIndex="0" GridPane.rowIndex="5">
-        <Button text="Vis tider" fx:id="showTidBtn"
-                onAction="#showTid"/>
-    </HBox>
-
-
-    <Text fx:id="status"
-          GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-
-    <HBox spacing="10" alignment="top_right"
-          GridPane.columnIndex="2" GridPane.rowIndex="0">
-        <Button text="Log out" fx:id="logoutBtn"
-                onAction="#logout"/>
-    </HBox>
-
-</GridPane>
+    </children>
+</AnchorPane>
