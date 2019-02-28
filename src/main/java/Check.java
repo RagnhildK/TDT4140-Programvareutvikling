@@ -1,11 +1,12 @@
-import javafx.scene.control.Label;
+
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Check {
-    public Check() {
-    }
+    /*
+     * Klasse som utfører diverse sjekker på input.
+     */
 
     public static boolean checkTidspunkt(String tid) {
         boolean bool = false;
