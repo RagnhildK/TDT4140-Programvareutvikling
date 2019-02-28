@@ -44,11 +44,11 @@ public class LoginController {
                 stage.setTitle("Admin");
             }
             else {
-                root = FXMLLoader.load(getClass().getResource("Emne.fxml"));
+                root = FXMLLoader.load(getClass().getResource("emne.fxml"));
                 stage.setTitle("Booking");
             }
         }catch (Exception e) {
-            root = FXMLLoader.load(getClass().getResource("Emne.fxml"));
+            root = FXMLLoader.load(getClass().getResource("emne.fxml"));
             stage.setTitle("Booking");
         }
 
@@ -59,7 +59,7 @@ public class LoginController {
 
     @FXML public void logout(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Login2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login2.fxml"));
         Scene scene =  new Scene(root, 300 ,275);
         stage.setTitle("Login");
         stage.setScene(scene);

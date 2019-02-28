@@ -41,7 +41,7 @@ public class LoginController1 {
         Stage stage = (Stage) lblStatus.getScene().getWindow();
         try {
             if (UserManager._rolle.isEmpty()){
-                root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
+                root = FXMLLoader.load(getClass().getResource("emne1.fxml"));
                 stage.setTitle("Emne");
             }
             else if (UserManager._rolle.get(0).get(1).equals("admin")){
@@ -49,11 +49,11 @@ public class LoginController1 {
                 stage.setTitle("Admin");
             }
             else {
-                root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
+                root = FXMLLoader.load(getClass().getResource("emne1.fxml"));
                 stage.setTitle("Emne");
             }
         }catch (Exception e) {
-            root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
+            root = FXMLLoader.load(getClass().getResource("emne1.fxml"));
             stage.setTitle("Emne");
         }
 
@@ -64,7 +64,7 @@ public class LoginController1 {
 
     @FXML public void logout(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Login2.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("login2.fxml"));
         Scene scene =  new Scene(root, 300 ,275);
         stage.setTitle("Login");
         stage.setScene(scene);

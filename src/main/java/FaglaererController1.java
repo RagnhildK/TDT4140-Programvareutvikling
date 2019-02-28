@@ -111,7 +111,7 @@ public class FaglaererController1 {
     }
 
     @FXML protected void logout(ActionEvent event) throws Exception {
-        LoginController l = new LoginController();
+        LoginController1 l = new LoginController1();
         l.logout(btnAddSaltid);
 
     }

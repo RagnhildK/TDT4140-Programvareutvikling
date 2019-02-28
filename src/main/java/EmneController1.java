@@ -170,7 +170,7 @@ public class EmneController1 {
     }
 
     @FXML protected void logout(ActionEvent event) throws Exception {
-        LoginController l = new LoginController();
+        LoginController1 l = new LoginController1();
         l.logout(btnEmne1);
 
     }
@@ -198,7 +198,7 @@ public class EmneController1 {
 
     public void back(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("Emne1.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("emne1.fxml"));
         Scene scene =  new Scene(root, 700 ,500);
         stage.setTitle("Emne");
         stage.setScene(scene);
