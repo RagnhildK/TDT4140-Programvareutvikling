@@ -22,7 +22,7 @@
 <entity id="6" is_weak="false" name="Faglærer" x="486" y="220">
 <attributes/>
 </entity>
-<entity id="19" is_weak="true" name="app.Booking" x="170" y="457">
+<entity id="19" is_weak="true" name="Booking" x="170" y="457">
 <attributes>
 <attribute is_hidden="false" is_key="true" name="BookingID" type=""/>
 <attribute is_hidden="false" is_key="false" name="Varighet" type=""/>

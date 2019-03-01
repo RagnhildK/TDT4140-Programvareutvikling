@@ -222,7 +222,7 @@ Database {
         return sendUpdate(sql);
     }
     public static boolean addBooking(int bookingID, String student, String dato, String tidspunkt, String studass ) {
-        String sql = "INSERT INTO app.Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"')";
+        String sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"')";
         return sendUpdate(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getUser(String brukernavn) {
@@ -263,8 +263,8 @@ Database {
 
     public static int getBookingID(){
         int id = 0;
-        String sql = "SELECT BookingID FROM app.Booking " +
-                "WHERE BookingID = (SELECT MAX(BookingID) FROM app.Booking);";
+        String sql = "SELECT BookingID FROM Booking " +
+                "WHERE BookingID = (SELECT MAX(BookingID) FROM Booking);";
         ArrayList<HashMap<String,ArrayList<String>>> dbOutput = sendQuery(sql);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {

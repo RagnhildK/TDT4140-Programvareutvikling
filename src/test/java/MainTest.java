@@ -11,7 +11,7 @@ public class MainTest {
 
     Main m = new Main();
     Database db = new Database();
-
+    UserManager um = new UserManager();
     @org.junit.Test
     public void main() {
 
@@ -22,6 +22,8 @@ public class MainTest {
     @org.junit.Test
     public void opprettBruker() {
         try {
+
+
 
 
         }catch(Exception e){

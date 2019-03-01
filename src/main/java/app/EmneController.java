@@ -189,7 +189,7 @@ public class EmneController {
         }
         else {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/student.fxml"));
-            stage.setTitle("app.Booking");
+            stage.setTitle("Booking");
         }
         Scene scene =  new Scene(root, 700 ,500);
         stage.setScene(scene);
