@@ -44,11 +44,10 @@ public class AdminController {
 
 
     @FXML private TableView<List<StringProperty>> table;
-    @FXML private TableColumn<List<StringProperty>, String> datoColumn;
-    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn;
+    @FXML private TableColumn<List<StringProperty>, String> brukernavnColumn;
+    @FXML private TableColumn<List<StringProperty>, String> navnColumn;
     @FXML private TableColumn<List<StringProperty>, String> emneColumn;
-    @FXML private TableColumn<List<StringProperty>, String> studassColumn;
-    @FXML private TableColumn<List<StringProperty>, String> varighetColumn;
+    @FXML private TableColumn<List<StringProperty>, String> rolleColumn;
 
     private Calendar calendar;
     private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
@@ -97,30 +96,26 @@ public class AdminController {
     }
 
     private void showTable() {
-        datoColumn.setCellValueFactory(param -> param.getValue().get(0));
-        tidspunktColumn.setCellValueFactory(param -> param.getValue().get(1));
+        brukernavnColumn.setCellValueFactory(param -> param.getValue().get(0));
+        navnColumn.setCellValueFactory(param -> param.getValue().get(1));
         emneColumn.setCellValueFactory(param -> param.getValue().get(2));
-        studassColumn.setCellValueFactory(param -> param.getValue().get(3));
-        varighetColumn.setCellValueFactory(param -> param.getValue().get(4));
-
+        rolleColumn.setCellValueFactory(param -> param.getValue().get(3));
         table.setItems(getData());
     }
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker("all");
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();
                 String key = entry.getKey();
                 ArrayList<String> values = entry.getValue();
-                ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
-                if (booking.isEmpty()){
-                    row.add(new SimpleStringProperty(key));
-                    for (String v : values) {
-                        row.add(new SimpleStringProperty(v));
-                    }
-                    data.add(row);
+                row.add(new SimpleStringProperty(key));
+                for (String v : values) {
+                    row.add(new SimpleStringProperty(v));
                 }
+                data.add(row);
+
             }
         }
         return data;

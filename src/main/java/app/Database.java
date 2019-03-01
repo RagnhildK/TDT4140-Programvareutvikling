@@ -253,7 +253,7 @@ Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getBooking(String brukernavn) {
-        String sql = "SELECT * FROM Booking Where Student = '"+brukernavn+"' order by StudassPåSalDato, StudassPåSalTidspunkt";
+        String sql = "SELECT DISTINCT BookingID, EmneID, StudassPåSalDato, StudassPåSalTidspunkt, StudassPåSalStudass FROM Booking inner join StudassPåSal on(Studass = StudassPåSalStudass)     Where Student = '"+brukernavn+"' order by StudassPåSalDato, StudassPåSalTidspunkt";
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getUnikBooking(String dato, String tidspunkt, String studass) {
