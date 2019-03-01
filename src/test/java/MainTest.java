@@ -6,28 +6,50 @@ import static org.junit.Assert.*;
 
 import app.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class MainTest {
 
-    Main m = new Main();
-    Database db = new Database();
-    UserManager um = new UserManager();
+    private String brukernavn = "truls";
+    private String passord = "123";
     @org.junit.Test
     public void main() {
-
-        assertEquals(1,1);
+        slettBruker(); //I tilfelle brukeren eksisterer
+        //Tester
         opprettBruker();
+        sjekkLogin();
+        slettBruker();
     }
-
-    @org.junit.Test
     public void opprettBruker() {
         try {
-
-
-
+            Database.addBruker(brukernavn, "Truls", passord);
+            ArrayList<HashMap<String, ArrayList<String>>> user = Database.getBruker("Truls");
+            for (HashMap<String,ArrayList<String>> set : user) {
+                for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                    String key = entry.getKey();
+                    assertEquals(brukernavn, key);
+                }
+            }
+        }catch(Exception e){
+            fail();
+        }
+    }
+    public void sjekkLogin() {
+        try {
+            assertTrue(UserManager.checkLogin(brukernavn, passord));
 
         }catch(Exception e){
-
+            fail();
+        }
+    }
+    public void slettBruker() {
+        try {
+            assertTrue(Database.deleteBruker(brukernavn));
+        }catch(Exception e){
+            fail();
         }
     }
 

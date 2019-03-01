@@ -80,7 +80,7 @@ public class AdminController {
     }
 
     @FXML protected void showUsers(ActionEvent event) throws Exception {
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser("all");
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker("all");
         String str = "|| BrukerNavn \t||\t Bruker \t||\t Passord \t||\t Rolle \t||\t EmneID \t||\t Emne\n";
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {

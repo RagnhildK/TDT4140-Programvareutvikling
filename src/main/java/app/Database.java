@@ -193,12 +193,13 @@ Database {
             return false;
         }
     }
+
     public static boolean addBruker(String brukernavn, String navn, String passord) {
         String sql = "INSERT INTO Bruker VALUES ('"+brukernavn+"','"+navn+"','"+passord+"')";
         return sendUpdate(sql);
     }
     public static boolean deleteBruker(String brukernavn) {
-        String sql = "DELETE FROM Bruker Where BrukerNavn = '"+brukernavn+"')";
+        String sql = "DELETE FROM Bruker Where BrukerNavn = '"+brukernavn+"'";
         return sendUpdate(sql);
     }
     public static boolean addRolle(String emneid, String brukernavn, String rolle) {
@@ -225,7 +226,7 @@ Database {
         String sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"')";
         return sendUpdate(sql);
     }
-    public static ArrayList<HashMap<String,ArrayList<String>>> getUser(String brukernavn) {
+    public static ArrayList<HashMap<String,ArrayList<String>>> getBruker(String brukernavn) {
         String sql = "Select BrukerNavn, Bruker.Navn as Bruker, Rolle, Emne.EmneID, Emne.Navn as Emne" +
                 " From Bruker natural join BrukerIEmne join Emne on (BrukerIEmne.EmneID = Emne.EmneID)";
         if (!brukernavn.equals("all")){

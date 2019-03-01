@@ -1,7 +1,5 @@
 package app;
 
-import app.Database;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -53,7 +51,7 @@ public class UserManager {
 
         if(Database.checkLogin(username,password)){
             System.out.println("|Login success!");
-            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(username);
+            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker(username);
             if (dbOutput.isEmpty()){
                 System.err.println("Enda ikke lagt til en rolle til et fag.");
                 _bruker = username;
@@ -94,7 +92,7 @@ public class UserManager {
     }
 
     public static boolean updateRoller() {
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUser(_bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker(_bruker);
         if (dbOutput.isEmpty()) {
             return false;
 
