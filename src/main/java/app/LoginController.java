@@ -31,10 +31,10 @@ public class LoginController {
 
     @FXML protected void login(ActionEvent event) throws Exception {
         if (UserManager.checkLogin(txtUser.getText(),txtPassword.getText())){
-            lblStatus.setText("|Login success!");
+            lblStatus.setText("Login success!");
             openScene();
         }else {
-            lblStatus.setText("|Login failed!");
+            lblStatus.setText("Login failed!");
         }
     }
     @FXML protected void openScene() throws Exception {

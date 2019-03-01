@@ -1,16 +1,15 @@
 package app;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
+import javafx.scene.control.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class AdminController {
     /*
@@ -25,58 +24,106 @@ public class AdminController {
      *          -Gjør at en kan logge ut fra andre fxml filer og åpne Login.fxml
      */
 
-    @FXML public Text actiontarget;
-    @FXML public TextField userField;
-    @FXML public TextField nameField;
-    @FXML public PasswordField passwordField;
-    @FXML public Button addUserBtn ;
 
-    @FXML public TextField emneField;
-    @FXML public TextField enameField;
-    @FXML public TextField faglærerField;
-    @FXML public Button addEmneBtn ;
-    @FXML public TextField enameField1;
-    @FXML public TextField nameField1;
-    @FXML public TextField roleField;
-    @FXML public Button addRolebtn;
-    @FXML public Label lblUser;
+    @FXML public Label lblStatus;
+    @FXML public Label lblBrukernavn;
+    @FXML public Label lblDato;
+    @FXML public TextField txtBrukernavn;
+    @FXML public TextField txtNavn;
+    @FXML public TextField txtPassord;
+    @FXML public Button btnBruker;
+    @FXML public TextField txtEmneID;
+    @FXML public TextField txtEmneNavn;
+    @FXML public TextField txtFaglærer;
+    @FXML public Button btnEmne;
+    @FXML public TextField txtBrukernavnRolle;
+    @FXML public TextField txtEmneIDRolle;
+    @FXML public TextField txtRolle;
+    @FXML public Button btnRolle;
 
 
-    @FXML protected void addUser(ActionEvent event) throws Exception {
-        if (Database.addBruker(userField.getText(),nameField.getText(),passwordField.getText())) {
-            actiontarget.setText("|Add success!");
+
+    @FXML private TableView<List<StringProperty>> table;
+    @FXML private TableColumn<List<StringProperty>, String> datoColumn;
+    @FXML private TableColumn<List<StringProperty>, String> tidspunktColumn;
+    @FXML private TableColumn<List<StringProperty>, String> emneColumn;
+    @FXML private TableColumn<List<StringProperty>, String> studassColumn;
+    @FXML private TableColumn<List<StringProperty>, String> varighetColumn;
+
+    private Calendar calendar;
+    private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
+
+    @FXML protected void initialize() throws Exception {
+        lblBrukernavn.setText(UserManager._bruker);
+        calendar = Calendar.getInstance();
+        showDate();
+        table.visibleProperty().setValue(true);
+        showTable();
+    }
+    private void showDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
+        lblDato.setText(sdf.format(calendar.getTime()));
+    }
+    @FXML protected void addBruker(ActionEvent event) throws Exception {
+        if (Database.addBruker(txtBrukernavn.getText(),txtNavn.getText(),txtPassord.getText())) {
+            lblStatus.setText("Add success!");
         }else {
-            actiontarget.setText("|Add failed!");
+            lblStatus.setText("Add failed!");
         }
-
-
     }
     @FXML protected void addEmne(ActionEvent event) throws Exception {
-        if (Database.addEmne(emneField.getText(),enameField.getText()) &&
-        Database.addRolle(emneField.getText(), faglærerField.getText(), "faglærer")) {
-            actiontarget.setText("|Add success!");
+        if (Database.addEmne(txtEmneID.getText(),txtEmneNavn.getText()) &&
+        Database.addRolle(txtEmneID.getText(), txtFaglærer.getText(), "faglærer")) {
+            lblStatus.setText("Add success!");
         }else{
-            actiontarget.setText("|Add failed!");
+            lblStatus.setText("Add failed!");
         }
-
-
     }
-
     @FXML protected void addRolle (ActionEvent event) throws Exception {
-        if(Database.getRolle(nameField1.getText(), enameField1.getText())!= ""){
-            if(Database.updateRolle(enameField1.getText(),nameField1.getText(), roleField.getText())) {
-                actiontarget.setText(nameField1.getText()+" har fått rollen "+roleField.getText());
+        if(Database.getRolle(txtBrukernavnRolle.getText(), txtEmneIDRolle.getText())!= ""){
+            if(Database.updateRolle(txtEmneIDRolle.getText(),txtBrukernavnRolle.getText(), txtRolle.getText())) {
+                lblStatus.setText(txtBrukernavnRolle.getText()+" har fått rollen "+txtRolle.getText());
             }else{
-                actiontarget.setText("|Update failed!");
+                lblStatus.setText("Update failed!");
             }
         }
         else{
-            if(Database.addRolle(enameField1.getText(),nameField1.getText(), roleField.getText())){
-                actiontarget.setText(nameField1.getText()+" har fått rollen "+roleField.getText());
+            if(Database.addRolle(txtEmneIDRolle.getText(),txtBrukernavnRolle.getText(), txtRolle.getText())){
+                lblStatus.setText(txtBrukernavnRolle.getText()+" har fått rollen "+txtRolle.getText());
             }else{
-                actiontarget.setText("|Add failed!");
+                lblStatus.setText("Add failed!");
             }
         }
+    }
+
+    private void showTable() {
+        datoColumn.setCellValueFactory(param -> param.getValue().get(0));
+        tidspunktColumn.setCellValueFactory(param -> param.getValue().get(1));
+        emneColumn.setCellValueFactory(param -> param.getValue().get(2));
+        studassColumn.setCellValueFactory(param -> param.getValue().get(3));
+        varighetColumn.setCellValueFactory(param -> param.getValue().get(4));
+
+        table.setItems(getData());
+    }
+    public ObservableList<List<StringProperty>> getData()  {
+        ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                List<StringProperty> row = new ArrayList<>();
+                String key = entry.getKey();
+                ArrayList<String> values = entry.getValue();
+                ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
+                if (booking.isEmpty()){
+                    row.add(new SimpleStringProperty(key));
+                    for (String v : values) {
+                        row.add(new SimpleStringProperty(v));
+                    }
+                    data.add(row);
+                }
+            }
+        }
+        return data;
     }
 
     @FXML protected void showUsers(ActionEvent event) throws Exception {
@@ -95,12 +142,12 @@ public class AdminController {
 
             }
         }
-        lblUser.setText(str);
+        //lblUser.setText(str);
     }
 
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();
-        l.logout(addEmneBtn);
+        l.logout(btnBruker);
 
     }
 }

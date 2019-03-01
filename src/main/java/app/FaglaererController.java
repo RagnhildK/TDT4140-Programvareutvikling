@@ -64,12 +64,12 @@ public class FaglaererController {
     @FXML protected void addSaltid(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtFra.getText()) && Check.checkTidspunkt(txtTil.getText())){
             if (UserManager.addSaltid(txtDato.getText(),txtFra.getText(),txtTil.getText(), txtTidPerStudent.getText())) {
-                lblStatus.setText("|Add success!");
+                lblStatus.setText("Add success!");
             }else {
-                lblStatus.setText("|Add failed!");
+                lblStatus.setText("Add failed!");
             }
         }else {
-            lblStatus.setText("|Dato og/eller klokkeslett skrevet på feil format!");
+            lblStatus.setText("Dato og/eller klokkeslett skrevet på feil format!");
         }
         initialize();
     }

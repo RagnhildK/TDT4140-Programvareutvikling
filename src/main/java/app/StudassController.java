@@ -14,13 +14,12 @@ import java.util.*;
 public class StudassController {
 
     /*
-     *  Klassen som er koblet opp mot faglaerer.fxml
+     *  Klassen som er koblet opp mot studass.fxml
      *
      *  Metoder:
-     *      check()
-     *          -Sjekker at dato er på rett format
-     *      addSaltid(ActionEvent event)
-     *          -Sender en saltid request til app.UserManager når man trykker på tilhørende knapp
+     *
+     *      addTid(ActionEvent event)
+     *          -Sender en studass på sal request til app.UserManager når man trykker på tilhørende knapp
      *
      */
     @FXML public Label lblBrukernavn;
@@ -63,12 +62,12 @@ public class StudassController {
     @FXML protected void addTid(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtTidspunkt.getText())){
             if (UserManager.addStudassPåSal(txtDato.getText(),txtTidspunkt.getText(),txtVarighet.getText())) {
-                lblStatus.setText("|Add success!");
+                lblStatus.setText("Add success!");
             }else {
-                lblStatus.setText("|Add failed!");
+                lblStatus.setText("Add failed!");
             }
         }else {
-            lblStatus.setText("|Dato og/eller klokkeslett skrevet på feil format!");
+            lblStatus.setText("Dato og/eller klokkeslett skrevet på feil format!");
         }
         initialize();
     }

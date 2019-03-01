@@ -69,9 +69,9 @@ public class StudentController {
     @FXML protected void book(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtTidspunkt.getText())){
             if (UserManager.booking(txtDato.getText(), txtTidspunkt.getText(), txtStudass.getText())){
-                lblStatus.setText("|Booking success!");
+                lblStatus.setText("Booking success!");
             }else {
-                lblStatus.setText("|Booking failed!");
+                lblStatus.setText("Booking failed!");
             }
         }
         initialize();

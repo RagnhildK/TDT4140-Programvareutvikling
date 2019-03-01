@@ -61,13 +61,13 @@ public class EmneController {
     @FXML protected void addEmne(ActionEvent event){
 
         if(Database.getRolle(UserManager._bruker, txtEmne.getText())!= ""){
-            lblStatus.setText("|Allerede meldt opp!");
+            lblStatus.setText("Allerede meldt opp!");
         }
         else {
             if (Database.addRolle(txtEmne.getText(), UserManager._bruker, "student")) {
                 lblStatus.setText(UserManager._bruker + " meldt opp i " + txtEmne.getText());
             } else {
-                lblStatus.setText("|Klarte ikke legge til!");
+                lblStatus.setText("Klarte ikke legge til!");
             }
         }
         UserManager.updateRoller();

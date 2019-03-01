@@ -50,7 +50,7 @@ public class UserManager {
     public static boolean checkLogin(String username, String password) {
 
         if(Database.checkLogin(username,password)){
-            System.out.println("|Login success!");
+            System.out.println("Login success!");
             ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker(username);
             if (dbOutput.isEmpty()){
                 System.err.println("Enda ikke lagt til en rolle til et fag.");
@@ -60,7 +60,7 @@ public class UserManager {
                 _rolle = new ArrayList<ArrayList<String>>();
 
             }else{
-                String rolle = "||Rolle: ";
+                String rolle = "Rolle: ";
                 ArrayList<ArrayList<String>> roller = new ArrayList<ArrayList<String>>();
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -86,7 +86,7 @@ public class UserManager {
             return true;
         }
         else {
-            System.out.println("|Login failed!");
+            System.out.println("Login failed!");
             return false;
         }
     }
