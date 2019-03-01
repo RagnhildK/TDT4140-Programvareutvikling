@@ -12,13 +12,17 @@ import java.util.Map;
 
 
 public class MainTest {
+    /*
+     * Hoved mainklasse. Tester med bruk av JUnit.
+     */
 
     private String brukernavn = "truls";
     private String passord = "123";
+
     @org.junit.Test
     public void main() {
         slettBruker(); //I tilfelle brukeren eksisterer
-        //Tester
+        //Tester basic bruker relaterte funksjoner
         opprettBruker();
         sjekkLogin();
         slettBruker();
