@@ -1,5 +1,7 @@
 .idea/
+/idea/
 .DS-Store
 *.iml
 *.class
 /target/
+.target/
