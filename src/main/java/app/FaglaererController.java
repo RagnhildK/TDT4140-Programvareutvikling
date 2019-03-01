@@ -1,3 +1,5 @@
+package app;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -18,7 +20,7 @@ public class FaglaererController {
      *      check()
      *          -Sjekker at dato er på rett format
      *      addSaltid(ActionEvent event)
-     *          -Sender en saltid request til UserManager når man trykker på tilhørende knapp
+     *          -Sender en saltid request til app.UserManager når man trykker på tilhørende knapp
      *
      */
     @FXML public Label lblBrukernavn;

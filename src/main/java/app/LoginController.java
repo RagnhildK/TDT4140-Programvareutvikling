@@ -1,3 +1,5 @@
+package app;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
@@ -16,7 +17,7 @@ public class LoginController {
      *
      *  Metoder:
      *      login(ActionEvent event)
-     *          -Sender en login request til UserManager når man trykker på tilhørende knapp
+     *          -Sender en login request til app.UserManager når man trykker på tilhørende knapp
      *      openScene()
      *          -Åpner den fxml fila tilhører de rettigheter brukeren har
      *      logout(Button b)
@@ -41,19 +42,19 @@ public class LoginController {
         Stage stage = (Stage) lblStatus.getScene().getWindow();
         try {
             if (UserManager._rolle.isEmpty()){
-                root = FXMLLoader.load(getClass().getResource("emne.fxml"));
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
                 stage.setTitle("Emne");
             }
             else if (UserManager._rolle.get(0).get(1).equals("admin")){
-                root = FXMLLoader.load(getClass().getResource("admin.fxml"));
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/admin.fxml"));
                 stage.setTitle("Admin");
             }
             else {
-                root = FXMLLoader.load(getClass().getResource("emne.fxml"));
+                root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
                 stage.setTitle("Emne");
             }
         }catch (Exception e) {
-            root = FXMLLoader.load(getClass().getResource("emne.fxml"));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
             stage.setTitle("Emne");
         }
 
@@ -64,7 +65,7 @@ public class LoginController {
 
     @FXML public void logout(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/login.fxml"));
         Scene scene =  new Scene(root, 300 ,275);
         stage.setTitle("Login");
         stage.setScene(scene);

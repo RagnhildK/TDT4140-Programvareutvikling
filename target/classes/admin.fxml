@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="center" hgap="10" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminController">
+<GridPane alignment="center" hgap="10" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.AdminController">
     <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
     <gridLinesVisible>false</gridLinesVisible>
 

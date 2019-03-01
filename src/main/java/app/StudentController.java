@@ -1,3 +1,5 @@
+package app;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -20,7 +22,7 @@ public class StudentController {
      *
      *  Metoder:
      *      book(ActionEvent event)
-     *          -Sender en booking request til UserManager når man trykker på tilhørende knapp
+     *          -Sender en booking request til app.UserManager når man trykker på tilhørende knapp
      *      showTid(ActionEvent event)
      *          -Viser saltider for studasser når man trykker på tilhørende knapp
      *
@@ -67,9 +69,9 @@ public class StudentController {
     @FXML protected void book(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtTidspunkt.getText())){
             if (UserManager.booking(txtDato.getText(), txtTidspunkt.getText(), txtStudass.getText())){
-                lblStatus.setText("|Booking success!");
+                lblStatus.setText("|app.Booking success!");
             }else {
-                lblStatus.setText("|Booking failed!");
+                lblStatus.setText("|app.Booking failed!");
             }
         }
         initialize();
@@ -118,7 +120,7 @@ public class StudentController {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
                 ArrayList<String> values = entry.getValue();
-                ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
+                ArrayList<HashMap<String, ArrayList<String>>> booking = app.Database.getUnikBooking(key, values.get(0), values.get(2));
                 if (booking.isEmpty()){
                     str += "|| " + key + " \t||\t";
                     for (String v : values) {

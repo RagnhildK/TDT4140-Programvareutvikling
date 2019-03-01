@@ -1,12 +1,13 @@
+package app;
 
 public class Main {
     /*
      * Klassen som kjører automagisk når maven builder.
-     * Kjører FXMLMain.main metoden.
+     * Kjører app.FXMLMain.main metoden.
      */
     public static void main(String[] args) {
         FXMLMain.main(args);
-        //UserManager.main();
+        //app.UserManager.main();
     }
 
     public static int add(int x, int y) {

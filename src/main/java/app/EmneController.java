@@ -1,3 +1,5 @@
+package app;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -89,7 +91,7 @@ public class EmneController {
         table.setItems(getBooking());
 
         table1.visibleProperty().setValue(false);
-        /*for (ArrayList list : UserManager._rolle){
+        /*for (ArrayList list : app.UserManager._rolle){
             if(list.get(1)=="studass"){
                 table1.visibleProperty().setValue(true);
             }
@@ -140,7 +142,7 @@ public class EmneController {
 
     protected void showTid() {
 
-        /*ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBooking(UserManager._bruker);
+        /*ArrayList<HashMap<String, ArrayList<String>>> dbOutput = app.Database.getBooking(app.UserManager._bruker);
         String str = "|| Student \t||\t Dato \t||\t Tidspunkt \t||\t Studass \t||\t \n";
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -178,16 +180,16 @@ public class EmneController {
         Parent root;
         Stage stage = (Stage) btnEmne1.getScene().getWindow();
         if (UserManager._aktivRolle.equals("faglærer")){
-            root = FXMLLoader.load(getClass().getResource("faglaerer.fxml"));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/faglaerer.fxml"));
             stage.setTitle("Faglærer");
         }
         else if (UserManager._aktivRolle.equals("studass")){
-            root = FXMLLoader.load(getClass().getResource("studass.fxml"));
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/studass.fxml"));
             stage.setTitle("Studass");
         }
         else {
-            root = FXMLLoader.load(getClass().getResource("student.fxml"));
-            stage.setTitle("Booking");
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/student.fxml"));
+            stage.setTitle("app.Booking");
         }
         Scene scene =  new Scene(root, 700 ,500);
         stage.setScene(scene);
@@ -196,7 +198,7 @@ public class EmneController {
 
     public void back(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("emne.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
         Scene scene =  new Scene(root, 700 ,500);
         stage.setTitle("Emne");
         stage.setScene(scene);
