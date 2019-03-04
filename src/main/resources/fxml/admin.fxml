@@ -85,8 +85,8 @@
             <columns>
                 <TableColumn fx:id="brukernavnColumn" prefWidth="83.0" text="Brukernavn" />
                 <TableColumn fx:id="navnColumn" prefWidth="72.0" text="Navn" />
-                <TableColumn fx:id="emneColumn" prefWidth="85.0" text="Emne" />
-                <TableColumn fx:id="rolleColumn" prefWidth="72.0" text="Rolle" />
+                <TableColumn fx:id="emneColumn" prefWidth="85.0" text="Rolle" />
+                <TableColumn fx:id="rolleColumn" prefWidth="72.0" text="Emne" />
             </columns>
         </TableView>
     </children>

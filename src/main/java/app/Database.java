@@ -113,6 +113,7 @@ Database {
         //System.out.println("Goodbye!");
         return info;
     }
+    // [{brukernavn,[navn,passort]}, {brukernavn,[navn,passort]} ]
     public static ArrayList<HashMap<String,ArrayList<String>>> sendQuery(String query) {
         Connection conn = null;
         Statement stmt = null;
