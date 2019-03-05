@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<<<<<<< HEAD
 <testsuite tests="1" failures="0" name="MainTest" time="0.721" errors="0" skipped="0">
+=======
+<<<<<<< HEAD
+<testsuite tests="1" failures="0" name="MainTest" time="0.895" errors="0" skipped="0">
+=======
+<testsuite tests="1" failures="0" name="MainTest" time="0.844" errors="0" skipped="0">
+>>>>>>> 8f0dd77a80ead2b3c2c80c5f4f36379266762cbb
+>>>>>>> 28a3232b856e18b54821348fe5b9cc6f53e6dd6e
   <properties>
     <property name="idea.version" value="2018.3.4"/>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
@@ -63,5 +71,13 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
+<<<<<<< HEAD
   <testcase classname="MainTest" name="main" time="0.721"/>
+=======
+<<<<<<< HEAD
+  <testcase classname="MainTest" name="main" time="0.895"/>
+=======
+  <testcase classname="MainTest" name="main" time="0.844"/>
+>>>>>>> 8f0dd77a80ead2b3c2c80c5f4f36379266762cbb
+>>>>>>> 28a3232b856e18b54821348fe5b9cc6f53e6dd6e
 </testsuite>

@@ -1,4 +1,12 @@
 -------------------------------------------------------------------------------
 Test set: MainTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.851 sec
+=======
+<<<<<<< HEAD
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.034 sec
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.942 sec
+>>>>>>> 8f0dd77a80ead2b3c2c80c5f4f36379266762cbb
+>>>>>>> 28a3232b856e18b54821348fe5b9cc6f53e6dd6e
