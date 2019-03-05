@@ -44,23 +44,27 @@ public class FaglaererController {
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         calendar = Calendar.getInstance();
-        showDate(false);
+        showDate(0);
         showTable();
     }
 
-    private void showDate(boolean increment) {
+    private void showDate(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
-        if(increment){
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Calendar today = Calendar.getInstance();
+        if(defaultF.format(today.getTime()).equals(defaultF.format(calendar.getTime())) && i == -1 ){
+            return;
         }
+        calendar.add(Calendar.DAY_OF_MONTH, i);
         lblDato.setText(sdf.format(calendar.getTime()));
         txtDato.setText(defaultF.format(calendar.getTime()));
         showTable();
     }
-    @FXML protected void showTid(ActionEvent event) throws Exception {
-        showDate(true);
+    @FXML protected void showNextDay(ActionEvent event) throws Exception {
+        showDate(1);
     }
-
+    @FXML protected void showPrevDay(ActionEvent event) throws Exception {
+        showDate(-1);
+    }
     @FXML protected void addSaltid(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtFra.getText()) && Check.checkTidspunkt(txtTil.getText())){
             if (UserManager.addSaltid(txtDato.getText(),txtFra.getText(),txtTil.getText(), txtTidPerStudent.getText())) {
@@ -71,7 +75,7 @@ public class FaglaererController {
         }else {
             lblStatus.setText("Dato og/eller klokkeslett skrevet på feil format!");
         }
-        initialize();
+        showTable();
     }
     private void showTable() {
         datoColumn.setCellValueFactory(param -> param.getValue().get(0));
