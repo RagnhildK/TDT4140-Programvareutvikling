@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 app\StudentController.class
 app\LoginController.class
 app\Database.class
@@ -12,3 +13,6 @@ app\FXMLMain.class
 app\AdminController.class
 app\TableController.class
 app\EmneController.class
+=======
+app/MeldingerController.class
+>>>>>>> 98acb0efc81c96e21782b0fd710ad17e59976a6c

@@ -2,11 +2,7 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="ingebrin_pu@mysql.stud.ntnu.no" uuid="09ecc179-8fe4-4ae8-86bc-4edac3f511cb">
-<<<<<<< HEAD
-      <database-info product="MySQL" version="5.7.24-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )" dbms="MYSQL" exact-version="5.7.24" exact-driver-version="5.1">
-=======
       <database-info product="MySQL" version="5.7.25-0ubuntu0.16.04.2" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e )" dbms="MYSQL" exact-version="5.7.25" exact-driver-version="5.1">
->>>>>>> a41d794aa2f40283be24f5187858e154b7dc1d70
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
