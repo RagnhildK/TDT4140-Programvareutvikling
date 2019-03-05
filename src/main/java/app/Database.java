@@ -219,6 +219,15 @@ Database {
         String sql = "INSERT INTO Saltid VALUES ('"+dato+"','"+fra+"','"+til+"','"+emneid+"','"+varighet+"','"+faglærer+"')";
         return sendUpdate(sql);
     }
+    public static boolean deleteSaltid(String emneid, String dato) {
+        String sql = "DELETE From Saltid Where EmneID = '"+emneid+"' and Dato = '"+dato+"'";
+        boolean ok = sendUpdate(sql);
+        if (ok){
+            String sql1 = "DELETE From StudassPåSal Where EmneID = '"+emneid+"' and Dato = '"+dato+"'";
+            ok = sendUpdate(sql1);
+        }
+        return ok;
+    }
     public static boolean addStudassPåSal(String dato, String tidspunkt, String emneid, String studass, int varighet) {
         String sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+emneid+"','"+studass+"','"+varighet+"')";
         return sendUpdate(sql);
