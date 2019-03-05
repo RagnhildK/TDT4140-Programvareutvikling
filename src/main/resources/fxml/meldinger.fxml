@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="401.0" prefWidth="606.0" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MeldingerController">
+   <children>
+      <Button fx:id="btnSend" layoutX="374.0" layoutY="292.0" mnemonicParsing="false" onAction="#Send" text="Send" />
+      <TextArea fx:id="txtMelding" layoutX="174.0" layoutY="292.0" prefHeight="27.0" prefWidth="200.0" />
+      <ScrollPane fx:id="scrollPane" layoutX="130.0" layoutY="67.0" prefHeight="200.0" prefWidth="329.0">
+         <content>
+            <Label fx:id="lblMeldinger" alignment="TOP_LEFT" prefHeight="448.0" prefWidth="312.0">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font></Label>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
