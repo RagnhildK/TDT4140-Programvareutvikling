@@ -17,7 +17,6 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <JFXTextField fx:id="txtDato" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="80.0" promptText="Dato" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
         <JFXTextField fx:id="txtFra" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="125.0" promptText="Fra" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
         <JFXTextField fx:id="txtTil" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="166.0" promptText="Til" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
         <JFXButton fx:id="btnAddSaltid" alignment="CENTER" layoutX="83.0" layoutY="252.0" onAction="#addSaltid" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Legg til saltid" textFill="#d3cbc2">
@@ -25,11 +24,27 @@
                 <Font size="14.0" />
             </font>
         </JFXButton>
+        <JFXButton fx:id="btnSlettSaltider" alignment="CENTER" layoutX="83.0" layoutY="323.0" onAction="#deleteSaltider" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Slett saltider" textFill="#d3cbc2">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <JFXTextField fx:id="txtDato" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="80.0" promptText="Dato" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
         <JFXButton fx:id="btnNextDay" alignment="CENTER" layoutX="443.0" layoutY="55.0" onAction="#showNextDay" prefHeight="20.0" prefWidth="39.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="&gt;" textFill="#d3cbc2">
             <font>
                 <Font size="14.0" />
             </font>
         </JFXButton>
+        <JFXButton fx:id="btnPrevDay" alignment="CENTER" layoutX="277.0" layoutY="55.0" onAction="#showPrevDay" prefHeight="20.0" prefWidth="39.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="&lt;" textFill="#d3cbc2">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </JFXButton>
+        <Label fx:id="lblDato" alignment="CENTER" contentDisplay="CENTER" layoutX="322.0" layoutY="61.0" prefHeight="20.0" prefWidth="114.0" stylesheets="@Styles.css" text="Dato" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
         <Label fx:id="lblBrukernavn" alignment="CENTER_RIGHT" layoutX="463.0" layoutY="14.0" prefHeight="20.0" prefWidth="114.0" stylesheets="@Styles.css" text="Brukernavn">
             <font>
                 <Font size="14.0" />
@@ -40,11 +55,6 @@
                 <Font size="14.0" />
             </font>
         </JFXButton>
-        <Label fx:id="lblDato" alignment="CENTER" contentDisplay="CENTER" layoutX="322.0" layoutY="61.0" prefHeight="20.0" prefWidth="114.0" stylesheets="@Styles.css" text="Dato" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
         <Label fx:id="lblStatus" layoutX="83.0" layoutY="292.0" prefHeight="62.0" prefWidth="158.0" stylesheets="@Styles.css">
             <font>
                 <Font size="14.0" />
@@ -64,16 +74,8 @@
                 <TableColumn fx:id="tpsColumn" prefWidth="85.0" text="Tid/student" />
             </columns>
         </TableView>
-      <JFXButton fx:id="btnSlettSaltider" alignment="CENTER" layoutX="83.0" layoutY="323.0" onAction="#deleteSaltider" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Slett saltider" textFill="#d3cbc2">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btnPrevDay" alignment="CENTER" layoutX="277.0" layoutY="55.0" onAction="#showPrevDay" prefHeight="20.0" prefWidth="39.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="&lt;" textFill="#d3cbc2">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
+
+
 
     </children>
 </AnchorPane>

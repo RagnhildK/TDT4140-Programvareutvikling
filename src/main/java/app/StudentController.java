@@ -50,20 +50,26 @@ public class StudentController {
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         calendar = Calendar.getInstance();
-        showDate(false);
-        showTid(new ActionEvent());
+        showDate(0);
         table.visibleProperty().setValue(true);
-        showTable();
     }
 
-    private void showDate(boolean increment) {
+    private void showDate(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
-        if(increment){
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-        } else {
-            calendar.add(Calendar.DAY_OF_MONTH, -1);
+        Calendar today = Calendar.getInstance();
+        if(defaultF.format(today.getTime()).equals(defaultF.format(calendar.getTime())) && i == -1 ){
+            return;
         }
+        calendar.add(Calendar.DAY_OF_MONTH, i);
         lblDato.setText(sdf.format(calendar.getTime()));
+        txtDato.setText(defaultF.format(calendar.getTime()));
+        showTable();
+    }
+    @FXML protected void showNextDay(ActionEvent event) throws Exception {
+        showDate(1);
+    }
+    @FXML protected void showPrevDay(ActionEvent event) throws Exception {
+        showDate(-1);
     }
 
     @FXML protected void book(ActionEvent event) throws Exception {
@@ -74,7 +80,7 @@ public class StudentController {
                 lblStatus.setText("Booking failed!");
             }
         }
-        initialize();
+        showTable();
     }
 
     private void showTable() {
@@ -106,31 +112,6 @@ public class StudentController {
             }
         }
         return data;
-    }
-
-
-
-    @FXML protected void showTid(ActionEvent event) throws Exception  {
-        showDate(true);
-        txtDato.setText(defaultF.format(calendar.getTime()));
-        showTable();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
-        /*String str = "|| Dato \t||\t Tidspunkt \t||\t Emne \t||\t Studass \t||\t Varighet \t||\t \n";
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                String key = entry.getKey();
-                ArrayList<String> values = entry.getValue();
-                ArrayList<HashMap<String, ArrayList<String>>> booking = app.Database.getUnikBooking(key, values.get(0), values.get(2));
-                if (booking.isEmpty()){
-                    str += "|| " + key + " \t||\t";
-                    for (String v : values) {
-                        str += " " + v + " \t||\t";
-                    }
-                    str += "\n";
-                }
-            }
-        }
-        lblTid.setText(str);*/
     }
 
     @FXML protected void back(ActionEvent event) throws Exception {
