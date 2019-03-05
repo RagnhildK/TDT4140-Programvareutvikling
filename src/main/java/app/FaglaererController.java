@@ -114,4 +114,9 @@ public class FaglaererController {
 
     }
 
+    @FXML protected void deleteSaltider(ActionEvent event) throws Exception {
+        Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()));
+        showTable();
+    }
+
 }
