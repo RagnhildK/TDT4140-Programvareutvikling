@@ -209,18 +209,15 @@ public class EmneController {
 
     }
 
-    public void showMeldingsside(){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/meldinger.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Meldinger");
-            stage.setScene(new Scene(root1, 700, 500));
-            stage.show();
-        }
-        catch(Exception e){
+    public void showMeldingsside(ActionEvent event) throws Exception{
 
-        }
+        Stage stage = (Stage) btnMeldinger.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/meldinger1.fxml"));
+        Scene scene =  new Scene(root, 700 ,500);
+        stage.setTitle("Meldinger");
+        stage.setScene(scene);
+        stage.show();
+
     }
 }
 

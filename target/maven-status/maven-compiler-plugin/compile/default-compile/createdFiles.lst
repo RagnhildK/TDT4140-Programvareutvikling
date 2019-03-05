@@ -1,18 +1,14 @@
-<<<<<<< HEAD
-app\StudentController.class
 app\LoginController.class
-app\Database.class
 app\Main.class
 app\UserManager.class
-app\Booking.class
 app\Check.class
-app\StudassController.class
-app\FaglaererController.class
 app\MeldingerController.class
 app\FXMLMain.class
-app\AdminController.class
 app\TableController.class
 app\EmneController.class
-=======
-app/MeldingerController.class
->>>>>>> 98acb0efc81c96e21782b0fd710ad17e59976a6c
+app\StudentController.class
+app\Database.class
+app\Booking.class
+app\StudassController.class
+app\FaglaererController.class
+app\AdminController.class
