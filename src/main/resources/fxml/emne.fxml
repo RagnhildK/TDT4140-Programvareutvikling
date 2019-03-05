@@ -2,6 +2,11 @@
 
 <!-- avenir font? -->
 
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
@@ -10,7 +15,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.EmneController">
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.EmneController">
     <children>
         <Label layoutX="27.0" layoutY="24.0" stylesheets="@Styles.css" text="Emne">
             <font>
@@ -80,5 +85,6 @@
                 <TableColumn fx:id="varighetColumn1" prefWidth="85.0" text="Varighet" />
             </columns>
         </TableView>
+      <Button fx:id="btnMeldinger" layoutX="73.0" layoutY="412.0" mnemonicParsing="false" onAction="#showMeldingsside" text="Meldinger" />
     </children>
 </AnchorPane>

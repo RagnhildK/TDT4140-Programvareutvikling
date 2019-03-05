@@ -10,7 +10,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.util.*;
 
@@ -25,6 +27,7 @@ public class EmneController {
     @FXML public Button btnEmne2 ;
     @FXML public Button btnEmne3 ;
     @FXML public Button btnEmne4 ;
+    @FXML public Button btnMeldinger;
     public ArrayList<Button> btns = new ArrayList<>();
 
     @FXML private TableView<List<StringProperty>> table;
@@ -204,6 +207,20 @@ public class EmneController {
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    public void showMeldingsside(){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/meldinger.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Meldinger");
+            stage.setScene(new Scene(root1, 700, 500));
+            stage.show();
+        }
+        catch(Exception e){
+
+        }
     }
 }
 
