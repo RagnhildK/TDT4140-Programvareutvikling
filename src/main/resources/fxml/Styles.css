@@ -11,6 +11,16 @@
     -jfx-unfocus-color: #d3cbc2;
 
 }
+.jfx-text-area {
+    -fx-text-fill: #d3cbc2;
+    -fx-background-color: #2b2927;
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
 
 .jfx-button {
     -fx-text-fill: #d3cbc2;

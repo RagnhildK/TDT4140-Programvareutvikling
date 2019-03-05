@@ -283,7 +283,7 @@ Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getMeldinger(String sender, String mottaker){
-        String sql = "SELECT Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"' UNION SELECT Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+mottaker+"' and Mottaker = '"+sender+"' order by Tid desc";
+        String sql = "SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"' UNION SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+mottaker+"' and Mottaker = '"+sender+"' order by Tid asc";
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> updateUlest(String sender, String mottaker){
