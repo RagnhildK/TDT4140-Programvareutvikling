@@ -50,3 +50,22 @@ CREATE TABLE Booking (
    CONSTRAINT StudassPåSal_FK FOREIGN KEY (StudassPåSal) REFERENCES StudassPåSal(Studass)
 													ON UPDATE CASCADE
                                                     ON DELETE CASCADE);
+
+
+SET time_zone='+01:00';
+
+CREATE TABLE Melding (
+   MeldingID	INTEGER NOT NULL AUTO_INCREMENT,
+   Sender			VARCHAR(30) NOT NULL,
+   Mottaker		VARCHAR(30) NOT NULL,
+   Beskjed    VARCHAR(200),
+   Ulest      BOOLEAN DEFAULT TRUE,
+   Tid        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+   CONSTRAINT Melding_PK PRIMARY KEY (MeldingID),
+   CONSTRAINT Sender_FK FOREIGN KEY (Sender) REFERENCES Bruker(BrukerNavn)
+													                        ON UPDATE CASCADE
+                                                  ON DELETE CASCADE,
+   CONSTRAINT Mottaker_FK FOREIGN KEY (Mottaker) REFERENCES Bruker(BrukerNavn)
+												                          	ON UPDATE CASCADE
+                                                    ON DELETE CASCADE);
+

@@ -236,6 +236,14 @@ Database {
         String sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"')";
         return sendUpdate(sql);
     }
+    public static boolean addMelding(String sender, String mottaker, String beskjed) {
+        String sql = "INSERT INTO Melding VALUES (NULL,'"+sender+"','"+mottaker+"','"+beskjed+"', TRUE, NULL)";
+        return sendUpdate(sql);
+    }
+
+
+
+
     public static ArrayList<HashMap<String,ArrayList<String>>> getBruker(String brukernavn) {
         String sql = "Select BrukerNavn, Bruker.Navn as Bruker, Rolle, Emne.EmneID, Emne.Navn as Emne" +
                 " From Bruker natural join BrukerIEmne join Emne on (BrukerIEmne.EmneID = Emne.EmneID)";
@@ -270,6 +278,20 @@ Database {
         String sql = "SELECT * FROM Booking Where StudassPåSalDato = '"+dato+"' and StudassPåSalTidspunkt = '"+tidspunkt+"' and StudassPåSalStudass = '"+studass+"' ";
         return sendQuery(sql);
     }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getAvsendere(String mottaker){
+        String sql = "SELECT Sender, Ulest FROM Melding Where Mottaker = '"+mottaker+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getMeldinger(String sender, String mottaker){
+        String sql = "SELECT Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"' UNION SELECT Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+mottaker+"' and Mottaker = '"+sender+"' order by Tid desc";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> updateUlest(String sender, String mottaker){
+        String sql = "UPDATE Melding SET Ulest = False Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"'";
+        return sendQuery(sql);
+    }
+
+
 
 
     public static int getBookingID(){
