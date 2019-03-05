@@ -26,13 +26,13 @@ public class MeldingerController {
     @FXML public ScrollPane scrollPane;
     @FXML public Label lblMeldinger;
 
-
+    
     public void Send(){
         String meldinger = lblMeldinger.getText();
         meldinger += "Me: " + txtMelding.getText() + "\n";
         lblMeldinger.setText(meldinger);
 
-
+        Database.addMelding(UserManager._bruker, "bob",txtMelding.getText());
     }
 
 
