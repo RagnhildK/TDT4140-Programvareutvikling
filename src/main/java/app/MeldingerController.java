@@ -7,6 +7,8 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +27,8 @@ import java.util.*;
 
 import javafx.fxml.FXML;
 import jdk.internal.vm.compiler.collections.EconomicMap;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 public class MeldingerController {
 
@@ -43,23 +47,39 @@ public class MeldingerController {
     @FXML public JFXListView listView;
 
     public String sender;
-    private static final String ITEM = "Item ";
-    private int counter = 0;
+
 
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
-        sender = "bob";
-        lblTil.setText(sender);
-        update(sender);
+        showAvsendere();
 
 
-        //listView = new JFXListView<>();
-        for (int i = 0; i < 4; i++) {
-            listView.getItems().add(new Label(ITEM + i));
+        listView.setOnMouseClicked(new ListViewHandler(){
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+                String s = listView.getSelectionModel().getSelectedItem().toString();
+                int i = s.indexOf("'");
+                lblTil.setText(s.substring(i+1,s.length()-1));
+                sender = s.substring(i+1,s.length()-1);
+                update(sender);
+            }
+        });
+    }
+    public void showAvsendere(){
+        ArrayList<String> list = new ArrayList();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                ArrayList<String> values = entry.getValue();
+                if(!list.contains(values.get(0))){
+                    list.add(values.get(0));
+                }
+            }
         }
+        for (String b : list) {
+            listView.getItems().add(new Label(b));
 
-
-
+        }
     }
 
     public void update(String sender){
@@ -103,13 +123,10 @@ public class MeldingerController {
     @FXML protected void back(ActionEvent event) throws Exception {
         EmneController ec = new EmneController();
         ec.back(btnBack);
-
     }
-
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();
         l.logout(btnLoggut);
-
     }
 
 

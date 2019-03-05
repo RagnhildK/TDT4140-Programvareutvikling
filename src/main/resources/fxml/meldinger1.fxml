@@ -50,11 +50,11 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label fx:id="lblTil" layoutX="213.0" layoutY="14.0" prefHeight="20.0" prefWidth="114.0" stylesheets="@Styles.css" text="Til">
+      <Label fx:id="lblTil" layoutX="213.0" layoutY="14.0" prefHeight="20.0" prefWidth="114.0" stylesheets="@Styles.css" text="Velg en bruker">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXListView fx:id="listView" layoutX="27.0" layoutY="160.0" prefHeight="239.0" prefWidth="135.0" />
+      <JFXListView fx:id="listView" layoutX="27.0" layoutY="160.0" prefHeight="255.0" prefWidth="170.0" />
     </children>
 </AnchorPane>

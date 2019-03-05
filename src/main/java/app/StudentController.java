@@ -52,6 +52,20 @@ public class StudentController {
         calendar = Calendar.getInstance();
         showDate(0);
         table.visibleProperty().setValue(true);
+
+
+        table.setOnMouseClicked(new ListViewHandler(){
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event)  {
+                List<StringProperty> list = table.getSelectionModel().getSelectedItem();
+                if(UserManager.booking(list.get(0).getValue(),list.get(1).getValue(),list.get(3).getValue())){
+                    lblStatus.setText("Booking success!");
+                }else {
+                    lblStatus.setText("Booking failed!");
+                }
+                showTable();
+            }
+        });
     }
 
     private void showDate(int i) {

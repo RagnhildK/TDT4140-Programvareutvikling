@@ -232,8 +232,8 @@ Database {
         String sql = "INSERT INTO StudassPåSal VALUES ('"+dato+"','"+tidspunkt+"','"+emneid+"','"+studass+"','"+varighet+"')";
         return sendUpdate(sql);
     }
-    public static boolean addBooking(int bookingID, String student, String dato, String tidspunkt, String studass ) {
-        String sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"')";
+    public static boolean addBooking(int bookingID, String student, String dato, String tidspunkt, String studass, String emneid ) {
+        String sql = "INSERT INTO Booking VALUES ('"+bookingID+"','"+student+"','"+dato+"','"+tidspunkt+"','"+studass+"','"+emneid+"')";
         return sendUpdate(sql);
     }
     public static boolean addMelding(String sender, String mottaker, String beskjed) {
@@ -271,7 +271,7 @@ Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getBooking(String brukernavn) {
-        String sql = "SELECT DISTINCT BookingID, EmneID, StudassPåSalDato, StudassPåSalTidspunkt, StudassPåSalStudass FROM Booking inner join StudassPåSal on(Studass = StudassPåSalStudass)     Where Student = '"+brukernavn+"' order by StudassPåSalDato, StudassPåSalTidspunkt";
+        String sql = "SELECT DISTINCT BookingID, EmneID, StudassPåSalDato, StudassPåSalTidspunkt, StudassPåSalStudass FROM Booking inner join StudassPåSal on(Studass = StudassPåSalStudass) Where Student = '"+brukernavn+"' order by StudassPåSalDato, StudassPåSalTidspunkt";
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getUnikBooking(String dato, String tidspunkt, String studass) {
@@ -279,7 +279,7 @@ Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getAvsendere(String mottaker){
-        String sql = "SELECT Sender, Ulest FROM Melding Where Mottaker = '"+mottaker+"'";
+        String sql = "SELECT MeldingID, Sender, Ulest FROM Melding Where Mottaker = '"+mottaker+"'";
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getMeldinger(String sender, String mottaker){

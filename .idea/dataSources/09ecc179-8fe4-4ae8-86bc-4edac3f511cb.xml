@@ -909,129 +909,63 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="228" parent="3" name="Booking"/>
-    <table id="229" parent="3" name="Bruker"/>
-    <table id="230" parent="3" name="BrukerIEmne"/>
-    <table id="231" parent="3" name="Emne"/>
-    <table id="232" parent="3" name="Melding"/>
-    <table id="233" parent="3" name="Saltid"/>
-    <table id="234" parent="3" name="StudassPåSal"/>
-    <column id="235" parent="228" name="BookingID">
-      <Position>1</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="236" parent="228" name="Student">
-      <Position>2</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="237" parent="228" name="StudassPåSalDato">
-      <Position>3</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="238" parent="228" name="StudassPåSalTidspunkt">
-      <Position>4</Position>
-      <DataType>varchar(5)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="239" parent="228" name="StudassPåSalStudass">
-      <Position>5</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="240" parent="228" name="Student_FK">
-      <ColNames>Student</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="241" parent="228" name="StudassPåSal_FK">
-      <ColNames>StudassPåSalDato
-StudassPåSalTidspunkt
-StudassPåSalStudass</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="242" parent="228" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>BookingID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="243" parent="228" name="Student_FK">
-      <ColNames>Student</ColNames>
-      <RefSchemaName>ingebrin_pu</RefSchemaName>
-      <RefTableName>Bruker</RefTableName>
-      <RefColNames>BrukerNavn</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <foreign-key id="244" parent="228" name="StudassPåSal_FK">
-      <ColNames>StudassPåSalDato
-StudassPåSalTidspunkt
-StudassPåSalStudass</ColNames>
-      <RefSchemaName>ingebrin_pu</RefSchemaName>
-      <RefTableName>StudassPåSal</RefTableName>
-      <RefColNames>Dato
-Tidspunkt
-Studass</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <column id="245" parent="229" name="BrukerNavn">
+    <table id="228" parent="3" name="Bruker"/>
+    <table id="229" parent="3" name="BrukerIEmne"/>
+    <table id="230" parent="3" name="Emne"/>
+    <table id="231" parent="3" name="Melding"/>
+    <table id="232" parent="3" name="Saltid"/>
+    <table id="233" parent="3" name="StudassPåSal"/>
+    <column id="234" parent="228" name="BrukerNavn">
       <Position>1</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="246" parent="229" name="Navn">
+    <column id="235" parent="228" name="Navn">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="247" parent="229" name="Passord">
+    <column id="236" parent="228" name="Passord">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="248" parent="229" name="PRIMARY">
+    <key id="237" parent="228" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>BrukerNavn</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="249" parent="230" name="EmneID">
+    <column id="238" parent="229" name="EmneID">
       <Position>1</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="250" parent="230" name="BrukerNavn">
+    <column id="239" parent="229" name="BrukerNavn">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="251" parent="230" name="Rolle">
+    <column id="240" parent="229" name="Rolle">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="252" parent="230" name="BrukerIEmne_FK2">
+    <index id="241" parent="229" name="BrukerIEmne_FK2">
       <ColNames>BrukerNavn</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="253" parent="230" name="PRIMARY">
+    <key id="242" parent="229" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>EmneID
 BrukerNavn</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="254" parent="230" name="BrukerIEmne_FK1">
+    <foreign-key id="243" parent="229" name="BrukerIEmne_FK1">
       <ColNames>EmneID</ColNames>
       <RefSchemaName>ingebrin_pu</RefSchemaName>
       <RefTableName>Emne</RefTableName>
@@ -1039,7 +973,7 @@ BrukerNavn</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="255" parent="230" name="BrukerIEmne_FK2">
+    <foreign-key id="244" parent="229" name="BrukerIEmne_FK2">
       <ColNames>BrukerNavn</ColNames>
       <RefSchemaName>ingebrin_pu</RefSchemaName>
       <RefTableName>Bruker</RefTableName>
@@ -1047,73 +981,73 @@ BrukerNavn</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="256" parent="231" name="EmneID">
+    <column id="245" parent="230" name="EmneID">
       <Position>1</Position>
       <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="257" parent="231" name="Navn">
+    <column id="246" parent="230" name="Navn">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="258" parent="231" name="PRIMARY">
+    <key id="247" parent="230" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>EmneID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="259" parent="232" name="MeldingID">
+    <column id="248" parent="231" name="MeldingID">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="232" name="Sender">
+    <column id="249" parent="231" name="Sender">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="261" parent="232" name="Mottaker">
+    <column id="250" parent="231" name="Mottaker">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="262" parent="232" name="Beskjed">
+    <column id="251" parent="231" name="Beskjed">
       <Position>4</Position>
       <DataType>varchar(200)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="232" name="Ulest">
+    <column id="252" parent="231" name="Ulest">
       <Position>5</Position>
       <DataType>tinyint(1)|0s</DataType>
       <DefaultExpression>1</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="232" name="Tid">
+    <column id="253" parent="231" name="Tid">
       <Position>6</Position>
       <DataType>timestamp|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="265" parent="232" name="Sender_FK">
+    <index id="254" parent="231" name="Sender_FK">
       <ColNames>Sender</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="266" parent="232" name="Mottaker_FK">
+    <index id="255" parent="231" name="Mottaker_FK">
       <ColNames>Mottaker</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="267" parent="232" name="PRIMARY">
+    <key id="256" parent="231" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>MeldingID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="268" parent="232" name="Sender_FK">
+    <foreign-key id="257" parent="231" name="Sender_FK">
       <ColNames>Sender</ColNames>
       <RefSchemaName>ingebrin_pu</RefSchemaName>
       <RefTableName>Bruker</RefTableName>
@@ -1121,8 +1055,73 @@ BrukerNavn</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="269" parent="232" name="Mottaker_FK">
+    <foreign-key id="258" parent="231" name="Mottaker_FK">
       <ColNames>Mottaker</ColNames>
+      <RefSchemaName>ingebrin_pu</RefSchemaName>
+      <RefTableName>Bruker</RefTableName>
+      <RefColNames>BrukerNavn</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="259" parent="232" name="Dato">
+      <Position>1</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="260" parent="232" name="Fra">
+      <Position>2</Position>
+      <DataType>varchar(5)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="261" parent="232" name="Til">
+      <Position>3</Position>
+      <DataType>varchar(5)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="262" parent="232" name="EmneID">
+      <Position>4</Position>
+      <DataType>varchar(10)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="263" parent="232" name="Varighet">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="264" parent="232" name="Faglærer">
+      <Position>6</Position>
+      <DataType>varchar(30)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="265" parent="232" name="EmneID_FK">
+      <ColNames>EmneID</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="266" parent="232" name="FaglærerSaltid_FK">
+      <ColNames>Faglærer</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="267" parent="232" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>Dato
+Fra
+EmneID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="268" parent="232" name="EmneID_FK">
+      <ColNames>EmneID</ColNames>
+      <RefSchemaName>ingebrin_pu</RefSchemaName>
+      <RefTableName>Emne</RefTableName>
+      <RefColNames>EmneID</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <foreign-key id="269" parent="232" name="FaglærerSaltid_FK">
+      <ColNames>Faglærer</ColNames>
       <RefSchemaName>ingebrin_pu</RefSchemaName>
       <RefTableName>Bruker</RefTableName>
       <RefColNames>BrukerNavn</RefColNames>
@@ -1135,21 +1134,21 @@ BrukerNavn</ColNames>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="233" name="Fra">
+    <column id="271" parent="233" name="Tidspunkt">
       <Position>2</Position>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="272" parent="233" name="Til">
+    <column id="272" parent="233" name="EmneID">
       <Position>3</Position>
-      <DataType>varchar(5)|0s</DataType>
+      <DataType>varchar(10)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="273" parent="233" name="EmneID">
+    <column id="273" parent="233" name="Studass">
       <Position>4</Position>
-      <DataType>varchar(10)|0s</DataType>
+      <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
@@ -1158,87 +1157,22 @@ BrukerNavn</ColNames>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="275" parent="233" name="Faglærer">
-      <Position>6</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="276" parent="233" name="EmneID_FK">
+    <index id="275" parent="233" name="StudEmneID_FK">
       <ColNames>EmneID</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="277" parent="233" name="FaglærerSaltid_FK">
-      <ColNames>Faglærer</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="278" parent="233" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>Dato
-Fra
-EmneID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="279" parent="233" name="EmneID_FK">
-      <ColNames>EmneID</ColNames>
-      <RefSchemaName>ingebrin_pu</RefSchemaName>
-      <RefTableName>Emne</RefTableName>
-      <RefColNames>EmneID</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <foreign-key id="280" parent="233" name="FaglærerSaltid_FK">
-      <ColNames>Faglærer</ColNames>
-      <RefSchemaName>ingebrin_pu</RefSchemaName>
-      <RefTableName>Bruker</RefTableName>
-      <RefColNames>BrukerNavn</RefColNames>
-      <OnUpdate>cascade</OnUpdate>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <column id="281" parent="234" name="Dato">
-      <Position>1</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="282" parent="234" name="Tidspunkt">
-      <Position>2</Position>
-      <DataType>varchar(5)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="283" parent="234" name="EmneID">
-      <Position>3</Position>
-      <DataType>varchar(10)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="284" parent="234" name="Studass">
-      <Position>4</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="285" parent="234" name="Varighet">
-      <Position>5</Position>
-      <DataType>int(11)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="286" parent="234" name="StudEmneID_FK">
-      <ColNames>EmneID</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="287" parent="234" name="Studass_FK">
+    <index id="276" parent="233" name="Studass_FK">
       <ColNames>Studass</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="288" parent="234" name="PRIMARY">
+    <key id="277" parent="233" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>Dato
 Tidspunkt
 Studass</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="289" parent="234" name="StudEmneID_FK">
+    <foreign-key id="278" parent="233" name="StudEmneID_FK">
       <ColNames>EmneID</ColNames>
       <RefSchemaName>ingebrin_pu</RefSchemaName>
       <RefTableName>Emne</RefTableName>
@@ -1246,7 +1180,7 @@ Studass</ColNames>
       <OnUpdate>cascade</OnUpdate>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="290" parent="234" name="Studass_FK">
+    <foreign-key id="279" parent="233" name="Studass_FK">
       <ColNames>Studass</ColNames>
       <RefSchemaName>ingebrin_pu</RefSchemaName>
       <RefTableName>Bruker</RefTableName>

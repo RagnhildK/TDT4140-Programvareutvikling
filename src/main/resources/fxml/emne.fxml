@@ -43,26 +43,7 @@
                 <Font size="14.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="btnEmne1" alignment="CENTER" layoutX="27.0" layoutY="148.0" onAction="#setAktivtEmne" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" textFill="#d3cbc2" visible="false">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </JFXButton>
-      <JFXButton fx:id="btnEmne2" alignment="CENTER" layoutX="27.0" layoutY="188.0" onAction="#setAktivtEmne" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" textFill="#d3cbc2" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btnEmne3" alignment="CENTER" layoutX="27.0" layoutY="227.0" onAction="#setAktivtEmne" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" textFill="#d3cbc2" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="btnEmne4" alignment="CENTER" layoutX="27.0" layoutY="266.0" onAction="#setAktivtEmne" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" textFill="#d3cbc2" visible="false">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </JFXButton>
+
       <Label fx:id="lblStatus" layoutX="175.0" layoutY="51.0" stylesheets="@Styles.css">
          <font>
             <Font size="14.0" />
@@ -70,7 +51,7 @@
       </Label>
         <TableView fx:id="table" layoutX="248.0" layoutY="102.0" prefHeight="150.0" prefWidth="320.0">
             <columns>
-                <TableColumn fx:id="studentColumn" prefWidth="83.0" text="Emne" />
+                <TableColumn fx:id="emneColumn" prefWidth="83.0" text="Emne" />
                 <TableColumn fx:id="datoColumn" prefWidth="72.0" text="Dato" />
                 <TableColumn fx:id="tidspunktColumn" prefWidth="72.0" text="Tidspunkt" />
                 <TableColumn fx:id="studassColumn" prefWidth="85.0" text="Studass" />
@@ -90,5 +71,7 @@
             <Font size="14.0" />
          </font>
       </JFXButton>
+        <JFXListView fx:id="listView" layoutX="27.0" layoutY="160.0" prefHeight="239.0" prefWidth="135.0" />
+
     </children>
 </AnchorPane>

@@ -11,6 +11,11 @@
     -jfx-unfocus-color: #d3cbc2;
 
 }
+.jfx-list-view {
+    -fx-text-fill: #d3cbc2;
+    -fx-background-color: #2b2927;
+}
+
 .jfx-text-area {
     -fx-text-fill: #d3cbc2;
     -fx-background-color: #2b2927;
@@ -51,4 +56,32 @@
 .table-cell:selected:filled {
     -fx-text-fill: #d3cbc2;
     -fx-background-color: #2b2927;
+}
+
+.list-view {
+    -fx-background-color: #2b2927;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #2b2927;
+}
+
+.list-view .list-cell:selected {
+    -fx-background-color: #2b2927;
+}
+
+.list-view .list-cell {
+    -fx-background-color: #2b2927;
+    -fx-text-fill: #d3cbc2;
+}
+
+.list-view .label {
+    -fx-text-fill: #d3cbc2;
+    -fx-border-color: #d3cbc2;
+    -fx-border-radius: 5;
+    -fx-padding: 6;
+}
+
+.jfx-rippler {
+    -jfx-rippler-fill: #2b2927;
 }
