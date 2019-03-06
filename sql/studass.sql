@@ -40,28 +40,32 @@ CREATE TABLE StudassPåSal (
                                                     ON DELETE CASCADE);
 
 CREATE TABLE Booking (
-   BookingID		INTEGER NOT NULL,   
-   Student			VARCHAR(30) NOT NULL,
-   StudassPåSalStudass		VARCHAR(30) NOT NULL,
-   StudassPåSalDato    			INTEGER NOT NULL,
-   StudassPåSalTidspunkt		INTEGER NOT NULL,
-   EmneID			VARCHAR(10) NOT NULL,
-   CONSTRAINT Booking_PK PRIMARY KEY (BookingID),
+   BookingID		           INTEGER NOT NULL,
+   Student			           VARCHAR(30) NOT NULL,
+   StudassPåSalDato    		 VARCHAR(10) NOT NULL,
+   StudassPåSalTidspunkt	 VARCHAR(5) NOT NULL,
+   StudassPåSalStudass		 VARCHAR(30) NOT NULL,
+   EmneID			             VARCHAR(10) NOT NULL,
+   PRIMARY KEY (BookingID),
    CONSTRAINT Student_FK FOREIGN KEY (Student) REFERENCES Bruker(BrukerNavn)
-													ON UPDATE CASCADE
-                                                    ON DELETE CASCADE,
-   CONSTRAINT StudassPåSal_FK FOREIGN KEY (StudassPåSalStudass) REFERENCES StudassPåSal(Studass)
       ON UPDATE CASCADE
       ON DELETE CASCADE,
-   CONSTRAINT StudassPåSalD_FK FOREIGN KEY (StudassPåSalDato) REFERENCES StudassPåSal(Dato)
+   CONSTRAINT StudassPåSalD_FK FOREIGN KEY (StudassPåSalDato, StudassPåSalTidspunkt, StudassPåSalStudass)
+     REFERENCES StudassPåSal(Dato, Tidspunkt, Studass)
+      ON UPDATE CASCADE
+      ON DELETE CASCADE,
+   /*CONSTRAINT StudassPåSalD_FK FOREIGN KEY (StudassPåSalDato) REFERENCES StudassPåSal(Dato)
       ON UPDATE CASCADE
       ON DELETE CASCADE,
    CONSTRAINT StudassPåSalT_FK FOREIGN KEY (StudassPåSalTidspunkt) REFERENCES StudassPåSal(Tidspunkt)
       ON UPDATE CASCADE
       ON DELETE CASCADE,
+   CONSTRAINT StudassPåSal2_FK FOREIGN KEY (StudassPåSalStudass) REFERENCES StudassPåSal(Studass)
+      ON UPDATE CASCADE
+      ON DELETE CASCADE,*/
    CONSTRAINT EmneID2_FK FOREIGN KEY (EmneID) REFERENCES Emne(EmneID)
-													ON UPDATE CASCADE
-                             ON DELETE CASCADE);
+      ON UPDATE CASCADE
+      ON DELETE CASCADE);
 
 
 
