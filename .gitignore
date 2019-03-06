@@ -1,4 +1,8 @@
 
-.DS-Store
-
+.DS_Store
+*.iml
 *.class
+/target/
+.target/
+/idea/
+.idea/
