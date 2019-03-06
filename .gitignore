@@ -6,3 +6,7 @@
 .target/
 /idea/
 .idea/
+/out/
+.out/
+/production/
+.production/
