@@ -102,6 +102,7 @@ public class EmneController {
 
 
     public void showEmner(){
+        listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
         for (ArrayList<String> r : UserManager._rolle){
                 list.add(r.get(0)+" - "+r.get(1));
