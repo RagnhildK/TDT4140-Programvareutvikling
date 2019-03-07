@@ -6,7 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -40,6 +44,7 @@ public class AdminController {
     @FXML public TextField txtEmneIDRolle;
     @FXML public TextField txtRolle;
     @FXML public Button btnRolle;
+    @FXML public Button btnMeldinger;
 
 
 
@@ -58,6 +63,11 @@ public class AdminController {
         showDate();
         table.visibleProperty().setValue(true);
         showTable();
+        MeldingerController msg = new MeldingerController();
+        int i = msg.checkUleste();
+        if (i>0){
+            btnMeldinger.setText(btnMeldinger.getText()+" ("+i+")");
+        }
     }
     private void showDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
@@ -143,6 +153,17 @@ public class AdminController {
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();
         l.logout(btnBruker);
+
+    }
+
+    public void showMeldingsside(ActionEvent event) throws Exception{
+
+        Stage stage = (Stage) btnMeldinger.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/meldinger.fxml"));
+        Scene scene =  new Scene(root, 700 ,500);
+        stage.setTitle("Meldinger");
+        stage.setScene(scene);
+        stage.show();
 
     }
 }

@@ -1,10 +1,7 @@
 package app;
 
 
-import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXScrollPane;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -29,6 +26,7 @@ public class MeldingerController {
     @FXML public AnchorPane vindu;
     @FXML public AnchorPane anchorPane;
     @FXML public JFXListView listView;
+    @FXML public JFXComboBox<String> comboBox;
 
     public String sender;
 
@@ -36,7 +34,7 @@ public class MeldingerController {
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         showAvsendere();
-
+        showAllBrukere();
 
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
@@ -50,6 +48,38 @@ public class MeldingerController {
             }
         });
     }
+
+    public void showAllBrukere() {
+        ArrayList<String> list = new ArrayList();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBrukere();
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                list.add(key);
+            }
+        }
+
+        for (String e : list){
+            comboBox.getItems().add(e);
+        }
+        comboBox.setEditable(false);
+        comboBox.setPromptText("Velg bruker");
+    }
+
+    public int checkUleste() {
+        int i = 0;
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                ArrayList<String> values = entry.getValue();
+                if (values.get(1).equals("1")){
+                    i++;
+                }
+            }
+        }
+        return i;
+    }
+
     public void showAvsendere(){
         ArrayList<String> list = new ArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
@@ -101,7 +131,7 @@ public class MeldingerController {
         update(sender);
     }
     @FXML protected void addChat(ActionEvent event){
-        sender = txtBruker.getText();
+        sender = comboBox.getValue();
         lblTil.setText(sender);
         update(sender);
     }

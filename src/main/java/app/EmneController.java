@@ -7,16 +7,13 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import org.graalvm.compiler.lir.LIRInstruction;
 
 import java.util.*;
 
@@ -49,8 +46,8 @@ public class EmneController {
         showTable();
         showEmner();
         showAllEmner();
-        System.out.println(checkUleste());
-        int i = checkUleste();
+        MeldingerController msg = new MeldingerController();
+        int i = msg.checkUleste();
         if (i>0){
             btnMeldinger.setText(btnMeldinger.getText()+" ("+i+")");
         }
@@ -66,19 +63,7 @@ public class EmneController {
         });
     }
 
-    public int checkUleste() {
-        int i = 0;
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                ArrayList<String> values = entry.getValue();
-                if (values.get(1).equals("1")){
-                    i++;
-                }
-            }
-        }
-        return i;
-    }
+
 
     public void showAllEmner() {
         ArrayList<String> list = new ArrayList();
@@ -221,18 +206,23 @@ public class EmneController {
 
     public void back(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
+        Parent root;
+        if(UserManager._bruker.equals("admin")){
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/admin.fxml"));
+        }else {
+            root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
+        }
         Scene scene =  new Scene(root, 700 ,500);
         stage.setTitle("Emne");
         stage.setScene(scene);
         stage.show();
-
     }
+
 
     public void showMeldingsside(ActionEvent event) throws Exception{
 
         Stage stage = (Stage) btnMeldinger.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/meldinger1.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/meldinger.fxml"));
         Scene scene =  new Scene(root, 700 ,500);
         stage.setTitle("Meldinger");
         stage.setScene(scene);

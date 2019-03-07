@@ -257,6 +257,11 @@ Database {
         }
         return sendQuery(sql);
     }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getBrukere() {
+        String sql = "Select BrukerNavn From Bruker";
+        return sendQuery(sql);
+    }
+
     public static ArrayList<HashMap<String,ArrayList<String>>> getEmner() {
         String sql = "SELECT EmneID FROM Emne";
         return sendQuery(sql);

@@ -1,7 +1,9 @@
 package app;
 
 public class Booking {
-
+    /*
+     * Ikke i bruk per nå
+     */
     private String dato, tidspunkt, emne, studass, varighet;
 
     public Booking(String dato, String tidspunkt, String emne, String studass, String varighet){
