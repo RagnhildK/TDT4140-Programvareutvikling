@@ -44,11 +44,13 @@ public class EmneController {
 
     @FXML protected void initialize() throws Exception{
         lblBrukernavn.setText(UserManager._bruker);
-
         showTable();
         showEmner();
-
-
+        System.out.println(checkUleste());
+        int i = checkUleste();
+        if (i>0){
+            btnMeldinger.setText(btnMeldinger.getText()+" ("+i+")");
+        }
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event)  {
@@ -59,11 +61,22 @@ public class EmneController {
                 openScene();
             }
         });
+    }
 
+    public int checkUleste() {
+        int i = 0;
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                ArrayList<String> values = entry.getValue();
+                System.out.println(values.get(1));
+                if (values.get(1).equals("1")){
+                    i++;
+                }
+            }
+        }
 
-
-
-
+        return i;
     }
 
     public void showEmner(){

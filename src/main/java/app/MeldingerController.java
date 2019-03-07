@@ -5,30 +5,14 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javafx.fxml.FXML;
-import jdk.internal.vm.compiler.collections.EconomicMap;
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
 
 public class MeldingerController {
 
@@ -61,6 +45,7 @@ public class MeldingerController {
                 int i = s.indexOf("'");
                 lblTil.setText(s.substring(i+1,s.length()-1));
                 sender = s.substring(i+1,s.length()-1);
+                Database.updateUlest(sender,UserManager._bruker);
                 update(sender);
             }
         });

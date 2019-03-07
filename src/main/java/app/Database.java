@@ -240,7 +240,10 @@ Database {
         String sql = "INSERT INTO Melding VALUES (NULL,'"+sender+"','"+mottaker+"','"+beskjed+"', TRUE, NULL)";
         return sendUpdate(sql);
     }
-
+    public static void updateUlest(String sender, String mottaker){
+        String sql = "UPDATE Melding SET Ulest = FALSE Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"'";
+        sendUpdate(sql);
+    }
 
 
 
@@ -283,13 +286,10 @@ Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getMeldinger(String sender, String mottaker){
-        String sql = "SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"' UNION SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+mottaker+"' and Mottaker = '"+sender+"' order by Tid asc";
+        String sql = "SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"' UNION SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+mottaker+"' and Mottaker = '"+sender+"' order by Tid desc";
         return sendQuery(sql);
     }
-    public static ArrayList<HashMap<String,ArrayList<String>>> updateUlest(String sender, String mottaker){
-        String sql = "UPDATE Melding SET Ulest = False Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"'";
-        return sendQuery(sql);
-    }
+
 
 
 
