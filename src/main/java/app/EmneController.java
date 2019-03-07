@@ -1,5 +1,6 @@
 package app;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -30,6 +31,7 @@ public class EmneController {
 
     @FXML public Button btnLoggut;
     @FXML public JFXListView listView;
+    @FXML public JFXComboBox<String> comboBox;
 
     @FXML private TableView<List<StringProperty>> table;
     @FXML private TableColumn<List<StringProperty>, String> emneColumn;
@@ -46,6 +48,7 @@ public class EmneController {
         lblBrukernavn.setText(UserManager._bruker);
         showTable();
         showEmner();
+        showAllEmner();
         System.out.println(checkUleste());
         int i = checkUleste();
         if (i>0){
@@ -69,15 +72,34 @@ public class EmneController {
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
-                System.out.println(values.get(1));
                 if (values.get(1).equals("1")){
                     i++;
                 }
             }
         }
-
         return i;
     }
+
+    public void showAllEmner() {
+        ArrayList<String> list = new ArrayList();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getEmner();
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                if (key.equals("admin")){
+                    continue;
+                }
+                list.add(key);
+            }
+        }
+
+        for (String e : list){
+            comboBox.getItems().add(e);
+        }
+        comboBox.setEditable(false);
+        comboBox.setPromptText("Velg emne");
+    }
+
 
     public void showEmner(){
         ArrayList<String> list = new ArrayList();
@@ -90,14 +112,14 @@ public class EmneController {
     }
 
 
-    @FXML protected void addEmne(ActionEvent event){
 
-        if(Database.getRolle(UserManager._bruker, txtEmne.getText())!= ""){
+    @FXML protected void addEmne(ActionEvent event){
+        if(Database.getRolle(UserManager._bruker, comboBox.getValue())!= ""){
             lblStatus.setText("Allerede meldt opp!");
         }
         else {
-            if (Database.addRolle(txtEmne.getText(), UserManager._bruker, "student")) {
-                lblStatus.setText(UserManager._bruker + " meldt opp i " + txtEmne.getText());
+            if (Database.addRolle(comboBox.getValue(), UserManager._bruker, "student")) {
+                lblStatus.setText(UserManager._bruker + " meldt opp i " + comboBox.getValue());
             } else {
                 lblStatus.setText("Klarte ikke legge til!");
             }

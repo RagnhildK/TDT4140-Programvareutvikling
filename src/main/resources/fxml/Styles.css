@@ -85,3 +85,46 @@
 .jfx-rippler {
     -jfx-rippler-fill: #2b2927;
 }
+
+
+.combo-box,
+.choice-box {
+
+    -fx-prompt-text-fill: #d3cbc2;
+    -fx-text-fill: #d3cbc2;
+    -fx-background-color: none;
+    /*-fx-border-width: 0 0 1 0;
+    -fx-border-color: #d3cbc2;*/
+    -fx-padding: 0 0 3 -8;
+}
+
+.combo-box .list-cell:filled:selected .text,
+.choice-box .list-cell:filled:selected .text {
+    -fx-fill: #d3cbc2;
+    -fx-text-fill: #d3cbc2;
+    -fx-prompt-text-fill: #d3cbc2;
+    -jfx-focus-color: #d3cbc2;
+    -jfx-unfocus-color: #d3cbc2;
+}
+
+.combo-box .arrow,
+.choice-box .arrow {
+    -fx-background-color: #d3cbc2;
+}
+.jfx-combo-box {
+    -fx-prompt-text-fill: #d3cbc2;
+    -jfx-focus-color: #d3cbc2;
+    -jfx-unfocus-color: #d3cbc2;
+}
+.combo-box .cell {
+    -fx-text-fill: #d3cbc2;
+}
+.combo-box > .cell {
+    -fx-text-fill: #d3cbc2;
+}
+.combo-box > .list-cell {
+    -fx-text-fill: #d3cbc2;
+}
+.jfx-combo-box .label {
+    -fx-text-fill: #d3cbc2;
+}

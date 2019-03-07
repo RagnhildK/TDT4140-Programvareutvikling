@@ -257,6 +257,10 @@ Database {
         }
         return sendQuery(sql);
     }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getEmner() {
+        String sql = "SELECT EmneID FROM Emne";
+        return sendQuery(sql);
+    }
     public static ArrayList<HashMap<String,ArrayList<String>>> getSaltid(String dato, String emneid) {
         String sql = "SELECT Dato, Fra, Til, Varighet FROM Saltid Where Dato = '"+dato+"' and EmneID = '"+emneid+"'";
         return sendQuery(sql);
