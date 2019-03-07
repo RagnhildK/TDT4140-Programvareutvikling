@@ -20,7 +20,8 @@ Database {
      *          -Henter fra databasen ved å sende en select query
      *      Resten er ulike querries for å sette inn og hente fra databasen.
      *      Metode navnene og sql spørringene forklarer seg stort sett selv.
-     *
+     *  Get metodene er f.eks på formatet: [{brukernavn,[navn,passord]}, {brukernavn,[navn,passord]} ]
+     *  Der brukernavn er key, og values er en liste med resten av raden
      */
 
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -113,7 +114,7 @@ Database {
         //System.out.println("Goodbye!");
         return info;
     }
-    // [{brukernavn,[navn,passort]}, {brukernavn,[navn,passort]} ]
+
     public static ArrayList<HashMap<String,ArrayList<String>>> sendQuery(String query) {
         Connection conn = null;
         Statement stmt = null;
@@ -298,11 +299,6 @@ Database {
         String sql = "SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"' UNION SELECT MeldingID, Sender, Beskjed, Ulest, Tid FROM Melding Where Sender = '"+mottaker+"' and Mottaker = '"+sender+"' order by Tid desc";
         return sendQuery(sql);
     }
-
-
-
-
-
     public static int getBookingID(){
         int id = 0;
         String sql = "SELECT BookingID FROM Booking " +

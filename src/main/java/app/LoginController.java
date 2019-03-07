@@ -29,6 +29,7 @@ public class LoginController {
     @FXML public PasswordField txtPassword;
     @FXML public Button loginBtn ;
 
+    //Sender en login request til app.UserManager når man trykker på tilhørende knapp
     @FXML protected void login(ActionEvent event) throws Exception {
         if (UserManager.checkLogin(txtUser.getText(),txtPassword.getText())){
             lblStatus.setText("Login success!");
@@ -37,15 +38,12 @@ public class LoginController {
             lblStatus.setText("Login failed!");
         }
     }
+    //Åpner den fxml fila tilhører de rettigheter brukeren har
     @FXML protected void openScene() throws Exception {
         Parent root;
         Stage stage = (Stage) lblStatus.getScene().getWindow();
         try {
-            if (UserManager._rolle.isEmpty()){
-                root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
-                stage.setTitle("Emne");
-            }
-            else if (UserManager._rolle.get(0).get(1).equals("admin")){
+            if (UserManager._rolle.get(0).get(1).equals("admin")){
                 root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/admin.fxml"));
                 stage.setTitle("Admin");
             }
@@ -57,12 +55,11 @@ public class LoginController {
             root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/emne.fxml"));
             stage.setTitle("Emne");
         }
-
         Scene scene =  new Scene(root, 700 ,500);
         stage.setScene(scene);
         stage.show();
     }
-
+    //Metode som gjør at man havner på login sida når man trykker for å logge ut
     @FXML public void logout(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/login.fxml"));

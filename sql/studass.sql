@@ -30,8 +30,8 @@ CREATE TABLE Saltid (
    
 
 CREATE TABLE StudassPåSal (
-   Dato    			INTEGER NOT NULL,
-   Tidspunkt		INTEGER NOT NULL,   
+   Dato    			VARCHAR(10) NOT NULL,
+   Tidspunkt		VARCHAR(5) NOT NULL,
    Studass			VARCHAR(30) NOT NULL,
    Varighet 		INTEGER,
    CONSTRAINT StudassPåSal_PK PRIMARY KEY (Dato, Tidspunkt, Studass),

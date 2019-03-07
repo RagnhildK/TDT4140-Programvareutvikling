@@ -38,14 +38,14 @@ public class StudassController {
     private Calendar calendar;
     private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
 
-
+    //Kjøres når siden startes
     @FXML protected void initialize() {
         lblBrukernavn.setText(UserManager._bruker);
         calendar = Calendar.getInstance();
         showDate(0);
         showTable();
     }
-
+    //Holder styr på dato og gjør sånn en kan gå frem og tilbake
     private void showDate(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         Calendar today = Calendar.getInstance();
@@ -64,6 +64,7 @@ public class StudassController {
         showDate(-1);
     }
 
+    //Legger til tid i studasspåsal i databasen
     @FXML protected void addTid(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtTidspunkt.getText())){
             if (UserManager.addStudassPåSal(txtDato.getText(),txtTidspunkt.getText(),txtVarighet.getText())) {
@@ -76,6 +77,7 @@ public class StudassController {
         }
         showTable();
     }
+    //Viser tabell med saltider
     private void showTable() {
         datoColumn.setCellValueFactory(param -> param.getValue().get(0));
         fraColumn.setCellValueFactory(param -> param.getValue().get(1));
@@ -83,10 +85,10 @@ public class StudassController {
         tpsColumn.setCellValueFactory(param -> param.getValue().get(3));
         table.setItems(getData());
     }
+    //Henter tabellinformasjon fra databasen
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getSaltid(txtDato.getText(), UserManager._aktivtEmne);
-
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();
@@ -104,17 +106,13 @@ public class StudassController {
         return data;
     }
 
-
-
     @FXML protected void back(ActionEvent event) throws Exception {
         EmneController ec = new EmneController();
         ec.back(btnAddTid);
     }
-
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();
         l.logout(btnAddTid);
-
     }
 
 }

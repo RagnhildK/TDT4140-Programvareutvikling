@@ -37,10 +37,11 @@ public class FaglaererController {
     @FXML private TableColumn<List<StringProperty>, String> tilColumn;
     @FXML private TableColumn<List<StringProperty>, String> tpsColumn;
 
+    //For å holde styr på dato
     private Calendar calendar;
     private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
 
-
+    //Kjører når siden startes
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         calendar = Calendar.getInstance();
@@ -48,6 +49,7 @@ public class FaglaererController {
         showTable();
     }
 
+    //Viser dato og gjør det mulig å kunne å frem og tilbake på dato
     private void showDate(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         Calendar today = Calendar.getInstance();
@@ -65,6 +67,7 @@ public class FaglaererController {
     @FXML protected void showPrevDay(ActionEvent event) throws Exception {
         showDate(-1);
     }
+    //Legger til saltid
     @FXML protected void addSaltid(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtFra.getText()) && Check.checkTidspunkt(txtTil.getText())){
             if (UserManager.addSaltid(txtDato.getText(),txtFra.getText(),txtTil.getText(), txtTidPerStudent.getText())) {
@@ -77,6 +80,7 @@ public class FaglaererController {
         }
         showTable();
     }
+    //Viser tabell med saltider
     private void showTable() {
         datoColumn.setCellValueFactory(param -> param.getValue().get(0));
         fraColumn.setCellValueFactory(param -> param.getValue().get(1));
@@ -84,6 +88,7 @@ public class FaglaererController {
         tpsColumn.setCellValueFactory(param -> param.getValue().get(3));
         table.setItems(getData());
     }
+    //Henter informasjon til tabell
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getSaltid(txtDato.getText(), UserManager._aktivtEmne);
@@ -103,24 +108,19 @@ public class FaglaererController {
         }
         return data;
     }
-
-
-
-    @FXML protected void back(ActionEvent event) throws Exception {
-        EmneController ec = new EmneController();
-        ec.back(btnAddSaltid);
-
-    }
-
-    @FXML protected void logout(ActionEvent event) throws Exception {
-        LoginController l = new LoginController();
-        l.logout(btnAddSaltid);
-
-    }
-
+    //Sletter saltider fra nåværende dato
     @FXML protected void deleteSaltider(ActionEvent event) throws Exception {
         Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()));
         showTable();
     }
+    @FXML protected void back(ActionEvent event) throws Exception {
+        EmneController ec = new EmneController();
+        ec.back(btnAddSaltid);
+    }
+    @FXML protected void logout(ActionEvent event) throws Exception {
+        LoginController l = new LoginController();
+        l.logout(btnAddSaltid);
+    }
+
 
 }

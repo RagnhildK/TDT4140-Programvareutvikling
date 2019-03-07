@@ -24,7 +24,7 @@ public class UserManager {
      *      checkTime(String før, String etter)
      *          -Sjekker hva som er først av tidspunkt
      *      addSaltid(String dato, String fra, String til, String emneid, String tid)
-     *          -Legger til saltid     *
+     *          -Legger til saltid
      */
 
 
@@ -46,7 +46,7 @@ public class UserManager {
         }
         return input;
     }
-
+    //Sjekker om brukernavn og passord stemmer overens med det som ligger i databasen
     public static boolean checkLogin(String username, String password) {
 
         if(Database.checkLogin(username,password)){
@@ -90,7 +90,7 @@ public class UserManager {
             return false;
         }
     }
-
+    //Oppdaterer rollene til brukeren
     public static boolean updateRoller() {
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker(_bruker);
         if (dbOutput.isEmpty()) {
@@ -112,7 +112,7 @@ public class UserManager {
             return true;
         }
     }
-
+    //Om det ikke allerede finst en booking så booker den tiden som er sendt inn
     public static boolean booking(String dato, String tidspunkt, String studass){
         ArrayList<HashMap<String,ArrayList<String>>> booking = Database.getUnikBooking(dato, tidspunkt, studass);
         if (!booking.isEmpty()){
@@ -123,6 +123,7 @@ public class UserManager {
 
         return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass, _aktivtEmne);
     }
+    //Legger til tid på sal for studass og sjekker at dette ligger innenfor oppgitt saltid.
     public static boolean addStudassPåSal(String dato, String tidspunkt, String varighet) {
         ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, _aktivtEmne);
         int lengde = Integer.parseInt(varighet);
@@ -159,7 +160,7 @@ public class UserManager {
 
         return false;
     }
-    // HH:mm
+    // Sjekker at før faktisk er før etter
     private static boolean checkTime(String før, String etter) {
 
         if (Integer.parseInt(før.substring(0,2)) < Integer.parseInt(etter.substring(0,2))) {
@@ -172,8 +173,8 @@ public class UserManager {
 
         return false;
     }
-
+    //Legger til saltid
     public static boolean addSaltid(String dato, String fra, String til, String tid) {
         return (Database.addSaltid(dato, fra, til, _aktivtEmne, Integer.parseInt(tid) , _bruker));
     }
-    }
+}

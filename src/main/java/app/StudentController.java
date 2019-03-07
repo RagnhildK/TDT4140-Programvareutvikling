@@ -26,7 +26,6 @@ public class StudentController {
      *      showTid(ActionEvent event)
      *          -Viser saltider for studasser når man trykker på tilhørende knapp
      *
-     *
      */
     @FXML public Label lblStatus;
     @FXML public Label lblTid;
@@ -47,13 +46,14 @@ public class StudentController {
     private Calendar calendar;
     private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
 
+    //Kjøres når siden startes
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         calendar = Calendar.getInstance();
         showDate(0);
         table.visibleProperty().setValue(true);
 
-
+        //Gjør det mulig å kunne trykke i tabellen og booke direkte
         table.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event)  {
@@ -68,6 +68,7 @@ public class StudentController {
         });
     }
 
+    //Viser dato og kan gå frem og tilbake
     private void showDate(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         Calendar today = Calendar.getInstance();
@@ -85,7 +86,7 @@ public class StudentController {
     @FXML protected void showPrevDay(ActionEvent event) throws Exception {
         showDate(-1);
     }
-
+    //Sender book request til usermanager
     @FXML protected void book(ActionEvent event) throws Exception {
         if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtTidspunkt.getText())){
             if (UserManager.booking(txtDato.getText(), txtTidspunkt.getText(), txtStudass.getText())){
@@ -96,7 +97,7 @@ public class StudentController {
         }
         showTable();
     }
-
+    //Viser tabell med studasspåsal tider
     private void showTable() {
         datoColumn.setCellValueFactory(param -> param.getValue().get(0));
         tidspunktColumn.setCellValueFactory(param -> param.getValue().get(1));
@@ -106,7 +107,7 @@ public class StudentController {
 
         table.setItems(getData());
     }
-
+    //Henter informasjon til tabell
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
@@ -131,13 +132,10 @@ public class StudentController {
     @FXML protected void back(ActionEvent event) throws Exception {
         EmneController ec = new EmneController();
         ec.back(btnBook);
-
     }
-
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();
         l.logout(btnBook);
-
     }
 
 }

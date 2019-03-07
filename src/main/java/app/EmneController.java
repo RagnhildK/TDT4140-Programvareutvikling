@@ -13,11 +13,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import org.graalvm.compiler.lir.LIRInstruction;
 
 import java.util.*;
 
 public class EmneController {
+    /*
+     * Siden som er kobler opp til emne.fxml
+     * Er på en måte en startside/hjemmeside for brukeren.
+     * For mulighet til å bli med i nye emner, får opp sine emner
+     * og kan trykke videre til medlinger. Studenter får også opp bookinger.
+     */
 
     @FXML public Label lblStatus;
     @FXML public Label lblTid;
@@ -41,16 +46,22 @@ public class EmneController {
     @FXML private TableColumn<List<StringProperty>, String> emneidColumn1;
     @FXML private TableColumn<List<StringProperty>, String> varighetColumn1;
 
-    @FXML protected void initialize() throws Exception{
+    //Kjøres når siden lastes
+    @FXML protected void initialize() {
+        //Setter brukernavn
         lblBrukernavn.setText(UserManager._bruker);
         showTable();
         showEmner();
         showAllEmner();
+
+        //Sjekker om det er noen uleste meldinger
         MeldingerController msg = new MeldingerController();
         int i = msg.checkUleste();
         if (i>0){
             btnMeldinger.setText(btnMeldinger.getText()+" ("+i+")");
         }
+
+        //Gjør sånn at en kan trykke i listviewen for å få opp et emne
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event)  {
@@ -63,8 +74,19 @@ public class EmneController {
         });
     }
 
+    //Viser emner en har en relasjon til allerede i knapper i en listview
+    public void showEmner(){
+        listView.getItems().clear();
+        ArrayList<String> list = new ArrayList();
+        for (ArrayList<String> r : UserManager._rolle){
+                list.add(r.get(0)+" - "+r.get(1));
+        }
+        for (String b : list) {
+            listView.getItems().add(new Label(b));
+        }
+    }
 
-
+    //Viser alle emner i en combobox
     public void showAllEmner() {
         ArrayList<String> list = new ArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getEmner();
@@ -77,7 +99,6 @@ public class EmneController {
                 list.add(key);
             }
         }
-
         for (String e : list){
             comboBox.getItems().add(e);
         }
@@ -85,20 +106,7 @@ public class EmneController {
         comboBox.setPromptText("Velg emne");
     }
 
-
-    public void showEmner(){
-        listView.getItems().clear();
-        ArrayList<String> list = new ArrayList();
-        for (ArrayList<String> r : UserManager._rolle){
-                list.add(r.get(0)+" - "+r.get(1));
-        }
-        for (String b : list) {
-            listView.getItems().add(new Label(b));
-        }
-    }
-
-
-
+    //Legger til et emne som student
     @FXML protected void addEmne(ActionEvent event){
         if(Database.getRolle(UserManager._bruker, comboBox.getValue())!= ""){
             lblStatus.setText("Allerede meldt opp!");
@@ -115,7 +123,7 @@ public class EmneController {
     }
 
 
-
+    //Viser booking tabell
     private void showTable() {
 
         emneColumn.setCellValueFactory(param -> param.getValue().get(0));
@@ -125,6 +133,8 @@ public class EmneController {
         table.setItems(getBooking());
 
         table1.visibleProperty().setValue(false);
+
+        //TODO : FÅ TIL Å VISE TO TABELLER OM EN ER STUDASS OG STUDENT
         /*for (ArrayList list : app.UserManager._rolle){
             if(list.get(1)=="studass"){
                 table1.visibleProperty().setValue(true);
@@ -136,6 +146,7 @@ public class EmneController {
         varighetColumn1.setCellValueFactory(param -> param.getValue().get(3));
         table1.setItems(getStudassPåSal());*/
     }
+    //Henter studass informasjon til tabell
     public ObservableList<List<StringProperty>> getStudassPåSal()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMineStudassPåSal(UserManager._bruker);
@@ -154,6 +165,7 @@ public class EmneController {
         }
         return data;
     }
+    //Henter booking informajson til tabell
     public ObservableList<List<StringProperty>> getBooking()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBooking(UserManager._bruker);
@@ -172,13 +184,7 @@ public class EmneController {
         return data;
     }
 
-    @FXML protected void logout(ActionEvent event) throws Exception {
-        LoginController l = new LoginController();
-        l.logout(btnLoggut);
-
-    }
-
-
+    //Åpner en ny side basert på rollen man har i det faget man trykker på
     @FXML protected void openScene() {
         try {
             Parent root;
@@ -199,11 +205,10 @@ public class EmneController {
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {
-
         }
-
     }
 
+    //Gjør det mulig å gå tilbake fra student/studass/faglærer/meldings sidene
     public void back(Button b) throws Exception {
         Stage stage = (Stage) b.getScene().getWindow();
         Parent root;
@@ -218,16 +223,13 @@ public class EmneController {
         stage.show();
     }
 
-
-    public void showMeldingsside(ActionEvent event) throws Exception{
-
-        Stage stage = (Stage) btnMeldinger.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/meldinger.fxml"));
-        Scene scene =  new Scene(root, 700 ,500);
-        stage.setTitle("Meldinger");
-        stage.setScene(scene);
-        stage.show();
-
+    @FXML protected void logout(ActionEvent event) throws Exception {
+        LoginController l = new LoginController();
+        l.logout(btnLoggut);
+    }
+    @FXML public void showMeldingsside(ActionEvent event) throws Exception{
+        MeldingerController m = new MeldingerController();
+        m.openMeldinger(btnLoggut);
     }
 }
 

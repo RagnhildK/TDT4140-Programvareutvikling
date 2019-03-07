@@ -8,6 +8,7 @@ public class Check {
      * Klasse som utfører diverse sjekker på input.
      */
 
+    //Sjekker at tidspunkt er skrevet på rett format
     public static boolean checkTidspunkt(String tid) {
         boolean bool = false;
         try {
@@ -22,6 +23,7 @@ public class Check {
             return bool;
         }
     }
+    //Sjekker at dato er skrevet på rett format
     public static boolean checkDato(String dato) {
         boolean bool = false;
         try {
@@ -37,6 +39,7 @@ public class Check {
             return bool;
         }
     }
+    //Sjekker om en dato er i fremtiden
     public static boolean future(String b) {
         SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
