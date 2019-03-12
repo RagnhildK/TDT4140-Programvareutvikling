@@ -5,8 +5,11 @@
 import static org.junit.Assert.*;
 
 import app.*;
+import org.graalvm.compiler.lir.LIRInstruction;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +21,11 @@ public class MainTest {
 
     private String brukernavn = "truls";
     private String passord = "123";
+    private String fag = "TDT4100";
+
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat dato = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat tidspunkt = new SimpleDateFormat("HH-mm");
 
     @org.junit.Test
     public void main() {
@@ -25,6 +33,11 @@ public class MainTest {
         //Tester basic bruker relaterte funksjoner
         opprettBruker();
         sjekkLogin();
+        UserManager._aktivtEmne=fag;
+        sjekkBooking();
+        sjekkRolle();
+        sjekkMelding();
+
         slettBruker();
     }
     public void opprettBruker() {
@@ -49,6 +62,21 @@ public class MainTest {
             fail();
         }
     }
+    public void sjekkBooking() {
+        assertTrue(UserManager.addSaltid(dato.format(calendar.getTime()),tidspunkt.format(calendar.getTime()),tidspunkt.format(calendar.getTime()),"15"));
+        assertTrue(UserManager.addStudassPåSal(dato.format(calendar.getTime()), tidspunkt.format(calendar.getTime()), "15"));
+        assertTrue(UserManager.booking(dato.format(calendar.getTime()),tidspunkt.format(calendar.getTime()),brukernavn));
+    }
+    public void sjekkRolle(){
+        assertTrue(Database.updateRolle(fag,brukernavn,"student"));
+    }
+    public void sjekkMelding(){
+        assertTrue(Database.addMelding(brukernavn,brukernavn,"hello"));
+    }
+
+
+
+
     public void slettBruker() {
         try {
             assertTrue(Database.deleteBruker(brukernavn));
@@ -56,5 +84,9 @@ public class MainTest {
             fail();
         }
     }
+
+
+
+
 
 }

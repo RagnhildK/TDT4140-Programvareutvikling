@@ -3,11 +3,14 @@ package app;
 
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -54,6 +57,15 @@ public class MeldingerController {
                 sender = s.substring(i+1,s.length()-1);
                 Database.updateUlest(sender,UserManager._bruker);
                 update(sender);
+            }
+        });
+
+        txtMelding.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.ENTER)  {
+                    sendMsg(new ActionEvent());
+                }
             }
         });
     }
@@ -140,7 +152,7 @@ public class MeldingerController {
     }
     //Sender en melding til databasen og oppdaterer meldingsvinduet
     public void sendMsg(ActionEvent event){
-        Database.addMelding(UserManager._bruker, sender,txtMelding.getText());
+        Database.addMelding(UserManager._bruker, sender,txtMelding.getText().trim());
         txtMelding.setText("");
         update(sender);
     }
