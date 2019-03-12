@@ -110,8 +110,28 @@ public class FaglaererController {
     }
     //Sletter saltider fra nåværende dato
     @FXML protected void deleteSaltider(ActionEvent event) throws Exception {
+       
+        List<String> data = new ArrayList<>();
+
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudenter(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                data.add(key);
+
+            }
+        }
+        System.out.println(dbOutput);
+        System.out.println(data);
+        for(String bruker : data)  {
+            System.out.println("hei");
+
+            Database.addMelding(UserManager._bruker, bruker, "Saltid den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + " har blitt endret");
+        }
+
         Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()));
         showTable();
+        
     }
     @FXML protected void back(ActionEvent event) throws Exception {
         EmneController ec = new EmneController();

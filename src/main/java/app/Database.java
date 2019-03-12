@@ -246,6 +246,11 @@ Database {
         sendUpdate(sql);
     }
 
+    public static ArrayList<HashMap<String,ArrayList<String>>> getStudenter(String dato, String emne) {
+        String sql = "SELECT Student FROM Booking WHERE StudassPåSalDato = '"+dato+"' AND EmneID = '"+emne+"'";
+        return sendQuery(sql);
+    }
+
 
 
     public static ArrayList<HashMap<String,ArrayList<String>>> getBruker(String brukernavn) {
