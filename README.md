@@ -6,7 +6,7 @@ Applikasjonen skal også inneholde tilrettelegging for bedre kommunikasjon og le
 ### Mål
 
 * Effektivsere saltidbooking (Implementert)
-* Forbedre kommunikasjon mellom studass, student, og faglærere (Ikke implementert)
+* Forbedre kommunikasjon mellom studass, student, og faglærere (Implementert)
 * Åpne opp for innlevering av øvinger (Ikke implementert)
 
 
@@ -43,9 +43,11 @@ Faglærer
 BookBoard har følgende funksjonalitet:
 * Admin bruker med mulighet for å opprette brukere, emner og legge til/endre roller mellom brukere og emner.
 * Faglærer som kan legge til saltider for sine emner.
-* Studasser som kan legge til når de er ledige innenfor gitte saltider i sine emner.
+* Studasser som kan legge til tider når de er ledige innenfor gitte saltider i sine emner.
 * Studenter som kan booke ledige studasser når de vil møte opp på sal.
 * En bruker kan være meldt opp i ulike emner med ulike roller
+* Brukerene har mulighet til å kommunisere seg imellom ved meldinger, og får opp varsler på uleste meldinger.
+* Faglærer kan sende ut kunngjøringer for spesifikke emner, til alle/studenter/studasser.
 
 ## Laget av
 
