@@ -46,13 +46,12 @@ public class KunngjoringerController {
 
     //Holder styr på hvilket chat vindu en skal vise.
     public String sender;
-    private List<String> mottakere;
+    private ArrayList<ArrayList<String>> mottakere;
 
 
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         showAvsendere();
-        showAllBrukere();
         getMottakere();
         //Gjør at en kan trykke i listviewen med avsendere og få opp meldingene
         listView.setOnMouseClicked(new ListViewHandler(){
@@ -102,15 +101,6 @@ public class KunngjoringerController {
     //Viser avsendere i listviewen
     public void showAvsendere(){
         ArrayList<String> list = new ArrayList();
-        /*ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                ArrayList<String> values = entry.getValue();
-                if(!list.contains(values.get(0))){
-                    list.add(values.get(0));
-                }
-            }
-        }*/
         list.add("alle");
         list.add("studass");
         list.add("student");
@@ -120,17 +110,21 @@ public class KunngjoringerController {
     }
 
     public void getMottakere(){
-        ArrayList<String> list = new ArrayList();
+        ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker("all");
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                ArrayList<String> row = new ArrayList<String>();
                 ArrayList<String> values = entry.getValue();
                 String key = entry.getKey();
                 if (values.get(2).equals(UserManager._aktivtEmne)){
-                    list.add(key);
+                    row.add(key);
+                    row.add(values.get(1));
+                    list.add(row);
                 }
             }
         }
+        mottakere = list;
     }
     //Oppdaterer meldings vinduet med meldinger fra nåværende avsender og mottaker
     public void update(String sender){
@@ -163,13 +157,19 @@ public class KunngjoringerController {
     }
     //Sender en melding til databasen og oppdaterer meldingsvinduet
     public void sendMsg(ActionEvent event){
-        String msg = "KUNNGJØRING for " + UserManager._aktivtEmne+"!";
+        String msg = "KUNNGJØRING for " + UserManager._aktivtEmne+"!\n";
         msg += txtMelding.getText().trim();
-        for (String b : mottakere){
-            Database.addMelding(UserManager._bruker, b,msg);
+        for (ArrayList l : mottakere){
+            if(sender.equals("alle")){
+                Database.addMelding(UserManager._bruker, l.get(0).toString(),msg);
+            }
+            else if (l.get(1).equals(sender)){
+                Database.addMelding(UserManager._bruker, l.get(0).toString(),msg);
+            }
+
         }
+        lblMeldinger.setText(lblMeldinger.getText()+"\n"+msg);
         txtMelding.setText("");
-        update(sender);
     }
 
     @FXML protected void back(ActionEvent event) throws Exception {
