@@ -184,7 +184,7 @@ public class KunngjoringerController {
     //Åpner meldingssiden
     public void openKunngjoringer(Button b) throws Exception{
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/meldinger.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/kunngjoringer.fxml"));
         Scene scene =  new Scene(root, 700 ,500);
         stage.setTitle("Meldinger");
         stage.setScene(scene);
