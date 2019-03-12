@@ -118,8 +118,18 @@ public class FaglaererController {
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
-                data.add(key);
-
+                if (!data.contains(key)) {
+                    data.add(key);
+                }
+            }
+        }
+        dbOutput = Database.getStudasser(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                if (!data.contains(key)) {
+                    data.add(key);
+                }
             }
         }
         System.out.println(dbOutput);
@@ -127,7 +137,7 @@ public class FaglaererController {
         for(String bruker : data)  {
             System.out.println("hei");
 
-            Database.addMelding(UserManager._bruker, bruker, "Saltidne den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + "\n har blitt endret. Sjekk om din saltid fortsatt står");
+            Database.addMelding(UserManager._bruker, bruker, "Saltidene den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + "\n har blitt endret. Sjekk om din saltid fortsatt står");
         }
 
         Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()), txtFraDelete.getText());
