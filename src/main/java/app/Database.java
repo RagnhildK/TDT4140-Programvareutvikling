@@ -313,7 +313,7 @@ Database {
 
     }
 
-    public static boolean getInnlevering(String innleveringID, String filnavn) {
+    public static File getInnlevering(String innleveringID, String filnavn) {
         String sql = "SELECT fil FROM Innlevering WHERE innleveringID = ?";
 
         Connection conn = null;
@@ -340,7 +340,8 @@ Database {
                     output.write(buffer);
                 }
             }
-            return true;
+
+            return file;
         }catch(SQLException se){
             //Handle errors for JDBC
             se.printStackTrace();
@@ -361,7 +362,7 @@ Database {
                 se.printStackTrace();
             }//end finally try
         }//end try
-        return false;
+        return null;
 
     }
 
@@ -372,6 +373,14 @@ Database {
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getOvingID(String emne, String tittel) {
         String sql = "SELECT OvingID, Beskrivelse, Frist FROM Oving WHERE EmneID = '"+emne+"' and Tittel = '"+tittel+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getInnleveringer(String emne) {
+        String sql = "SELECT * FROM Innlevering WHERE EmneID = '"+emne+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikInnlevering(String id) {
+        String sql = "SELECT * FROM Innlevering WHERE InnleveringID = '"+id+"'";
         return sendQuery(sql);
     }
 

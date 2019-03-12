@@ -128,3 +128,9 @@
 .jfx-combo-box .label {
     -fx-text-fill: #d3cbc2;
 }
+.jfx-check-box {
+    -fx-prompt-text-fill: #d3cbc2;
+    -jfx-focus-color: #d3cbc2;
+    -jfx-unfocus-color: #d3cbc2;
+}
+

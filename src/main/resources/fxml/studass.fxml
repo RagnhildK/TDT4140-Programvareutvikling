@@ -69,6 +69,11 @@
                 <TableColumn fx:id="tpsColumn" prefWidth="85.0" text="Tid/student" />
             </columns>
         </TableView>
+      <JFXButton fx:id="btnRetting" alignment="CENTER" layoutX="83.0" layoutY="396.0" onAction="#openRetting" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Retting" textFill="#d3cbc2">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
 
     </children>
 </AnchorPane>

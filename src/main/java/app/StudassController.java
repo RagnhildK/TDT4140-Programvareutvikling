@@ -114,5 +114,9 @@ public class StudassController {
         LoginController l = new LoginController();
         l.logout(btnAddTid);
     }
+    @FXML protected void openRetting(ActionEvent event) throws Exception {
+        RettingController r = new RettingController();
+        r.openRetting(btnAddTid);
+    }
 
 }
