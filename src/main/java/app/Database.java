@@ -1,15 +1,13 @@
 package app;
 
-import java.io.FileInputStream;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -315,6 +313,58 @@ Database {
 
     }
 
+    public static boolean getInnlevering(String innleveringID, String filnavn) {
+        String sql = "SELECT fil FROM Innlevering WHERE innleveringID = ?";
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, innleveringID);
+            rs = pstmt.executeQuery();
+
+            File file = new File(filnavn);
+            FileOutputStream output = new FileOutputStream(file);
+
+            System.out.println("Writing to file " + file.getAbsolutePath());
+            while (rs.next()) {
+                InputStream input = rs.getBinaryStream("fil");
+                byte[] buffer = new byte[1024];
+                while (input.read(buffer) > 0) {
+                    output.write(buffer);
+                }
+            }
+            return true;
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        return false;
+
+    }
+
 
 
 
@@ -425,7 +475,7 @@ Database {
         //rsToString(dbOutput);
 
         System.out.println(addInnlevering("1", "alice", "Her", "test.pdf"));
-
+        System.out.println(getInnlevering("3", "motta.pdf"));
     }
 
     public static String rsToString(ArrayList<HashMap<String, ArrayList<String>>> dbOutput) {
