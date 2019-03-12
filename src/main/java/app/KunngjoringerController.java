@@ -1,14 +1,19 @@
 package app;
 
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 
-public class MeldingerController {
+public class KunngjoringerController {
     /*
      * Siden som er koblet opp mot meldinger.fxml
      * Man kan velge noen å sende melding til og lese meldinger man har fått.
@@ -41,12 +46,13 @@ public class MeldingerController {
 
     //Holder styr på hvilket chat vindu en skal vise.
     public String sender;
+    private ArrayList<ArrayList<String>> mottakere;
 
 
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         showAvsendere();
-        showAllBrukere();
+        getMottakere();
         //Gjør at en kan trykke i listviewen med avsendere og få opp meldingene
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
@@ -91,35 +97,34 @@ public class MeldingerController {
         lblTil.setText(sender);
         update(sender);
     }
-    //Sjekker om det finst noen uleste meldinger og returnerer hvor mange
-    public int checkUleste() {
-        int i = 0;
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                ArrayList<String> values = entry.getValue();
-                if (values.get(1).equals("1")){
-                    i++;
-                }
-            }
-        }
-        return i;
-    }
+
     //Viser avsendere i listviewen
     public void showAvsendere(){
         ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                ArrayList<String> values = entry.getValue();
-                if(!list.contains(values.get(0))){
-                    list.add(values.get(0));
-                }
-            }
-        }
+        list.add("alle");
+        list.add("studass");
+        list.add("student");
         for (String b : list) {
             listView.getItems().add(new Label(b));
         }
+    }
+
+    public void getMottakere(){
+        ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker("all");
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                ArrayList<String> row = new ArrayList<String>();
+                ArrayList<String> values = entry.getValue();
+                String key = entry.getKey();
+                if (values.get(2).equals(UserManager._aktivtEmne)){
+                    row.add(key);
+                    row.add(values.get(1));
+                    list.add(row);
+                }
+            }
+        }
+        mottakere = list;
     }
     //Oppdaterer meldings vinduet med meldinger fra nåværende avsender og mottaker
     public void update(String sender){
@@ -152,9 +157,19 @@ public class MeldingerController {
     }
     //Sender en melding til databasen og oppdaterer meldingsvinduet
     public void sendMsg(ActionEvent event){
-        Database.addMelding(UserManager._bruker, sender,txtMelding.getText().trim());
+        String msg = "KUNNGJØRING for " + UserManager._aktivtEmne+"!\n";
+        msg += txtMelding.getText().trim();
+        for (ArrayList l : mottakere){
+            if(sender.equals("alle")){
+                Database.addMelding(UserManager._bruker, l.get(0).toString(),msg);
+            }
+            else if (l.get(1).equals(sender)){
+                Database.addMelding(UserManager._bruker, l.get(0).toString(),msg);
+            }
+
+        }
+        lblMeldinger.setText(lblMeldinger.getText()+"\n"+msg);
         txtMelding.setText("");
-        update(sender);
     }
 
     @FXML protected void back(ActionEvent event) throws Exception {
@@ -167,9 +182,9 @@ public class MeldingerController {
     }
 
     //Åpner meldingssiden
-    public void openMeldinger(Button b) throws Exception{
+    public void openKunngjoringer(Button b) throws Exception{
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/meldinger.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/kunngjoringer.fxml"));
         Scene scene =  new Scene(root, 700 ,500);
         stage.setTitle("Meldinger");
         stage.setScene(scene);
