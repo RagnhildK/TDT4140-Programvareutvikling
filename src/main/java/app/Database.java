@@ -272,7 +272,7 @@ Database {
         return sendUpdate(sql);
     }
     public static boolean addInnlevering(String ovingID, String student, String beskrivelse, String filnavn) {
-        String sql = "INSERT INTO Oving VALUES (NULL,'"+ovingID+"','"+student+"',NULL, '"+beskrivelse+"', ?)";
+        String sql = "INSERT INTO Innlevering VALUES (NULL,'"+ovingID+"','"+student+"',NULL, '"+beskrivelse+"', ?)";
 
         Connection conn = null;
         Statement stmt = null;
@@ -421,9 +421,10 @@ Database {
         addStudassPåSal("2019-02-19","14:00", "TMA4100", "bob", 15);
         addStudassPåSal("2019-02-19","16:00", "TMA4100", "bob", 15);*/
 
-        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
-        rsToString(dbOutput);
+        //ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
+        //rsToString(dbOutput);
 
+        System.out.println(addInnlevering("1", "alice", "Her", "test.pdf"));
 
     }
 

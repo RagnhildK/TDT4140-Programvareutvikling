@@ -32,7 +32,7 @@ public class MainTest {
         opprettBruker();
         sjekkLogin();
         UserManager._aktivtEmne=fag;
-        sjekkBooking();
+        //sjekkBooking();
         sjekkRolle();
         sjekkMelding();
 
