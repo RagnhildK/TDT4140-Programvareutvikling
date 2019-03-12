@@ -121,6 +121,10 @@ public class FaglaererController {
         LoginController l = new LoginController();
         l.logout(btnAddSaltid);
     }
+    @FXML protected void openKunngjoringer(ActionEvent event) throws Exception {
+        KunngjoringerController k = new KunngjoringerController();
+        k.openKunngjoringer(btnAddSaltid);
+    }
 
 
 }

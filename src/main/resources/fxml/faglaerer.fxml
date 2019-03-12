@@ -74,6 +74,11 @@
                 <TableColumn fx:id="tpsColumn" prefWidth="85.0" text="Tid/student" />
             </columns>
         </TableView>
+      <JFXButton fx:id="btnKunngjoringer" alignment="CENTER" layoutX="83.0" layoutY="393.0" onAction="#openKunngjoringer" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Kunngjøringer" textFill="#d3cbc2">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
 
 
 
