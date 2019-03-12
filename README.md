@@ -16,10 +16,10 @@ Applikasjonen skal også inneholde tilrettelegging for bedre kommunikasjon og le
 
 * For å komme i gang med BookBoard, må du sørge for at du har Java 11.0.2 på PCen din og at dette er den versjonen som er linka til i JAVA_HOME variabelen din. 
 * Klikk [her](https://confluence.atlassian.com/doc/setting-the-java_home-variable-in-windows-8895.html) for en guide for å sette JAVA_HOME variabelen.
-* Nå kan du laste ned siste versjon av BookBoard (1.0) fra repositoriet over.
+* Nå kan du laste ned siste versjon av BookBoard (1.1) fra repositoriet over.
 * Kjør den ved å dobbelklikke på den, eller cd til rett mappe i cmd og skriv:
 ```java
-C:\Users\bruker\Downloads> java -jar "BookBoard 1.0.jar"
+C:\Users\bruker\Downloads> java -jar "BookBoard 1.1.jar"
 ```
 
 ### Komme i gang
