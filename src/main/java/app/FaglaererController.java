@@ -36,6 +36,7 @@ public class FaglaererController {
     @FXML private TableColumn<List<StringProperty>, String> fraColumn;
     @FXML private TableColumn<List<StringProperty>, String> tilColumn;
     @FXML private TableColumn<List<StringProperty>, String> tpsColumn;
+    @FXML private TextField txtFraDelete;
 
     //For å holde styr på dato
     private Calendar calendar;
@@ -126,10 +127,10 @@ public class FaglaererController {
         for(String bruker : data)  {
             System.out.println("hei");
 
-            Database.addMelding(UserManager._bruker, bruker, "Saltid den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + " har blitt endret");
+            Database.addMelding(UserManager._bruker, bruker, "Saltidne den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + "\n har blitt endret. Sjekk om din saltid fortsatt står");
         }
 
-        Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()));
+        Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()), txtFraDelete.getText());
         showTable();
         
     }
