@@ -132,9 +132,7 @@ public class EmneController {
         studassColumn.setCellValueFactory(param -> param.getValue().get(3));
         table.setItems(getBooking());
 
-        //table1.visibleProperty().setValue(true);
 
-        //TODO : FÅ TIL Å VISE TO TABELLER OM EN ER STUDASS OG STUDENT
         for (ArrayList list : app.UserManager._rolle){
             if(list.get(1)=="studass"){
                 table1.visibleProperty().setValue(true);
