@@ -42,7 +42,7 @@
         </JFXButton>
         <JFXTextArea fx:id="txtMelding" layoutX="202.0" layoutY="277.0" prefHeight="24.0" prefWidth="295.0" />
         <JFXButton fx:id="btnSend" alignment="CENTER" contentDisplay="CENTER" layoutX="497.0" layoutY="278.0" onAction="#sendMsg" prefHeight="19.0" prefWidth="63.0" text="Send" textAlignment="CENTER" />
-      <ScrollPane layoutX="213.0" layoutY="34.0" prefHeight="200.0" prefWidth="329.0" styleClass="scroll-pane">
+      <ScrollPane layoutX="213.0" layoutY="34.0" prefHeight="238.0" prefWidth="330.0" styleClass="scroll-pane">
         <content>
           <AnchorPane fx:id="vindu" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="289.0">
                <children>

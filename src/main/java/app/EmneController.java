@@ -132,19 +132,19 @@ public class EmneController {
         studassColumn.setCellValueFactory(param -> param.getValue().get(3));
         table.setItems(getBooking());
 
-        table1.visibleProperty().setValue(false);
+        //table1.visibleProperty().setValue(true);
 
         //TODO : FÅ TIL Å VISE TO TABELLER OM EN ER STUDASS OG STUDENT
-        /*for (ArrayList list : app.UserManager._rolle){
+        for (ArrayList list : app.UserManager._rolle){
             if(list.get(1)=="studass"){
                 table1.visibleProperty().setValue(true);
             }
-        }*//*
+        }
         datoColumn1.setCellValueFactory(param -> param.getValue().get(0));
         tidspunktColumn1.setCellValueFactory(param -> param.getValue().get(1));
         emneidColumn1.setCellValueFactory(param -> param.getValue().get(2));
         varighetColumn1.setCellValueFactory(param -> param.getValue().get(3));
-        table1.setItems(getStudassPåSal());*/
+        table1.setItems(getStudassPåSal());
     }
     //Henter studass informasjon til tabell
     public ObservableList<List<StringProperty>> getStudassPåSal()  {
@@ -156,6 +156,7 @@ public class EmneController {
                 ArrayList<String> values = entry.getValue();
                 String key = entry.getKey();
                 if (Check.future(key)){
+                    row.add(new SimpleStringProperty(key));
                     for (String v : values) {
                         row.add(new SimpleStringProperty(v));
                     }
