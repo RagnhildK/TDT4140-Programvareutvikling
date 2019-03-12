@@ -132,11 +132,7 @@ public class FaglaererController {
                 }
             }
         }
-        System.out.println(dbOutput);
-        System.out.println(data);
         for(String bruker : data)  {
-            System.out.println("hei");
-
             Database.addMelding(UserManager._bruker, bruker, "Saltidene den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + "\n har blitt endret. Sjekk om din saltid fortsatt står");
         }
 

@@ -61,7 +61,6 @@ public class MeldingerController {
                 }
                 lblTil.setText(str);
                 sender = str;
-                System.out.println(str);
                 Database.updateUlest(sender,UserManager._bruker);
                 update(sender);
                 showAvsendere();
@@ -185,7 +184,6 @@ public class MeldingerController {
                 i++;
             }
         }
-        System.out.println(i);
         lblMeldinger.setPrefHeight(lblMeldinger.getPrefHeight()+17*i);
         vindu.setPrefHeight(lblMeldinger.getPrefHeight());
 
