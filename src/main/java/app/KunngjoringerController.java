@@ -25,8 +25,8 @@ import java.util.*;
 
 public class KunngjoringerController {
     /*
-     * Siden som er koblet opp mot meldinger.fxml
-     * Man kan velge noen å sende melding til og lese meldinger man har fått.
+     * Siden som er koblet opp mot kunngjoringer.fxml
+     * Man kan å sende kunngjøringer til alle/studenter/studasser i faget.
      */
 
     @FXML public Button btnSend;
@@ -186,7 +186,7 @@ public class KunngjoringerController {
         Stage stage = (Stage) b.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/kunngjoringer.fxml"));
         Scene scene =  new Scene(root, 700 ,500);
-        stage.setTitle("Meldinger");
+        stage.setTitle("Kunngjøringer");
         stage.setScene(scene);
         stage.show();
     }

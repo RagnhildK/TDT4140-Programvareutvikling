@@ -137,5 +137,9 @@ public class StudentController {
         LoginController l = new LoginController();
         l.logout(btnBook);
     }
+    @FXML protected void openInnlevering(ActionEvent event) throws Exception {
+        InnleveringController i = new InnleveringController();
+        i.openInnlevering(btnBook);
+    }
 
 }

@@ -269,7 +269,7 @@ Database {
         String sql = "INSERT INTO Oving VALUES (NULL,'"+innleveringID+"','"+studass+"','"+godkjent+"', '"+kommentar+"', NULL)";
         return sendUpdate(sql);
     }
-    public static boolean addInnlevering(String ovingID, String student, String beskrivelse, String filnavn) {
+    public static boolean addInnlevering(String ovingID, String student, String beskrivelse, File file) {
         String sql = "INSERT INTO Innlevering VALUES (NULL,'"+ovingID+"','"+student+"',NULL, '"+beskrivelse+"', ?)";
 
         Connection conn = null;
@@ -281,7 +281,7 @@ Database {
             conn = DriverManager.getConnection(DB_URL,USER,PASS);
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            File file = new File(filnavn);
+
             FileInputStream input = new FileInputStream(file);
 
             pstmt.setBinaryStream(1, input);
@@ -366,7 +366,14 @@ Database {
     }
 
 
-
+    public static ArrayList<HashMap<String,ArrayList<String>>> getOvinger(String emne) {
+        String sql = "SELECT * FROM Oving WHERE EmneID = '"+emne+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getOvingID(String emne, String tittel) {
+        String sql = "SELECT OvingID, Beskrivelse, Frist FROM Oving WHERE EmneID = '"+emne+"' and Tittel = '"+tittel+"'";
+        return sendQuery(sql);
+    }
 
 
 
@@ -474,8 +481,8 @@ Database {
         //ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
         //rsToString(dbOutput);
 
-        System.out.println(addInnlevering("1", "alice", "Her", "test.pdf"));
-        System.out.println(getInnlevering("3", "motta.pdf"));
+        //System.out.println(addInnlevering("1", "alice", "Her", "test.pdf"));
+        //System.out.println(getInnlevering("3", "motta.pdf"));
     }
 
     public static String rsToString(ArrayList<HashMap<String, ArrayList<String>>> dbOutput) {

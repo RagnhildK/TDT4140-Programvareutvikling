@@ -75,6 +75,11 @@
             <TableColumn fx:id="varighetColumn" prefWidth="87.0" text="Varighet" />
          </columns>
       </TableView>
+      <JFXButton fx:id="btnInnlevering" alignment="CENTER" layoutX="83.0" layoutY="305.0" onAction="#openInnlevering" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Innleveringer" textFill="#d3cbc2">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
 
     </children>
 </AnchorPane>
