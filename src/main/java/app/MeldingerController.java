@@ -53,10 +53,18 @@ public class MeldingerController {
             public void handle(javafx.scene.input.MouseEvent event) {
                 String s = listView.getSelectionModel().getSelectedItem().toString();
                 int i = s.indexOf("'");
-                lblTil.setText(s.substring(i+1,s.length()-1));
-                sender = s.substring(i+1,s.length()-1);
+                String str = s.substring(i+1,s.length()-1);
+                try {
+                    int j = str.indexOf("(");
+                    str = str.substring(0,j-1);
+                }catch(Exception e){
+                }
+                lblTil.setText(str);
+                sender = str;
+                System.out.println(str);
                 Database.updateUlest(sender,UserManager._bruker);
                 update(sender);
+                showAvsendere();
             }
         });
 
@@ -105,19 +113,42 @@ public class MeldingerController {
         }
         return i;
     }
+    public int checkUleste(String bruker) {
+        int i = 0;
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                ArrayList<String> values = entry.getValue();
+                if (values.get(0).equals(bruker) && values.get(1).equals("1")){
+                    i++;
+                }
+            }
+        }
+        return i;
+    }
+
     //Viser avsendere i listviewen
     public void showAvsendere(){
+        listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
+        ArrayList<String> listVarsler = new ArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
                 if(!list.contains(values.get(0))){
+                    int i = checkUleste(values.get(0));
                     list.add(values.get(0));
+                    if (i>0){
+                        listVarsler.add(values.get(0)+" ("+i+")");
+                    }else {
+                        listVarsler.add(values.get(0));
+                    }
+
                 }
             }
         }
-        for (String b : list) {
+        for (String b : listVarsler) {
             listView.getItems().add(new Label(b));
         }
     }

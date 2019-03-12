@@ -56,7 +56,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXListView fx:id="listView" layoutX="27.0" layoutY="160.0" prefHeight="255.0" prefWidth="170.0" />
+      <JFXListView fx:id="listView" layoutX="27.0" layoutY="120.0" prefHeight="255.0" prefWidth="170.0" />
         <!--<JFXComboBox fx:id="comboBox" layoutX="37.0" layoutY="80.0" />-->
       </children>
   </AnchorPane>
