@@ -87,3 +87,43 @@ CREATE TABLE Melding (
 												                          	ON UPDATE CASCADE
                                                     ON DELETE CASCADE);
 
+ CREATE TABLE Oving (
+    OvingID	INTEGER NOT NULL AUTO_INCREMENT,
+    EmneID		VARCHAR(30) NOT NULL,
+    Tittel VARCHAR(30) NOT NULL,
+    Beskrivelse    VARCHAR(200),
+    Frist        TIMESTAMP NOT NULL,
+    CONSTRAINT Oving_PK PRIMARY KEY (OvingID),
+    CONSTRAINT EmneID3_FK FOREIGN KEY (EmneID) REFERENCES Emne(EmneID)
+       ON UPDATE CASCADE
+       ON DELETE CASCADE);
+
+ CREATE TABLE Innlevering (
+     InnleveringID	INTEGER NOT NULL AUTO_INCREMENT,
+     OvingID		INTEGER NOT NULL,
+     Student   VARCHAR(30) NOT NULL,
+     Levert        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     Beskrivelse VARCHAR(200),
+     Fil        LONGBLOB,
+     CONSTRAINT Innlevering_PK PRIMARY KEY (InnleveringID),
+        CONSTRAINT OvingID_FK FOREIGN KEY (OvingID) REFERENCES Oving(OvingID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+     CONSTRAINT Student11_FK FOREIGN KEY (Student) REFERENCES Bruker(BrukerNavn)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE);
+
+ CREATE TABLE Retting (
+      RettingID INTEGER NOT NULL AUTO_INCREMENT,
+     InnleveringID	INTEGER NOT NULL,
+     Studass   VARCHAR(30) NOT NULL,
+     Godkjent  BOOLEAN NOT NULL,
+     Kommentar VARCHAR(200),
+     Tid        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+     CONSTRAINT Retting_PK PRIMARY KEY (RettingID),
+     CONSTRAINT InnleveringID_FK FOREIGN KEY (InnleveringID) REFERENCES Innlevering(InnleveringID)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+     CONSTRAINT Studass2_FK FOREIGN KEY (Studass) REFERENCES Bruker(BrukerNavn)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE);

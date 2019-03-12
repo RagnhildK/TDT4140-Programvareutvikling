@@ -1,11 +1,18 @@
 package app;
 
+import java.io.FileInputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class
 Database {
@@ -256,6 +263,62 @@ Database {
         String sql = "UPDATE Melding SET Ulest = FALSE Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"'";
         sendUpdate(sql);
     }
+    public static boolean addOving(String emneID, String tittel, String beskrivelse, String frist) {
+        String sql = "INSERT INTO Oving VALUES (NULL,'"+emneID+"','"+tittel+"','"+beskrivelse+"', '"+frist+"')";
+        return sendUpdate(sql);
+    }
+    public static boolean addRetting(String innleveringID, String studass, String godkjent, String kommentar) {
+        String sql = "INSERT INTO Oving VALUES (NULL,'"+innleveringID+"','"+studass+"','"+godkjent+"', '"+kommentar+"', NULL)";
+        return sendUpdate(sql);
+    }
+    public static boolean addInnlevering(String ovingID, String student, String beskrivelse, String filnavn) {
+        String sql = "INSERT INTO Oving VALUES (NULL,'"+ovingID+"','"+student+"',NULL, '"+beskrivelse+"', ?)";
+
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            File file = new File(filnavn);
+            FileInputStream input = new FileInputStream(file);
+
+            pstmt.setBinaryStream(1, input);
+            System.out.println("Reading file " + file.getAbsolutePath());
+            System.out.println("Store file in the database.");
+            pstmt.executeUpdate();
+            return true;
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        return false;
+
+    }
+
+
+
+
+
 
     public static ArrayList<HashMap<String,ArrayList<String>>> getStudenter(String dato, String emne) {
         String sql = "SELECT Student FROM Booking WHERE StudassPåSalDato = '"+dato+"' AND EmneID = '"+emne+"'";
