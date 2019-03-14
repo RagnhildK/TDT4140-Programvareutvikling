@@ -113,6 +113,12 @@ CREATE TABLE Melding (
         ON UPDATE CASCADE
         ON DELETE CASCADE);
 
+ ALTER TABLE Innlevering
+   ADD COLUMN filtype VARCHAR(5);
+
+
+
+
  CREATE TABLE Retting (
       RettingID INTEGER NOT NULL AUTO_INCREMENT,
      InnleveringID	INTEGER NOT NULL,

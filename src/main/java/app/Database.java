@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+
+
 public class
 Database {
     /*
@@ -270,7 +272,7 @@ Database {
         return sendUpdate(sql);
     }
     public static boolean addInnlevering(String ovingID, String student, String beskrivelse, File file) {
-        String sql = "INSERT INTO Innlevering VALUES (NULL,'"+ovingID+"','"+student+"',NULL, '"+beskrivelse+"', ?)";
+        String sql = "INSERT INTO Innlevering VALUES (NULL,'"+ovingID+"','"+student+"',NULL, '"+beskrivelse+"', ?, ?)";
 
         Connection conn = null;
         Statement stmt = null;
@@ -283,8 +285,8 @@ Database {
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             FileInputStream input = new FileInputStream(file);
-
             pstmt.setBinaryStream(1, input);
+            pstmt.setString(2, getFileExtension(file));
             System.out.println("Reading file " + file.getAbsolutePath());
             System.out.println("Store file in the database.");
             pstmt.executeUpdate();
@@ -315,16 +317,17 @@ Database {
     private static String getFileExtension(File file) {
         String fileName = file.getName();
         if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-            return fileName.substring(fileName.lastIndexOf(".")+1);
+            return fileName.substring(fileName.lastIndexOf("."));
         else return "";
     }
 
     public static File getInnlevering(String innleveringID, String filnavn) {
-        String sql = "SELECT fil FROM Innlevering WHERE innleveringID = ?";
+        String sql = "SELECT fil, filtype FROM Innlevering WHERE innleveringID = ?";
 
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+
         try {
             //STEP 3: Open a connection
             Class.forName(JDBC_DRIVER);
@@ -334,8 +337,27 @@ Database {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, innleveringID);
             rs = pstmt.executeQuery();
-
-            File file = new File(filnavn);
+            boolean first = true;
+            File file = null;
+            FileOutputStream output = null;
+            try{
+                while (rs.next()){
+                    if (first){
+                        filnavn+= rs.getString("filtype");
+                        file = new File(filnavn);
+                        output = new FileOutputStream(file);
+                        first = false;
+                    }
+                    InputStream input = rs.getBinaryStream("fil");
+                    byte[] buffer = new byte[1024];
+                    while (input.read(buffer) > 0) {
+                        output.write(buffer);
+                    }
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+            /*File file = new File(filnavn);
             FileOutputStream output = new FileOutputStream(file);
 
             System.out.println("Writing to file " + file.getAbsolutePath());
@@ -345,7 +367,8 @@ Database {
                 while (input.read(buffer) > 0) {
                     output.write(buffer);
                 }
-            }
+            }*/
+
 
             return file;
         }catch(SQLException se){

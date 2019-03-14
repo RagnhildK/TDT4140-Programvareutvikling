@@ -63,7 +63,7 @@ public class RettingController {
                         ArrayList<String> values = entry.getValue();
                         ovingID = values.get(0);
                         lblØving.setText(values.get(1));
-                        file = Database.getInnlevering(innleveringID, innleveringID+" "+values.get(1)+".pdf");
+                        file = Database.getInnlevering(innleveringID, innleveringID+values.get(1));
                         lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3));
                     }
                 }
@@ -120,8 +120,6 @@ public class RettingController {
     @FXML protected void openFile(ActionEvent event) throws Exception {
         Desktop.getDesktop().open(file);
     }
-
-
 
     @FXML protected void back(ActionEvent event) throws Exception {
         EmneController ec = new EmneController();
