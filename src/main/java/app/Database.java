@@ -377,6 +377,11 @@ Database {
         String sql = "SELECT * FROM Oving WHERE EmneID = '"+emne+"'";
         return sendQuery(sql);
     }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikOving(String ovingID) {
+        String sql = "SELECT * FROM Oving WHERE OvingID = '"+ovingID+"'";
+        return sendQuery(sql);
+    }
+
     public static ArrayList<HashMap<String,ArrayList<String>>> getOvingID(String emne, String tittel) {
         String sql = "SELECT OvingID, Beskrivelse, Frist FROM Oving WHERE EmneID = '"+emne+"' and Tittel = '"+tittel+"'";
         return sendQuery(sql);

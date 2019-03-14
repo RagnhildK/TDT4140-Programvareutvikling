@@ -152,6 +152,8 @@ public class FaglaererController {
         KunngjoringerController k = new KunngjoringerController();
         k.openKunngjoringer(btnAddSaltid);
     }
-
-
+    @FXML protected void openOving(ActionEvent event) throws Exception {
+        OvingController o = new OvingController();
+        o.openOving(btnAddSaltid);
+    }
 }

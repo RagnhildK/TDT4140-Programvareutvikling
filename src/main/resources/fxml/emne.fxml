@@ -63,7 +63,7 @@
                 <TableColumn fx:id="varighetColumn1" prefWidth="85.0" text="Varighet" />
             </columns>
         </TableView>
-      <JFXButton fx:id="btnMeldinger" alignment="CENTER" layoutX="568.0" layoutY="46.0" onAction="#showMeldingsside" prefHeight="30.0" prefWidth="114.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Meldinger" textFill="#d3cbc2">
+      <JFXButton fx:id="btnMeldinger" alignment="CENTER" layoutX="568.0" layoutY="57.0" onAction="#showMeldingsside" prefHeight="30.0" prefWidth="114.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Meldinger" textFill="#d3cbc2">
          <font>
             <Font size="14.0" />
          </font>

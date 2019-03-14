@@ -1,7 +1,6 @@
 package app;
 
 
-import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -22,33 +21,32 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class RettingController {
+public class OvingController {
     /*
-     * Siden som er koblet opp mot rettinger.fxml
-     * Kan sende rettinger på innleveringer
+     * Siden som er koblet opp mot innleveringer.fxml
+     * Kan levere inn øvinger
      */
 
-    @FXML public Button btnEvaluer;
-    @FXML public Button btnOpenFile;
+    @FXML public Button btnOpprett;
     @FXML public Button btnBack;
     @FXML public Button btnLoggut;
-    @FXML public JFXTextArea txtKommentar;
+    @FXML public JFXTextArea txtBeskrivelse;
+    @FXML public JFXTextField txtFrist;
+    @FXML public JFXTextField txtTittel;
     @FXML public Label lblStatus;
     @FXML public Label lblBrukernavn;
     @FXML public Label lblØving;
     @FXML public JFXListView listView;
-    @FXML public JFXCheckBox checkGodkjent;
-
 
     //Lokale variabler
     public String ovingID;
-    public String innleveringID;
-    public File file;
+    public String frist;
+
 
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         showOvinger();
-        //Gjør at en kan trykke i listviewen og få opp innleveringer
+        //Gjør at en kan trykke i listviewen med øvinger og få opp
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
@@ -56,30 +54,27 @@ public class RettingController {
                 int i = s.indexOf("'");
                 String str = s.substring(i+1,s.length()-1);
                 lblØving.setText(str);
-                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikInnlevering(str);
+                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getOvingID(UserManager._aktivtEmne,str);
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                        innleveringID = entry.getKey();
+                        ovingID = entry.getKey();
                         ArrayList<String> values = entry.getValue();
-                        ovingID = values.get(0);
-                        lblØving.setText(values.get(1));
-                        file = Database.getInnlevering(innleveringID, innleveringID+" "+values.get(1)+".pdf");
-                        lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3));
+                        frist = values.get(1);
+                        lblStatus.setText("Frist: " + MeldingerController.getTid(values.get(1)) + "\nBeskrivelse: " + values.get(0));
                     }
                 }
             }
         });
     }
-    //Viser innleveringer i listviewen
+    //Viser øvinger i listviewen
     public void showOvinger(){
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getInnleveringer(UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getOvinger(UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
-                String key = entry.getKey();
-                list.add(key);
+                list.add(values.get(1));
             }
         }
         for (String b : list) {
@@ -87,42 +82,18 @@ public class RettingController {
         }
     }
 
-    //Sender en request om retting
-    @FXML public void evaluer(ActionEvent event){
-        //TODO: Funker ikke per nå
-        String i = "0";
-        String godkjent = "Ikke godkjent";
-        if (checkGodkjent.isSelected()){
-            i = "1";
-            godkjent = "Godkjent";
-        }
-        if(Database.addRetting(innleveringID, UserManager._bruker, i, txtKommentar.getText())){
+    //Oppretter en øving i databasen
+    @FXML public void opprett(ActionEvent event){
+        if(Database.addOving(UserManager._aktivtEmne, txtTittel.getText(), txtBeskrivelse.getText(), txtFrist.getText())){
             lblStatus.setText("Add success!");
         }else {
             lblStatus.setText("Add failed!");
         }
-        String tittel = "";
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikOving(ovingID);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                ArrayList<String> values = entry.getValue();
-                tittel = values.get(1);
-            }
-        }
-
-
-        String str = UserManager._aktivtEmne + " - " + tittel + "\nVurdering: "+ godkjent + "\nKommentar: " + txtKommentar.getText();
-        Database.addMelding(UserManager._bruker, lblØving.getText(), str);
-        checkGodkjent.setSelected(false);
-        txtKommentar.setText("");
+        showOvinger();
+        txtTittel.setText("");
+        txtFrist.setText("");
+        txtBeskrivelse.setText("");
     }
-
-    @FXML protected void openFile(ActionEvent event) throws Exception {
-        Desktop.getDesktop().open(file);
-    }
-
-
-
     @FXML protected void back(ActionEvent event) throws Exception {
         EmneController ec = new EmneController();
         ec.back(btnBack);
@@ -132,12 +103,12 @@ public class RettingController {
         l.logout(btnLoggut);
     }
 
-    //Åpner rettingsiden
-    public void openRetting(Button b) throws Exception{
+    //Åpner ovingssiden
+    public void openOving(Button b) throws Exception{
         Stage stage = (Stage) b.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/retting.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/oving.fxml"));
         Scene scene =  new Scene(root, 700 ,500);
-        stage.setTitle("Retting");
+        stage.setTitle("Øving");
         stage.setScene(scene);
         stage.show();
     }
