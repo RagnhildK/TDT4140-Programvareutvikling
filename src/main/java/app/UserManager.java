@@ -118,7 +118,6 @@ public class UserManager {
         if (!booking.isEmpty()){
             return false;
         }
-        System.out.println(dato+ tidspunkt+ studass+ _aktivtEmne);
         ArrayList<HashMap<String,ArrayList<String>>> sps = Database.getUnikStudassPåSal(dato, _aktivtEmne, tidspunkt, studass);
 
         return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass, _aktivtEmne);

@@ -28,12 +28,11 @@ public class RettingController {
      * Kan sende rettinger på innleveringer
      */
 
-    @FXML public Button btnLever;
+    @FXML public Button btnEvaluer;
     @FXML public Button btnOpenFile;
     @FXML public Button btnBack;
     @FXML public Button btnLoggut;
     @FXML public JFXTextArea txtKommentar;
-    @FXML public JFXTextField txtFilnavn;
     @FXML public Label lblStatus;
     @FXML public Label lblBrukernavn;
     @FXML public Label lblØving;
@@ -65,7 +64,7 @@ public class RettingController {
                         ovingID = values.get(0);
                         lblØving.setText(values.get(1));
                         file = Database.getInnlevering(innleveringID, innleveringID+" "+values.get(1)+".pdf");
-                        lblStatus.setText("Levert: " + values.get(2) + "\nBeskrivelse: " + values.get(3));
+                        lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3));
                     }
                 }
             }
@@ -89,14 +88,17 @@ public class RettingController {
     }
 
     //Sender en request om retting
-    @FXML public void lever(ActionEvent event){
+    @FXML public void evaluer(ActionEvent event){
         //TODO: Funker ikke per nå
-        if(Database.addRetting(innleveringID, UserManager._bruker, String.valueOf(checkGodkjent.isSelected()), txtKommentar.getText())){
+        String i = "0";
+        if (checkGodkjent.isSelected()){
+            i = "1";
+        }
+        if(Database.addRetting(innleveringID, UserManager._bruker, i, txtKommentar.getText())){
             lblStatus.setText("Add success!");
         }else {
             lblStatus.setText("Add failed!");
         }
-        txtFilnavn.setText("");
         txtKommentar.setText("");
     }
 

@@ -128,6 +128,7 @@ public class KunngjoringerController {
     }
     //Oppdaterer meldings vinduet med meldinger fra nåværende avsender og mottaker
     public void update(String sender){
+        lblMeldinger.setPrefHeight(0);
         String data="";
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMeldinger(sender,UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
@@ -152,8 +153,14 @@ public class KunngjoringerController {
             }
         }
         lblMeldinger.setText(data);
-        //TODO: Lage sånn at vinduet utvider seg etterhvert som det kommer flere meldinger!!
-        vindu.setPrefHeight(lblMeldinger.getHeight());
+        int i = 0;
+        for (char c : data.toCharArray()){
+            if (c == '\n'){
+                i++;
+            }
+        }
+        lblMeldinger.setPrefHeight(lblMeldinger.getPrefHeight()+17*i);
+        vindu.setPrefHeight(lblMeldinger.getPrefHeight());
     }
     //Sender en melding til databasen og oppdaterer meldingsvinduet
     public void sendMsg(ActionEvent event){

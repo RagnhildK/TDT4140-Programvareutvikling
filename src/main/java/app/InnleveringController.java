@@ -47,6 +47,7 @@ public class InnleveringController {
     //Lokale variabler
     public String ovingID;
     public File file;
+    public String frist;
 
 
     @FXML protected void initialize() throws Exception {
@@ -65,7 +66,8 @@ public class InnleveringController {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         ovingID = entry.getKey();
                         ArrayList<String> values = entry.getValue();
-                        lblStatus.setText("Frist: " + values.get(1) + "\nBeskrivelse: " + values.get(0));
+                        frist = values.get(1);
+                        lblStatus.setText("Frist: " + MeldingerController.getTid(values.get(1)) + "\nBeskrivelse: " + values.get(0));
                     }
                 }
             }

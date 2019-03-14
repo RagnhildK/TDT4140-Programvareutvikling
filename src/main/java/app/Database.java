@@ -266,7 +266,7 @@ Database {
         return sendUpdate(sql);
     }
     public static boolean addRetting(String innleveringID, String studass, String godkjent, String kommentar) {
-        String sql = "INSERT INTO Oving VALUES (NULL,'"+innleveringID+"','"+studass+"','"+godkjent+"', '"+kommentar+"', NULL)";
+        String sql = "INSERT INTO Retting VALUES (NULL,'"+innleveringID+"','"+studass+"','"+godkjent+"', '"+kommentar+"', NULL)";
         return sendUpdate(sql);
     }
     public static boolean addInnlevering(String ovingID, String student, String beskrivelse, File file) {

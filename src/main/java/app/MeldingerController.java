@@ -159,20 +159,7 @@ public class MeldingerController {
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
-                String tid;
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-                    String dateInString = values.get(3);
-                    Date date = sdf.parse(dateInString);
-
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(date);
-                    SimpleDateFormat f = new SimpleDateFormat("d MMM yyyy HH:mm");
-                    tid = f.format(calendar.getTime());
-                }catch (Exception e){
-                    System.out.println(e.getStackTrace().toString());
-                    tid = values.get(3);
-                }
+                String tid = getTid(values.get(3));
                 String row = tid + " - " + values.get(0) + ":\n" + values.get(1) +"\n";
                 data += row;
             }
@@ -188,6 +175,24 @@ public class MeldingerController {
         vindu.setPrefHeight(lblMeldinger.getPrefHeight());
 
     }
+
+    public static String getTid(String dateInString) {
+        String tid;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            Date date = sdf.parse(dateInString);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            SimpleDateFormat f = new SimpleDateFormat("d MMM yyyy HH:mm");
+            tid = f.format(calendar.getTime());
+        }catch (Exception e){
+            System.out.println(e.getStackTrace().toString());
+            tid = dateInString;
+        }
+        return tid;
+    }
+
     //Sender en melding til databasen og oppdaterer meldingsvinduet
     public void sendMsg(ActionEvent event){
         Database.addMelding(UserManager._bruker, sender,txtMelding.getText().trim());
