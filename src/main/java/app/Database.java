@@ -312,6 +312,12 @@ Database {
         return false;
 
     }
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+        else return "";
+    }
 
     public static File getInnlevering(String innleveringID, String filnavn) {
         String sql = "SELECT fil FROM Innlevering WHERE innleveringID = ?";
@@ -376,7 +382,7 @@ Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getInnleveringer(String emne) {
-        String sql = "SELECT * FROM Innlevering WHERE EmneID = '"+emne+"'";
+        String sql = "SELECT InnleveringID FROM Innlevering join Oving on(Innlevering.OvingID = Oving.OvingID) WHERE EmneID = '"+emne+"'";
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getUnikInnlevering(String id) {
@@ -490,8 +496,7 @@ Database {
         //ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
         //rsToString(dbOutput);
 
-        //System.out.println(addInnlevering("1", "alice", "Her", "test.pdf"));
-        //System.out.println(getInnlevering("3", "motta.pdf"));
+
     }
 
     public static String rsToString(ArrayList<HashMap<String, ArrayList<String>>> dbOutput) {

@@ -30,7 +30,7 @@ import java.util.*;
 public class InnleveringController {
     /*
      * Siden som er koblet opp mot innleveringer.fxml
-     * Man kan velge noen å sende melding til og lese meldinger man har fått.
+     * Kan levere inn øvinger
      */
 
     @FXML public Button btnLever;
@@ -44,7 +44,7 @@ public class InnleveringController {
     @FXML public Label lblØving;
     @FXML public JFXListView listView;
 
-    //Holder styr på hvilket chat vindu en skal vise.
+    //Lokale variabler
     public String ovingID;
     public File file;
 
@@ -52,7 +52,7 @@ public class InnleveringController {
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         showOvinger();
-        //Gjør at en kan trykke i listviewen med avsendere og få opp meldingene
+        //Gjør at en kan trykke i listviewen med øvinger og få opp
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
@@ -71,7 +71,7 @@ public class InnleveringController {
             }
         });
     }
-    //Viser avsendere i listviewen
+    //Viser øvinger i listviewen
     public void showOvinger(){
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
@@ -87,7 +87,7 @@ public class InnleveringController {
         }
     }
 
-    //Sender en melding til databasen og oppdaterer meldingsvinduet
+    //Sender inn en innlevering til databasen
     @FXML public void lever(ActionEvent event){
         if(Database.addInnlevering(ovingID,UserManager._bruker, txtBeskrivelse.getText(), file)){
             lblStatus.setText("Add success!");
@@ -120,7 +120,7 @@ public class InnleveringController {
         l.logout(btnLoggut);
     }
 
-    //Åpner meldingssiden
+    //Åpner innleveringssiden
     public void openInnlevering(Button b) throws Exception{
         Stage stage = (Stage) b.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/innlevering.fxml"));

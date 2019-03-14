@@ -24,15 +24,15 @@ import java.util.Map;
 
 public class RettingController {
     /*
-     * Siden som er koblet opp mot innleveringer.fxml
-     * Man kan velge noen å sende melding til og lese meldinger man har fått.
+     * Siden som er koblet opp mot rettinger.fxml
+     * Kan sende rettinger på innleveringer
      */
 
     @FXML public Button btnLever;
     @FXML public Button btnOpenFile;
     @FXML public Button btnBack;
     @FXML public Button btnLoggut;
-    @FXML public JFXTextArea txtBeskrivelse;
+    @FXML public JFXTextArea txtKommentar;
     @FXML public JFXTextField txtFilnavn;
     @FXML public Label lblStatus;
     @FXML public Label lblBrukernavn;
@@ -41,7 +41,7 @@ public class RettingController {
     @FXML public JFXCheckBox checkGodkjent;
 
 
-    //Holder styr på hvilket chat vindu en skal vise.
+    //Lokale variabler
     public String ovingID;
     public String innleveringID;
     public File file;
@@ -49,7 +49,7 @@ public class RettingController {
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         showOvinger();
-        //Gjør at en kan trykke i listviewen med avsendere og få opp meldingene
+        //Gjør at en kan trykke i listviewen og få opp innleveringer
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
@@ -64,14 +64,14 @@ public class RettingController {
                         ArrayList<String> values = entry.getValue();
                         ovingID = values.get(0);
                         lblØving.setText(values.get(1));
-                        file = Database.getInnlevering(innleveringID, innleveringID+" "+values.get(1));
+                        file = Database.getInnlevering(innleveringID, innleveringID+" "+values.get(1)+".pdf");
                         lblStatus.setText("Levert: " + values.get(2) + "\nBeskrivelse: " + values.get(3));
                     }
                 }
             }
         });
     }
-    //Viser avsendere i listviewen
+    //Viser innleveringer i listviewen
     public void showOvinger(){
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
@@ -88,28 +88,22 @@ public class RettingController {
         }
     }
 
-    //Sender en melding til databasen og oppdaterer meldingsvinduet
+    //Sender en request om retting
     @FXML public void lever(ActionEvent event){
-        if(Database.addInnlevering(ovingID,UserManager._bruker, txtBeskrivelse.getText(), file)){
+        //TODO: Funker ikke per nå
+        if(Database.addRetting(innleveringID, UserManager._bruker, String.valueOf(checkGodkjent.isSelected()), txtKommentar.getText())){
             lblStatus.setText("Add success!");
         }else {
             lblStatus.setText("Add failed!");
         }
         txtFilnavn.setText("");
-        txtBeskrivelse.setText("");
+        txtKommentar.setText("");
     }
 
-    @FXML protected void openExplorer(ActionEvent event) throws Exception {
-        JFileChooser chooser= new JFileChooser();
-        Container content = chooser.getComponentPopupMenu();
-        int choice = chooser.showOpenDialog(content);
-
-        if (choice != JFileChooser.APPROVE_OPTION) return;
-
-        File chosenFile = chooser.getSelectedFile();
-        file = chosenFile;
-        txtFilnavn.setText(file.getPath());
+    @FXML protected void openFile(ActionEvent event) throws Exception {
+        Desktop.getDesktop().open(file);
     }
+
 
 
     @FXML protected void back(ActionEvent event) throws Exception {
@@ -121,7 +115,7 @@ public class RettingController {
         l.logout(btnLoggut);
     }
 
-    //Åpner
+    //Åpner rettingsiden
     public void openRetting(Button b) throws Exception{
         Stage stage = (Stage) b.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/retting.fxml"));
