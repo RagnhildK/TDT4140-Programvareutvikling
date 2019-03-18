@@ -101,11 +101,24 @@ public class InnleveringController {
     }
 
     @FXML protected void openExplorer(ActionEvent event) throws Exception {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+        }
+        final JFrame frame = new JFrame("Open File Example");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+
         JFileChooser chooser= new JFileChooser();
+
         Container content = chooser.getComponentPopupMenu();
-        int choice = chooser.showOpenDialog(content);
+        int choice = chooser.showOpenDialog(frame);
 
         if (choice != JFileChooser.APPROVE_OPTION) return;
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
 
         File chosenFile = chooser.getSelectedFile();
         file = chosenFile;
