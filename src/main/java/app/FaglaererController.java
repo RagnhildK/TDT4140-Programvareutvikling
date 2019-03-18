@@ -156,4 +156,8 @@ public class FaglaererController {
         OvingController o = new OvingController();
         o.openOving(btnAddSaltid);
     }
+    @FXML protected void openRetting(ActionEvent event) throws Exception {
+        RettingController r = new RettingController();
+        r.openRetting(btnAddSaltid);
+    }
 }
