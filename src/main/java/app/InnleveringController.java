@@ -103,10 +103,9 @@ public class InnleveringController {
                 txtFilnavn.setText("");
                 txtBeskrivelse.setText("");
             }
+        }else {
+            lblStatus.setText("Fristen har gått ut!");
         }
-
-
-
     }
 
     @FXML protected void openExplorer(ActionEvent event) throws Exception {

@@ -4,7 +4,6 @@ package app;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
@@ -44,10 +42,11 @@ public class RettingController {
     public String ovingID;
     public String innleveringID;
     public File file;
+    public HashMap<String, String> innleveringer = new HashMap<>();
 
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
-        showOvinger();
+        showInnleveringer();
         //Gjør at en kan trykke i listviewen og få opp innleveringer
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
@@ -56,22 +55,38 @@ public class RettingController {
                 int i = s.indexOf("'");
                 String str = s.substring(i+1,s.length()-1);
                 lblØving.setText(str);
-                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikInnlevering(str);
+                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikInnlevering(innleveringer.get(str));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         innleveringID = entry.getKey();
                         ArrayList<String> values = entry.getValue();
                         ovingID = values.get(0);
-                        lblØving.setText(values.get(1));
-                        file = Database.getInnlevering(innleveringID, innleveringID+values.get(1));
+                        lblØving.setText(str);
+                        file = Database.getInnlevering(innleveringID, str);
                         lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3));
+                    }
+                }
+                dbOutput = Database.getUnikRetting(innleveringer.get(str));
+                for (HashMap<String,ArrayList<String>> set : dbOutput) {
+                    for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                        innleveringID = entry.getKey();
+                        ArrayList<String> values = entry.getValue();
+                        ovingID = values.get(0);
+                        lblØving.setText(str);
+                        file = Database.getInnlevering(innleveringID, str);
+                        lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2))
+                                + "\nBeskrivelse: " + values.get(3)
+                                + "\n\nSist endret av: " + values.get(4) + " den " + MeldingerController.getTid(values.get(7))
+                                + "\nGodkjent: " + values.get(5)
+                                + "\nKommentar: " + values.get(6));
+
                     }
                 }
             }
         });
     }
     //Viser innleveringer i listviewen
-    public void showOvinger(){
+    public void showInnleveringer(){
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getInnleveringer(UserManager._aktivtEmne);
@@ -79,7 +94,9 @@ public class RettingController {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
                 String key = entry.getKey();
-                list.add(key);
+                String item = values.get(1) + " - " + values.get(0) + " - " + key;
+                innleveringer.put(item,key);
+                list.add(item);
             }
         }
         for (String b : list) {
