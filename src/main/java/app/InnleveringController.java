@@ -91,13 +91,22 @@ public class InnleveringController {
 
     //Sender inn en innlevering til databasen
     @FXML public void lever(ActionEvent event){
-        if(Database.addInnlevering(ovingID,UserManager._bruker, txtBeskrivelse.getText(), file)){
-            lblStatus.setText("Add success!");
-        }else {
-            lblStatus.setText("Add failed!");
+        if(Check.future(frist.substring(0,10))){
+            Calendar c = Calendar.getInstance();
+            SimpleDateFormat f = new SimpleDateFormat("hh:mm:ss");
+            if(Check.checkTime(f.format(c.getTime()),frist.substring(11))){
+                if(Database.addInnlevering(ovingID,UserManager._bruker, txtBeskrivelse.getText(), file)){
+                    lblStatus.setText("Add success!");
+                }else {
+                    lblStatus.setText("Add failed!");
+                }
+                txtFilnavn.setText("");
+                txtBeskrivelse.setText("");
+            }
         }
-        txtFilnavn.setText("");
-        txtBeskrivelse.setText("");
+
+
+
     }
 
     @FXML protected void openExplorer(ActionEvent event) throws Exception {
@@ -105,8 +114,7 @@ public class InnleveringController {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
         }
-        final JFrame frame = new JFrame("Open File Example");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        final JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
 
 
@@ -117,8 +125,7 @@ public class InnleveringController {
 
         if (choice != JFileChooser.APPROVE_OPTION) return;
         frame.pack();
-        frame.setLocationByPlatform(true);
-        frame.setVisible(true);
+        frame.setVisible(false);
 
         File chosenFile = chooser.getSelectedFile();
         file = chosenFile;
