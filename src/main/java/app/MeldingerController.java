@@ -154,6 +154,7 @@ public class MeldingerController {
     //Oppdaterer meldings vinduet med meldinger fra nåværende avsender og mottaker
     public void update(String sender){
         lblMeldinger.setPrefHeight(0);
+        lblMeldinger.setWrapText(true);
         String data="";
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMeldinger(sender,UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {

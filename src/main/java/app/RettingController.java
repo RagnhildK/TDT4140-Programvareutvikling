@@ -41,6 +41,7 @@ public class RettingController {
     //Lokale variabler
     public String ovingID;
     public String innleveringID;
+    public String student;
     public File file;
     public HashMap<String, String> innleveringer = new HashMap<>();
 
@@ -61,6 +62,7 @@ public class RettingController {
                         innleveringID = entry.getKey();
                         ArrayList<String> values = entry.getValue();
                         ovingID = values.get(0);
+                        student = values.get(1);
                         lblØving.setText(str);
                         file = Database.getInnlevering(innleveringID, str);
                         lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3));
@@ -95,9 +97,11 @@ public class RettingController {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
                 String key = entry.getKey();
-                String item = values.get(1) + " - " + values.get(0) + " - " + key;
+                String item = values.get(1) + " - " + values.get(0);
                 innleveringer.put(item,key);
-                list.add(item);
+                if (!list.contains(item)){
+                    list.add(item);
+                }
             }
         }
         for (String b : list) {
@@ -130,7 +134,7 @@ public class RettingController {
 
 
         String str = UserManager._aktivtEmne + " - " + tittel + "\nVurdering: "+ godkjent + "\nKommentar: " + txtKommentar.getText();
-        Database.addMelding(UserManager._bruker, lblØving.getText(), str);
+        Database.addMelding(UserManager._bruker, student, str);
         checkGodkjent.setSelected(false);
         txtKommentar.setText("");
     }

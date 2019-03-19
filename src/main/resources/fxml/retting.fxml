@@ -22,7 +22,7 @@
                 <Font size="14.0" />
             </font>
         </JFXButton>
-        <Label fx:id="lblStatus" alignment="TOP_LEFT" layoutX="209.0" layoutY="216.0" prefHeight="178.0" prefWidth="343.0" stylesheets="@Styles.css">
+        <Label fx:id="lblStatus" alignment="TOP_LEFT" layoutX="209.0" layoutY="216.0" prefHeight="178.0" prefWidth="343.0" stylesheets="@Styles.css" wrapText="true">
             <font>
                 <Font size="14.0" />
             </font>
@@ -39,7 +39,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXListView fx:id="listView" layoutX="25.0" layoutY="70.0" prefHeight="386.0" prefWidth="143.0" />
+      <JFXListView fx:id="listView" layoutX="25.0" layoutY="70.0" prefHeight="386.0" prefWidth="176.0" />
       <JFXButton fx:id="btnEvaluer" alignment="CENTER" contentDisplay="CENTER" layoutX="358.0" layoutY="179.0" onAction="#evaluer" prefHeight="19.0" prefWidth="76.0" text="Evaluer" textAlignment="CENTER" />
       <JFXCheckBox fx:id="checkGodkjent" layoutX="209.0" layoutY="80.0" stylesheets="@Styles.css" text="Godkjent" />
     </children>
