@@ -37,6 +37,7 @@ public class InnleveringController {
     @FXML public Button btnLever;
     @FXML public Button btnBack;
     @FXML public Button btnLoggut;
+    @FXML public Button btnOpenFile;
     @FXML public JFXTextArea txtBeskrivelse;
     @FXML public JFXTextField txtFilnavn;
     @FXML public Label lblMeldinger;
@@ -46,9 +47,11 @@ public class InnleveringController {
     @FXML public JFXListView listView;
     @FXML public AnchorPane anchorPane;
 
+
     //Lokale variabler
     public String ovingID;
     public File file;
+    public File fileLevert;
     public String frist;
     public Stage mainStage;
 
@@ -60,6 +63,7 @@ public class InnleveringController {
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
+                btnOpenFile.setVisible(false);
                 String s = listView.getSelectionModel().getSelectedItem().toString();
                 int i = s.indexOf("'");
                 String str = s.substring(i+1,s.length()-1);
@@ -77,7 +81,8 @@ public class InnleveringController {
                 dbOutput = Database.getUnikInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-
+                        btnOpenFile.setVisible(true);
+                        fileLevert = Database.getInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID), str);
                         ArrayList<String> values = entry.getValue();
                         last = "\n\nLevert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3);
                     }
@@ -85,8 +90,9 @@ public class InnleveringController {
                 dbOutput = Database.getUnikRetting(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                        btnOpenFile.setVisible(true);
                         ArrayList<String> values = entry.getValue();
-                        //file = Database.getInnlevering(innleveringID, str);
+                        fileLevert = Database.getInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID), str);
                         String godkjent = (values.get(5).equals("1")) ? "Ja" : "Nei";
                         last = "\n\nLevert: " + MeldingerController.getTid(values.get(2))
                                 + "\nBeskrivelse: " + values.get(3)
@@ -102,6 +108,9 @@ public class InnleveringController {
 
             }
         });
+    }
+    @FXML protected void openFile(ActionEvent event) throws Exception {
+        Desktop.getDesktop().open(fileLevert);
     }
     //Viser øvinger i listviewen
     public void showOvinger(){
