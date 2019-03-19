@@ -519,6 +519,20 @@ Database {
         }
         return id;
     }
+    public static String getMaxIDInnlevering(String bruker, String ovingID){
+        String id = "0";
+        String sql = "SELECT MAX(InnleveringID) FROM Innlevering where OvingID = '"+ovingID+"' and Student = '"+bruker+"';";
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = sendQuery(sql);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                id = key;
+            }
+        }
+        return id;
+    }
+
+
     public static String getRolle(String brukernavn, String emneid){
         String sql = "SELECT Rolle FROM BrukerIEmne Where BrukerNavn = '"+brukernavn+"' and EmneID = '"+emneid+"'";
         return sendQueryString(sql);

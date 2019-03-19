@@ -73,6 +73,33 @@ public class InnleveringController {
                         lblStatus.setText("Frist: " + MeldingerController.getTid(values.get(1)) + "\nBeskrivelse: " + values.get(0));
                     }
                 }
+                String last = "";
+                dbOutput = Database.getUnikInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
+                for (HashMap<String,ArrayList<String>> set : dbOutput) {
+                    for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+
+                        ArrayList<String> values = entry.getValue();
+                        last = "\n\nLevert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3);
+                    }
+                }
+                dbOutput = Database.getUnikRetting(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
+                for (HashMap<String,ArrayList<String>> set : dbOutput) {
+                    for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                        ArrayList<String> values = entry.getValue();
+                        //file = Database.getInnlevering(innleveringID, str);
+                        String godkjent = (values.get(5).equals("1")) ? "Ja" : "Nei";
+                        last = "\n\nLevert: " + MeldingerController.getTid(values.get(2))
+                                + "\nBeskrivelse: " + values.get(3)
+                                + "\n\nRetting: " + values.get(4) + " den " + MeldingerController.getTid(values.get(7))
+                                + "\nGodkjent: " + godkjent
+                                + "\nKommentar: " + values.get(6);
+
+                    }
+                }
+                lblStatus.setText(lblStatus.getText()+last);
+
+
+
             }
         });
     }
