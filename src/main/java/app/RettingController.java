@@ -74,10 +74,11 @@ public class RettingController {
                         ovingID = values.get(0);
                         lblØving.setText(str);
                         file = Database.getInnlevering(innleveringID, str);
+                        String godkjent = (values.get(5).equals("1")) ? "Ja" : "Nei";
                         lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2))
                                 + "\nBeskrivelse: " + values.get(3)
                                 + "\n\nSist endret av: " + values.get(4) + " den " + MeldingerController.getTid(values.get(7))
-                                + "\nGodkjent: " + values.get(5)
+                                + "\nGodkjent: " + godkjent
                                 + "\nKommentar: " + values.get(6));
 
                     }

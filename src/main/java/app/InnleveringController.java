@@ -17,6 +17,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -43,14 +44,16 @@ public class InnleveringController {
     @FXML public Label lblBrukernavn;
     @FXML public Label lblØving;
     @FXML public JFXListView listView;
+    @FXML public AnchorPane anchorPane;
 
     //Lokale variabler
     public String ovingID;
     public File file;
     public String frist;
-
+    public Stage mainStage;
 
     @FXML protected void initialize() throws Exception {
+
         lblBrukernavn.setText(UserManager._bruker);
         showOvinger();
         //Gjør at en kan trykke i listviewen med øvinger og få opp
@@ -113,20 +116,13 @@ public class InnleveringController {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
         }
-        final JFrame frame = new JFrame();
-        frame.setLayout(new BorderLayout());
+        //final Window frame = new ();
+        //frame.setLayout(new BorderLayout());
+        mainStage = (Stage) anchorPane.getScene().getWindow();
+        FileChooser chooser= new FileChooser();
 
+        File chosenFile = chooser.showOpenDialog(mainStage);
 
-        JFileChooser chooser= new JFileChooser();
-
-        Container content = chooser.getComponentPopupMenu();
-        int choice = chooser.showOpenDialog(frame);
-
-        if (choice != JFileChooser.APPROVE_OPTION) return;
-        frame.pack();
-        frame.setVisible(false);
-
-        File chosenFile = chooser.getSelectedFile();
         file = chosenFile;
         txtFilnavn.setText(file.getPath());
     }
