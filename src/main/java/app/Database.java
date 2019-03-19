@@ -223,6 +223,10 @@ Database {
         String sql = "INSERT INTO Emne VALUES ('"+emneid+"','"+navn+"')";
         return sendUpdate(sql);
     }
+    public static boolean deleteEmne(String emneid) {
+        String sql = "DELETE FROM Emne Where EmneID = '"+emneid+"'";
+        return sendUpdate(sql);
+    }
     public static boolean addSaltid(String dato, String fra, String til, String emneid, int varighet, String faglærer) {
         String sql = "INSERT INTO Saltid VALUES ('"+dato+"','"+fra+"','"+til+"','"+emneid+"','"+varighet+"','"+faglærer+"')";
         return sendUpdate(sql);
@@ -502,6 +506,18 @@ Database {
             }
         }
         return id + 1;
+    }
+    public static String getMaxID(String col, String table){
+        String id = "0";
+        String sql = "SELECT MAX("+col+") FROM "+table+";";
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = sendQuery(sql);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                id = key;
+            }
+        }
+        return id;
     }
     public static String getRolle(String brukernavn, String emneid){
         String sql = "SELECT Rolle FROM BrukerIEmne Where BrukerNavn = '"+brukernavn+"' and EmneID = '"+emneid+"'";
