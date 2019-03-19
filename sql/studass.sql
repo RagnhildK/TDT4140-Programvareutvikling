@@ -133,3 +133,4 @@ CREATE TABLE Melding (
      CONSTRAINT Studass2_FK FOREIGN KEY (Studass) REFERENCES Bruker(BrukerNavn)
         ON UPDATE CASCADE
         ON DELETE CASCADE);
+

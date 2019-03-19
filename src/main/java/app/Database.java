@@ -410,14 +410,20 @@ Database {
         return sendQuery(sql);
     }
     public static ArrayList<HashMap<String,ArrayList<String>>> getInnleveringer(String emne) {
-        String sql = "SELECT InnleveringID FROM Innlevering join Oving on(Innlevering.OvingID = Oving.OvingID) WHERE EmneID = '"+emne+"'";
+        String sql = "SELECT InnleveringID, Student, Tittel FROM Innlevering join Oving on(Innlevering.OvingID = Oving.OvingID) WHERE EmneID = '"+emne+"'";
         return sendQuery(sql);
     }
+
+
     public static ArrayList<HashMap<String,ArrayList<String>>> getUnikInnlevering(String id) {
         String sql = "SELECT * FROM Innlevering WHERE InnleveringID = '"+id+"'";
         return sendQuery(sql);
     }
 
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikRetting(String id) { //5
+        String sql = "SELECT InnleveringID, OvingID, Student, Levert, Beskrivelse, Studass, Godkjent, Kommentar, Tid FROM Innlevering natural join Retting WHERE InnleveringID = '"+id+"'";
+        return sendQuery(sql);
+    }
 
 
     public static ArrayList<HashMap<String,ArrayList<String>>> getStudenter(String dato, String emne) {
