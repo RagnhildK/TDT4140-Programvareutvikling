@@ -62,7 +62,7 @@ public class KunngjoringerController {
                 lblTil.setText(s.substring(i+1,s.length()-1));
                 sender = s.substring(i+1,s.length()-1);
                 Database.updateUlest(sender,UserManager._bruker);
-                update(sender);
+                //update(sender);
             }
         });
 
@@ -106,7 +106,7 @@ public class KunngjoringerController {
     }
     //Oppdaterer meldingsvinduet
     public void update(String sender){
-        lblMeldinger.setPrefHeight(0);
+        //lblMeldinger.setPrefHeight(0);
         String data="";
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMeldinger(sender,UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
@@ -153,7 +153,6 @@ public class KunngjoringerController {
             }
 
         }
-        System.out.println(msg);
         lblMeldinger.setText(lblMeldinger.getText()+"\n"+msg);
         txtMelding.setText("");
     }
