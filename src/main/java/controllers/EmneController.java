@@ -1,5 +1,8 @@
-package app;
+package controllers;
 
+import app.Check;
+import app.Database;
+import app.UserManager;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.beans.property.SimpleStringProperty;

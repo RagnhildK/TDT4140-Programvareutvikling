@@ -1,5 +1,8 @@
-package app;
+package controllers;
 
+import app.Check;
+import app.Database;
+import app.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -11,24 +14,22 @@ import javafx.scene.control.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class FaglaererController {
+public class StudassController {
 
     /*
-     *  Klassen som er koblet opp mot faglaerer.fxml
+     *  Klassen som er koblet opp mot studass.fxml
      *
      *  Metoder:
-     *      check()
-     *          -Sjekker at dato er på rett format
-     *      addSaltid(ActionEvent event)
-     *          -Sender en saltid request til app.UserManager når man trykker på tilhørende knapp
+     *
+     *      addTid(ActionEvent event)
+     *          -Sender en studass på sal request til app.UserManager når man trykker på tilhørende knapp
      *
      */
     @FXML public Label lblBrukernavn;
     @FXML public TextField txtDato;
-    @FXML public TextField txtFra;
-    @FXML public TextField txtTil;
-    @FXML public TextField txtTidPerStudent;
-    @FXML public Button btnAddSaltid;
+    @FXML public TextField txtTidspunkt;
+    @FXML public TextField txtVarighet;
+    @FXML public Button btnAddTid;
     @FXML public Label lblStatus;
     @FXML public Label lblDato;
     @FXML private TableView<List<StringProperty>> table;
@@ -36,21 +37,18 @@ public class FaglaererController {
     @FXML private TableColumn<List<StringProperty>, String> fraColumn;
     @FXML private TableColumn<List<StringProperty>, String> tilColumn;
     @FXML private TableColumn<List<StringProperty>, String> tpsColumn;
-    @FXML private TextField txtFraDelete;
 
-    //For å holde styr på dato
     private Calendar calendar;
     private SimpleDateFormat defaultF = new SimpleDateFormat("yyyy-MM-dd");
 
-    //Kjører når siden startes
-    @FXML protected void initialize() throws Exception {
+    //Kjøres når siden startes
+    @FXML protected void initialize() {
         lblBrukernavn.setText(UserManager._bruker);
         calendar = Calendar.getInstance();
         showDate(0);
         showTable();
     }
-
-    //Viser dato og gjør det mulig å kunne å frem og tilbake på dato
+    //Holder styr på dato og gjør sånn en kan gå frem og tilbake
     private void showDate(int i) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy");
         Calendar today = Calendar.getInstance();
@@ -68,10 +66,11 @@ public class FaglaererController {
     @FXML protected void showPrevDay(ActionEvent event) throws Exception {
         showDate(-1);
     }
-    //Legger til saltid
-    @FXML protected void addSaltid(ActionEvent event) throws Exception {
-        if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtFra.getText()) && Check.checkTidspunkt(txtTil.getText())){
-            if (UserManager.addSaltid(txtDato.getText(),txtFra.getText(),txtTil.getText(), txtTidPerStudent.getText())) {
+
+    //Legger til tid i studasspåsal i databasen
+    @FXML protected void addTid(ActionEvent event) throws Exception {
+        if (Check.checkDato(txtDato.getText()) && Check.checkTidspunkt(txtTidspunkt.getText())){
+            if (UserManager.addStudassPåSal(txtDato.getText(),txtTidspunkt.getText(),txtVarighet.getText())) {
                 lblStatus.setText("Add success!");
             }else {
                 lblStatus.setText("Add failed!");
@@ -89,7 +88,7 @@ public class FaglaererController {
         tpsColumn.setCellValueFactory(param -> param.getValue().get(3));
         table.setItems(getData());
     }
-    //Henter informasjon til tabell
+    //Henter tabellinformasjon fra databasen
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getSaltid(txtDato.getText(), UserManager._aktivtEmne);
@@ -109,55 +108,18 @@ public class FaglaererController {
         }
         return data;
     }
-    //Sletter saltider fra nåværende dato
-    @FXML protected void deleteSaltider(ActionEvent event) throws Exception {
-       
-        List<String> data = new ArrayList<>();
 
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudenter(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                String key = entry.getKey();
-                if (!data.contains(key)) {
-                    data.add(key);
-                }
-            }
-        }
-        dbOutput = Database.getStudasser(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                String key = entry.getKey();
-                if (!data.contains(key)) {
-                    data.add(key);
-                }
-            }
-        }
-        for(String bruker : data)  {
-            Database.addMelding(UserManager._bruker, bruker, "Saltidene den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + "\n har blitt endret. Sjekk om din saltid fortsatt står");
-        }
-
-        Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()), txtFraDelete.getText());
-        showTable();
-        
-    }
     @FXML protected void back(ActionEvent event) throws Exception {
         EmneController ec = new EmneController();
-        ec.back(btnAddSaltid);
+        ec.back(btnAddTid);
     }
     @FXML protected void logout(ActionEvent event) throws Exception {
         LoginController l = new LoginController();
-        l.logout(btnAddSaltid);
-    }
-    @FXML protected void openKunngjoringer(ActionEvent event) throws Exception {
-        KunngjoringerController k = new KunngjoringerController();
-        k.openKunngjoringer(btnAddSaltid);
-    }
-    @FXML protected void openOving(ActionEvent event) throws Exception {
-        OvingController o = new OvingController();
-        o.openOving(btnAddSaltid);
+        l.logout(btnAddTid);
     }
     @FXML protected void openRetting(ActionEvent event) throws Exception {
         RettingController r = new RettingController();
-        r.openRetting(btnAddSaltid);
+        r.openRetting(btnAddTid);
     }
+
 }

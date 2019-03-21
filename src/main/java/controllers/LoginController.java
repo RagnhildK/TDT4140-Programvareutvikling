@@ -1,5 +1,6 @@
-package app;
+package controllers;
 
+import app.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

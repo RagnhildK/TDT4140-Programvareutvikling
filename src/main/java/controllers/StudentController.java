@@ -1,5 +1,8 @@
-package app;
+package controllers;
 
+import app.Check;
+import app.Database;
+import app.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;

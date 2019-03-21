@@ -1,6 +1,8 @@
-package app;
+package controllers;
 
 
+import app.Database;
+import app.UserManager;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;

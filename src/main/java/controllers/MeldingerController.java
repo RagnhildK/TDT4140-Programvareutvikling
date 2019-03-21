@@ -1,6 +1,8 @@
-package app;
+package controllers;
 
 
+import app.Database;
+import app.UserManager;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
