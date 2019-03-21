@@ -59,7 +59,7 @@ public class InnleveringController {
 
         lblBrukernavn.setText(UserManager._bruker);
         showOvinger();
-        //Gjør at en kan trykke i listviewen med øvinger og få opp
+        //Gjør at en kan trykke i listviewen med øvinger og få opp informasjon
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
@@ -68,6 +68,7 @@ public class InnleveringController {
                 int i = s.indexOf("'");
                 String str = s.substring(i+1,s.length()-1);
                 lblØving.setText(str);
+                //Øvingsinformasjon
                 ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getOvingID(UserManager._aktivtEmne,str);
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -78,6 +79,7 @@ public class InnleveringController {
                     }
                 }
                 String last = "";
+                //Henter siste innlevering informasjon
                 dbOutput = Database.getUnikInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -87,6 +89,7 @@ public class InnleveringController {
                         last = "\n\nLevert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3);
                     }
                 }
+                //Henter siste retting og innlevering informasjon
                 dbOutput = Database.getUnikRetting(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -103,12 +106,10 @@ public class InnleveringController {
                     }
                 }
                 lblStatus.setText(lblStatus.getText()+last);
-
-
-
             }
         });
     }
+    //Åpner fil i default program
     @FXML protected void openFile(ActionEvent event) throws Exception {
         Desktop.getDesktop().open(fileLevert);
     }
@@ -128,7 +129,7 @@ public class InnleveringController {
         }
     }
 
-    //Sender inn en innlevering til databasen
+    //Sender inn en innlevering til databasen og sjekker at det er innenfor fristen
     @FXML public void lever(ActionEvent event){
         if(Check.future(frist.substring(0,10))){
             Calendar c = Calendar.getInstance();
@@ -146,14 +147,12 @@ public class InnleveringController {
             lblStatus.setText("Fristen har gått ut!");
         }
     }
-
+    //Åpner filutforsker for å finne fil å laste opp
     @FXML protected void openExplorer(ActionEvent event) throws Exception {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
         }
-        //final Window frame = new ();
-        //frame.setLayout(new BorderLayout());
         mainStage = (Stage) anchorPane.getScene().getWindow();
         FileChooser chooser= new FileChooser();
 

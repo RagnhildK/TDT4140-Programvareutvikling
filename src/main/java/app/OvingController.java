@@ -46,7 +46,7 @@ public class OvingController {
     @FXML protected void initialize() throws Exception {
         lblBrukernavn.setText(UserManager._bruker);
         showOvinger();
-        //Gjør at en kan trykke i listviewen med øvinger og få opp
+        //Gjør at en kan trykke i listviewen med øvinger og få opp info
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {

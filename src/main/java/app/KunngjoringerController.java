@@ -53,7 +53,7 @@ public class KunngjoringerController {
         lblBrukernavn.setText(UserManager._bruker);
         showAvsendere();
         getMottakere();
-        //Gjør at en kan trykke i listviewen med avsendere og få opp meldingene
+        //Gjør at en kan trykke i listviewen med motakkere og sende melding til dem
         listView.setOnMouseClicked(new ListViewHandler(){
             @Override
             public void handle(javafx.scene.input.MouseEvent event) {
@@ -75,30 +75,8 @@ public class KunngjoringerController {
             }
         });
     }
-    //Viser alle brukere i comboboxen
-    public void showAllBrukere() {
-        ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBrukere();
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                String key = entry.getKey();
-                list.add(key);
-            }
-        }
-        for (String e : list){
-            comboBox.getItems().add(e);
-        }
-        comboBox.setEditable(false);
-        comboBox.setPromptText("Velg bruker");
-    }
-    //Henter opp en ny chat for den avsenderen man velger
-    @FXML protected void addChat(ActionEvent event){
-        sender = comboBox.getValue();
-        lblTil.setText(sender);
-        update(sender);
-    }
 
-    //Viser avsendere i listviewen
+    //Viser mulige mottakergrupper i listviewen
     public void showAvsendere(){
         ArrayList<String> list = new ArrayList();
         list.add("alle");
@@ -126,7 +104,7 @@ public class KunngjoringerController {
         }
         mottakere = list;
     }
-    //Oppdaterer meldings vinduet med meldinger fra nåværende avsender og mottaker
+    //Oppdaterer meldingsvinduet
     public void update(String sender){
         lblMeldinger.setPrefHeight(0);
         String data="";
@@ -162,7 +140,7 @@ public class KunngjoringerController {
         lblMeldinger.setPrefHeight(lblMeldinger.getPrefHeight()+17*i);
         vindu.setPrefHeight(lblMeldinger.getPrefHeight());
     }
-    //Sender en melding til databasen og oppdaterer meldingsvinduet
+    //Sender en kunngjøring(melding) til databasen og oppdaterer meldingsvinduet
     public void sendMsg(ActionEvent event){
         String msg = "KUNNGJØRING for " + UserManager._aktivtEmne+"!\n";
         msg += txtMelding.getText().trim();
@@ -175,6 +153,7 @@ public class KunngjoringerController {
             }
 
         }
+        System.out.println(msg);
         lblMeldinger.setText(lblMeldinger.getText()+"\n"+msg);
         txtMelding.setText("");
     }

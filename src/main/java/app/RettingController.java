@@ -56,6 +56,7 @@ public class RettingController {
                 int i = s.indexOf("'");
                 String str = s.substring(i+1,s.length()-1);
                 lblØving.setText(str);
+                //Henter siste levering informasjon
                 ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikInnlevering(innleveringer.get(str));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -68,6 +69,7 @@ public class RettingController {
                         lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3));
                     }
                 }
+                //Henter siste retting informasjon
                 dbOutput = Database.getUnikRetting(innleveringer.get(str));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
@@ -120,25 +122,25 @@ public class RettingController {
         }
         if(Database.addRetting(innleveringID, UserManager._bruker, i, txtKommentar.getText())){
             lblStatus.setText("Add success!");
+            //Sender en melding til brukeren om at innleveringen er vurdert
+            String tittel = "";
+            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikOving(ovingID);
+            for (HashMap<String,ArrayList<String>> set : dbOutput) {
+                for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                    ArrayList<String> values = entry.getValue();
+                    tittel = values.get(1);
+                }
+            }
+            String str = UserManager._aktivtEmne + " - " + tittel + "\nVurdering: "+ godkjent + "\nKommentar: " + txtKommentar.getText();
+            Database.addMelding(UserManager._bruker, student, str);
+            checkGodkjent.setSelected(false);
+            txtKommentar.setText("");
         }else {
             lblStatus.setText("Add failed!");
         }
-        String tittel = "";
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikOving(ovingID);
-        for (HashMap<String,ArrayList<String>> set : dbOutput) {
-            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
-                ArrayList<String> values = entry.getValue();
-                tittel = values.get(1);
-            }
-        }
 
-
-        String str = UserManager._aktivtEmne + " - " + tittel + "\nVurdering: "+ godkjent + "\nKommentar: " + txtKommentar.getText();
-        Database.addMelding(UserManager._bruker, student, str);
-        checkGodkjent.setSelected(false);
-        txtKommentar.setText("");
     }
-
+    //Åpne fil i default program
     @FXML protected void openFile(ActionEvent event) throws Exception {
         Desktop.getDesktop().open(file);
     }
