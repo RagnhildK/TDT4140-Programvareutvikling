@@ -9,8 +9,10 @@ Vi har valgt å følge standarder beskrevet i dette dokumentet: https://google.g
 
 ## Teknologi
 
-Prosjektet er kodet i java, og vi har brukt IntelliJ IDEA som programmeringsomgivelse. Vi har brukt javaFX for å designe produktet. MySQL er brukt som databaseverktøy.
-Maven har blitt brukt som rammeverk for å bygge prosjektet til en kjørbar .jar fil.
+* Prosjektet er kodet i java, og vi har brukt IntelliJ IDEA som programmeringsomgivelse. 
+* Vi har brukt javaFX for å designe produktet. 
+* MySQL er brukt som databaseverktøy.
+* Maven har blitt brukt som rammeverk for å bygge prosjektet, kjøre tester og deploye til kjørbar .jar fil.
 
 ## Funksjonalitet
 
@@ -45,4 +47,4 @@ BookBoard har følgende funksjonalitet:
 
 ## Tester
 
-
+Testene til prosjektet ligger i filen MainTest.java som ligger i src/test/java
