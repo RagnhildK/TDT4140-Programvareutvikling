@@ -48,4 +48,6 @@ BookBoard har følgende funksjonalitet:
 ## Tester
 
 Testene til prosjektet ligger i filen MainTest.java som ligger i src/test/java/MainTest.java.
+
 Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test kommandoen.
+

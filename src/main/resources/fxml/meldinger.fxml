@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MeldingerController">
+<AnchorPane id="pane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MeldingerController">
     <children>
         <JFXTextField fx:id="txtBruker" focusColor="#d3cbc2" labelFloat="true" layoutX="27.0" layoutY="84.0" promptText="Bruker" stylesheets="@Styles.css" unFocusColor="#d3cbc2" visible="false" />
         <JFXButton fx:id="btnOpprettChat" alignment="CENTER" layoutX="27.0" layoutY="120.0" onAction="#addChat" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Opprett chat" textFill="#d3cbc2">
@@ -56,7 +56,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <JFXListView fx:id="listView" layoutX="27.0" layoutY="160.0" prefHeight="255.0" prefWidth="170.0" />
+      <JFXListView fx:id="listView" layoutX="27.0" layoutY="160.0" prefHeight="255.0" prefWidth="178.0" />
       <JFXComboBox fx:id="comboBox" layoutX="37.0" layoutY="80.0" />
     </children>
 </AnchorPane>

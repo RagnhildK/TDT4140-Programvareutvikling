@@ -1,10 +1,17 @@
 package app;
 
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import java.io.FileInputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 
 public class
@@ -216,6 +223,10 @@ Database {
         String sql = "INSERT INTO Emne VALUES ('"+emneid+"','"+navn+"')";
         return sendUpdate(sql);
     }
+    public static boolean deleteEmne(String emneid) {
+        String sql = "DELETE FROM Emne Where EmneID = '"+emneid+"'";
+        return sendUpdate(sql);
+    }
     public static boolean addSaltid(String dato, String fra, String til, String emneid, int varighet, String faglærer) {
         String sql = "INSERT INTO Saltid VALUES ('"+dato+"','"+fra+"','"+til+"','"+emneid+"','"+varighet+"','"+faglærer+"')";
         return sendUpdate(sql);
@@ -256,6 +267,168 @@ Database {
         String sql = "UPDATE Melding SET Ulest = FALSE Where Sender = '"+sender+"' and Mottaker = '"+mottaker+"'";
         sendUpdate(sql);
     }
+    public static boolean addOving(String emneID, String tittel, String beskrivelse, String frist) {
+        String sql = "INSERT INTO Oving VALUES (NULL,'"+emneID+"','"+tittel+"','"+beskrivelse+"', '"+frist+"')";
+        return sendUpdate(sql);
+    }
+    public static boolean addRetting(String innleveringID, String studass, String godkjent, String kommentar) {
+        String sql = "INSERT INTO Retting VALUES (NULL,'"+innleveringID+"','"+studass+"','"+godkjent+"', '"+kommentar+"', NULL)";
+        return sendUpdate(sql);
+    }
+    public static boolean addInnlevering(String ovingID, String student, String beskrivelse, File file) {
+        String sql = "INSERT INTO Innlevering VALUES (NULL,'"+ovingID+"','"+student+"',NULL, '"+beskrivelse+"', ?, ?)";
+
+        Connection conn = null;
+        Statement stmt = null;
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            FileInputStream input = new FileInputStream(file);
+            pstmt.setBinaryStream(1, input);
+            pstmt.setString(2, getFileExtension(file));
+            System.out.println("Reading file " + file.getAbsolutePath());
+            System.out.println("Store file in the database.");
+            pstmt.executeUpdate();
+            return true;
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        return false;
+
+    }
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            return fileName.substring(fileName.lastIndexOf("."));
+        else return "";
+    }
+
+    public static File getInnlevering(String innleveringID, String filnavn) {
+        String sql = "SELECT fil, filtype FROM Innlevering WHERE innleveringID = ?";
+
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            //STEP 3: Open a connection
+            Class.forName(JDBC_DRIVER);
+            //System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL,USER,PASS);
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, innleveringID);
+            rs = pstmt.executeQuery();
+            boolean first = true;
+            File file = null;
+            FileOutputStream output = null;
+            try{
+                while (rs.next()){
+                    if (first){
+                        filnavn+= rs.getString("filtype");
+                        file = new File(filnavn);
+                        output = new FileOutputStream(file);
+                        first = false;
+                    }
+                    InputStream input = rs.getBinaryStream("fil");
+                    byte[] buffer = new byte[1024];
+                    while (input.read(buffer) > 0) {
+                        output.write(buffer);
+                    }
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+            /*File file = new File(filnavn);
+            FileOutputStream output = new FileOutputStream(file);
+
+            System.out.println("Writing to file " + file.getAbsolutePath());
+            while (rs.next()) {
+                InputStream input = rs.getBinaryStream("fil");
+                byte[] buffer = new byte[1024];
+                while (input.read(buffer) > 0) {
+                    output.write(buffer);
+                }
+            }*/
+
+
+            return file;
+        }catch(SQLException se){
+            //Handle errors for JDBC
+            se.printStackTrace();
+        }catch(Exception e){
+            //Handle errors for Class.forName
+            e.printStackTrace();
+        }finally{
+            //finally block used to close resources
+            try{
+                if(stmt!=null)
+                    stmt.close();
+            }catch(SQLException se2){
+            }// nothing we can do
+            try{
+                if(conn!=null)
+                    conn.close();
+            }catch(SQLException se){
+                se.printStackTrace();
+            }//end finally try
+        }//end try
+        return null;
+
+    }
+
+
+    public static ArrayList<HashMap<String,ArrayList<String>>> getOvinger(String emne) {
+        String sql = "SELECT * FROM Oving WHERE EmneID = '"+emne+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikOving(String ovingID) {
+        String sql = "SELECT * FROM Oving WHERE OvingID = '"+ovingID+"'";
+        return sendQuery(sql);
+    }
+
+    public static ArrayList<HashMap<String,ArrayList<String>>> getOvingID(String emne, String tittel) {
+        String sql = "SELECT OvingID, Beskrivelse, Frist FROM Oving WHERE EmneID = '"+emne+"' and Tittel = '"+tittel+"'";
+        return sendQuery(sql);
+    }
+    public static ArrayList<HashMap<String,ArrayList<String>>> getInnleveringer(String emne) {
+        String sql = "SELECT InnleveringID, Student, Tittel FROM Innlevering join Oving on(Innlevering.OvingID = Oving.OvingID) WHERE EmneID = '"+emne+"'";
+        return sendQuery(sql);
+    }
+
+
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikInnlevering(String id) {
+        String sql = "SELECT * FROM Innlevering WHERE InnleveringID = '"+id+"'";
+        return sendQuery(sql);
+    }
+
+    public static ArrayList<HashMap<String,ArrayList<String>>> getUnikRetting(String id) { //5
+        String sql = "SELECT InnleveringID, OvingID, Student, Levert, Beskrivelse, Studass, Godkjent, Kommentar, Tid FROM Innlevering natural join Retting WHERE InnleveringID = '"+id+"'";
+        return sendQuery(sql);
+    }
+
 
     public static ArrayList<HashMap<String,ArrayList<String>>> getStudenter(String dato, String emne) {
         String sql = "SELECT Student FROM Booking WHERE StudassPåSalDato = '"+dato+"' AND EmneID = '"+emne+"'";
@@ -334,6 +507,32 @@ Database {
         }
         return id + 1;
     }
+    public static String getMaxID(String col, String table){
+        String id = "0";
+        String sql = "SELECT MAX("+col+") FROM "+table+";";
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = sendQuery(sql);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                id = key;
+            }
+        }
+        return id;
+    }
+    public static String getMaxIDInnlevering(String bruker, String ovingID){
+        String id = "0";
+        String sql = "SELECT MAX(InnleveringID) FROM Innlevering where OvingID = '"+ovingID+"' and Student = '"+bruker+"';";
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = sendQuery(sql);
+        for (HashMap<String,ArrayList<String>> set : dbOutput) {
+            for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
+                String key = entry.getKey();
+                id = key;
+            }
+        }
+        return id;
+    }
+
+
     public static String getRolle(String brukernavn, String emneid){
         String sql = "SELECT Rolle FROM BrukerIEmne Where BrukerNavn = '"+brukernavn+"' and EmneID = '"+emneid+"'";
         return sendQueryString(sql);
@@ -358,8 +557,8 @@ Database {
         addStudassPåSal("2019-02-19","14:00", "TMA4100", "bob", 15);
         addStudassPåSal("2019-02-19","16:00", "TMA4100", "bob", 15);*/
 
-        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
-        rsToString(dbOutput);
+        //ArrayList<HashMap<String,ArrayList<String>>> dbOutput = getStudassPåSal("2019-02-21", "TDT4100");
+        //rsToString(dbOutput);
 
 
     }

@@ -58,5 +58,16 @@ public class Check {
         }
         return ok;
     }
+    public static boolean checkTime(String før, String etter) {
 
+        if (Integer.parseInt(før.substring(0,2)) < Integer.parseInt(etter.substring(0,2))) {
+            return true;
+        }
+        else if (Integer.parseInt(før.substring(0,2)) == Integer.parseInt(etter.substring(0,2))
+                && (Integer.parseInt(før.substring(3)) <= Integer.parseInt(etter.substring(3)))){
+            return true;
+        }
+
+        return false;
+    }
 }

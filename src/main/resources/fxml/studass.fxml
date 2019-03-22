@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.StudassController">
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StudassController">
     <children>
         <Label layoutX="83.0" layoutY="51.0" stylesheets="@Styles.css" text="Studass På Sal">
             <font>
@@ -69,6 +69,11 @@
                 <TableColumn fx:id="tpsColumn" prefWidth="85.0" text="Tid/student" />
             </columns>
         </TableView>
+      <JFXButton fx:id="btnRetting" alignment="CENTER" layoutX="83.0" layoutY="396.0" onAction="#openRetting" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Retting" textFill="#d3cbc2">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
 
     </children>
 </AnchorPane>

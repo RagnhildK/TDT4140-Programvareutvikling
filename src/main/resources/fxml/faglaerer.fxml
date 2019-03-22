@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.FaglaererController">
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.FaglaererController">
     <children>
         <Label layoutX="83.0" layoutY="51.0" stylesheets="@Styles.css" text="Faglærer">
             <font>
@@ -80,6 +80,16 @@
          </font>
       </JFXButton>
       <JFXTextField fx:id="txtFraDelete" focusColor="#d3cbc2" labelFloat="true" layoutX="83.0" layoutY="381.0" promptText="Fra" stylesheets="@Styles.css" unFocusColor="#d3cbc2" />
+      <JFXButton fx:id="btnOving" alignment="CENTER" layoutX="528.0" layoutY="382.0" onAction="#openOving" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Opprett øving" textFill="#d3cbc2">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnRetting" layoutX="528.0" layoutY="339.0" onAction="#openRetting" prefHeight="32.0" prefWidth="135.0" text="Retting" textFill="#d3cbc2">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
 
 
 

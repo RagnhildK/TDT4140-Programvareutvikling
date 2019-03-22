@@ -118,7 +118,6 @@ public class UserManager {
         if (!booking.isEmpty()){
             return false;
         }
-        System.out.println(dato+ tidspunkt+ studass+ _aktivtEmne);
         ArrayList<HashMap<String,ArrayList<String>>> sps = Database.getUnikStudassPåSal(dato, _aktivtEmne, tidspunkt, studass);
 
         return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass, _aktivtEmne);
@@ -133,7 +132,7 @@ public class UserManager {
                 ArrayList<String> val = entry.getValue();
                 int intervall = Integer.parseInt(val.get(2));
                 while(lengde >= intervall){
-                    if (checkTime(val.get(0), tidspunkt) && checkTime(tidspunkt, val.get(1))){
+                    if (Check.checkTime(val.get(0), tidspunkt) && Check.checkTime(tidspunkt, val.get(1))){
                         ok = Database.addStudassPåSal(dato, tidspunkt, _aktivtEmne, _bruker, intervall);
 
                         lengde -= intervall;
@@ -161,18 +160,7 @@ public class UserManager {
         return false;
     }
     // Sjekker at før faktisk er før etter
-    private static boolean checkTime(String før, String etter) {
 
-        if (Integer.parseInt(før.substring(0,2)) < Integer.parseInt(etter.substring(0,2))) {
-            return true;
-        }
-        else if (Integer.parseInt(før.substring(0,2)) == Integer.parseInt(etter.substring(0,2))
-            && (Integer.parseInt(før.substring(3)) <= Integer.parseInt(etter.substring(3)))){
-            return true;
-        }
-
-        return false;
-    }
     //Legger til saltid
     public static boolean addSaltid(String dato, String fra, String til, String tid) {
         return (Database.addSaltid(dato, fra, til, _aktivtEmne, Integer.parseInt(tid) , _bruker));

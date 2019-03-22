@@ -19,6 +19,7 @@
 .jfx-text-area {
     -fx-text-fill: #d3cbc2;
     -fx-background-color: #2b2927;
+    -fx-prompt-text-fill: #d3cbc2;
 }
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
@@ -128,3 +129,11 @@
 .jfx-combo-box .label {
     -fx-text-fill: #d3cbc2;
 }
+.jfx-check-box {
+    -fx-prompt-text-fill: #d3cbc2;
+    -fx-text-fill: #d3cbc2;
+    -jfx-focus-color: #d3cbc2;
+    -jfx-unfocus-color: #d3cbc2;
+}
+
+

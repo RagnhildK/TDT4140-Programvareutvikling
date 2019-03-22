@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.EmneController">
+<AnchorPane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" styleClass="pane" stylesheets="@Styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EmneController">
     <children>
         <Label layoutX="27.0" layoutY="24.0" stylesheets="@Styles.css" text="Emne">
             <font>
@@ -20,7 +20,7 @@
             </font>
         </Label>
         <JFXTextField fx:id="txtEmne" focusColor="#d3cbc2" labelFloat="true" layoutX="27.0" layoutY="60.0" promptText="EmneID" stylesheets="@Styles.css" unFocusColor="#d3cbc2" visible="false" />
-        <JFXButton fx:id="btnLeggTilEmne" alignment="CENTER" layoutX="27.0" layoutY="97.0" onAction="#addEmne" prefHeight="22.0" prefWidth="135.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Legg til emne" textFill="#d3cbc2">
+        <JFXButton fx:id="btnLeggTilEmne" alignment="CENTER" layoutX="27.0" layoutY="97.0" onAction="#addEmne" prefHeight="22.0" prefWidth="127.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Legg til emne" textFill="#d3cbc2">
             <font>
                 <Font size="14.0" />
             </font>
@@ -63,13 +63,13 @@
                 <TableColumn fx:id="varighetColumn1" prefWidth="85.0" text="Varighet" />
             </columns>
         </TableView>
-      <JFXButton fx:id="btnMeldinger" alignment="CENTER" layoutX="35.0" layoutY="410.0" onAction="#showMeldingsside" prefHeight="30.0" prefWidth="114.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Meldinger" textFill="#d3cbc2">
+      <JFXButton fx:id="btnMeldinger" alignment="CENTER" layoutX="568.0" layoutY="57.0" onAction="#showMeldingsside" prefHeight="30.0" prefWidth="114.0" ripplerFill="#2b2927" stylesheets="@Styles.css" text="Meldinger" textFill="#d3cbc2">
          <font>
             <Font size="14.0" />
          </font>
       </JFXButton>
-        <JFXListView fx:id="listView" layoutX="27.0" layoutY="160.0" prefHeight="239.0" prefWidth="135.0" />
-      <JFXComboBox fx:id="comboBox" layoutX="34.0" layoutY="60.0" />
+        <JFXListView fx:id="listView" layoutX="14.0" layoutY="135.0" prefHeight="327.0" prefWidth="204.0" />
+      <JFXComboBox fx:id="comboBox" layoutX="34.0" layoutY="60.0" prefHeight="19.0" prefWidth="81.0" />
 
     </children>
 </AnchorPane>
