@@ -26,7 +26,16 @@ BookBoard har følgende funksjonalitet:
 
 ## Screenshots
 ![login](https://i.imgur.com/UeZLnV3.png)
-
+![admin](https://i.imgur.com/2lfmsDy.png)
+![emne](https://i.imgur.com/Pc2nOjK.png)
+![faglærer](https://i.imgur.com/I4gtdMd.png)
+![studass](https://i.imgur.com/GtApggM.png)
+![student](https://i.imgur.com/anq62YH.png)
+![innlevering](https://i.imgur.com/o3BemqG.png)
+![retting](https://i.imgur.com/ZBoCI0O.png)
+![emne](https://i.imgur.com/0lCzvde.png)
+![kunngjørigner](https://i.imgur.com/w7D7BdJ.png)
+![meldinger](https://i.imgur.com/Cnzhno0.png)
 
 ## Installasjon
 
