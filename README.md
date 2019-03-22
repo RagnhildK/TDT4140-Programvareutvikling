@@ -1,47 +1,20 @@
 # BookBoard
 
 Dette er en applikasjon for å booke studentassistenter, for å gjøre det lettere for studenter å vite når det er mulighet for å få hjelp og få en oversiktlig tilstrømning av studenter på sal.
-Applikasjonen inneholder også funksjoner for bedre kommunikasjon mellom brukere og mulighet for levering av øvinger og retting og tilbakemelding.
+Applikasjonen skal også inneholde tilrettelegging for bedre kommunikasjon og levering av øvinger.
 
-### Mål
+## Standarder for koding
 
-* Effektivsere saltidbooking (Implementert)
-* Forbedre kommunikasjon mellom studass, student, og faglærere (Implementert)
-* Åpne opp for innlevering av øvinger (Implementert)
+Vi har valgt å følge standarder beskrevet i dette dokumentet: https://google.github.io/styleguide/javaguide.html
 
+## Teknologi
 
-## Hvordan bruke det
+* Prosjektet er kodet i java, og vi har brukt IntelliJ IDEA som programmeringsomgivelse. 
+* Vi har brukt javaFX for å designe produktet. 
+* MySQL er brukt som databaseverktøy.
+* Maven har blitt brukt som rammeverk for å bygge prosjektet, kjøre tester og deploye til kjørbar .jar fil.
 
-### Installasjon
-
-* For å komme i gang med BookBoard, må du sørge for at du har Java 11.0.2 på PCen din og at dette er den versjonen som er linka til i JAVA_HOME variabelen din. 
-* Klikk [her](https://confluence.atlassian.com/doc/setting-the-java_home-variable-in-windows-8895.html) for en guide for å sette JAVA_HOME variabelen.
-* Nå kan du laste ned siste versjon av BookBoard (1.1) fra repositoriet over.
-* Kjør den ved å dobbelklikke på den, eller cd til rett mappe i cmd og skriv:
-```java
-C:\Users\bruker\Downloads> java -jar "BookBoard 1.1.jar"
-```
-
-### Komme i gang
-Student:
-* Om du ikke allerede har fått bruker må du ta kontakt og be admin fikse dette.
-* Deretter er det bare å logge inn. Om du ikke har noen fag fra før kan du melde deg opp i fagene dine så lenge faget er meldt opp i BookBoard av faglærer.
-* Nå er det bare å booke ledige studasser til saltider faglærer har satt opp.
-* Kan også levere inn øvinger om det er lagt ut øvinger for dine emner, og få tilbakemelding når de er rettet.
-
-Studass:
-* Om du ikke allerede har fått bruker må du ta kontakt og be admin fikse dette.
-* Gi beskjed til admin hvilket fag du er studass i sånn at admin får oppdatert det.
-* Nå er det bare å si ifra når du er tilgjengelig på sal i de tidene faglærer har sagt at det skal være åpent på sal.
-* Mulighet for å rette øvinger til studenter i ditt emne.
-
-Faglærer
-* Om du ikke allerede har fått bruker må du ta kontakt og be admin fikse dette.
-* Gi beskjed til admin hvilket fag du vil opprette/bli faglærer i sånn at admin får oppdatert det.
-* Nå er det bare å legge ut når du som faglærer vil at studenter skal kunne booke sudasser på sal.
-* Mulighet for å opprette og rette øvinger i ditt emne.
-
-### Funksjonalitet
+## Funksjonalitet
 
 BookBoard har følgende funksjonalitet:
 * Admin bruker med mulighet for å opprette brukere, emner og legge til/endre roller mellom brukere og emner.
@@ -53,15 +26,26 @@ BookBoard har følgende funksjonalitet:
 * Faglærer kan sende ut kunngjøringer for spesifikke emner, til alle/studenter/studasser.
 * Mulighet for et øvingssystem der faglærer kan opprette øvinger, studenter kan levere og studasser og faglærer kan rette.
 
-## Laget av
+## Screenshots
+![login](https://i.imgur.com/UeZLnV3.png)
+![admin](https://i.imgur.com/2lfmsDy.png)
+![emne](https://i.imgur.com/Pc2nOjK.png)
+![faglærer](https://i.imgur.com/I4gtdMd.png)
+![studass](https://i.imgur.com/GtApggM.png)
+![student](https://i.imgur.com/anq62YH.png)
+![innlevering](https://i.imgur.com/o3BemqG.png)
+![retting](https://i.imgur.com/ZBoCI0O.png)
+![emne](https://i.imgur.com/0lCzvde.png)
+![kunngjørigner](https://i.imgur.com/w7D7BdJ.png)
+![meldinger](https://i.imgur.com/Cnzhno0.png)
 
-* Agnes Marie Ockernahl
-* Ragnhild Kleiven
-* Bjørn Haugland Spangelo
-* Ingebrigt Nygård
+## Installasjon
 
+1. Clone reposetorien ved å skrive git clone git@gitlab.stud.idi.ntnu.no:programvareutvikling-v19/gruppe-16.git i terminalen i ønsket mappe.
+2. Åpne prosjektet i ønsket IDEA, for eksempel IntelliJ IDEA.
+3. Bruk sql-tabellene som ligger i sql/tabeller.sql, og sett opp egen database.
 
-## Kontakt
+## Tester
 
-Send mail til ingebrin@stud.ntnu.no om det er noe som er uklart, eller andre spørsmål og henvendelser.
-
+Testene til prosjektet ligger i filen MainTest.java som ligger i src/test/java/MainTest.java.
+Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test kommandoen.
