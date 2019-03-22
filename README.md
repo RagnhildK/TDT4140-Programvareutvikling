@@ -24,6 +24,10 @@ BookBoard har følgende funksjonalitet:
 * Faglærer kan sende ut kunngjøringer for spesifikke emner, til alle/studenter/studasser.
 * Mulighet for et øvingssystem der faglærer kan opprette øvinger, studenter kan levere og studasser og faglærer kan rette.
 
+## Screenshots
+![login](C:\Users\ingin\Documents\Skole\screenshots\login)
+
+
 ## Installasjon
 
 1. Clone reposetorien ved å skrive git clone git@gitlab.stud.idi.ntnu.no:programvareutvikling-v19/gruppe-16.git i terminalen i ønsket mappe.
