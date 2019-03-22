@@ -25,7 +25,7 @@ BookBoard har følgende funksjonalitet:
 * Mulighet for et øvingssystem der faglærer kan opprette øvinger, studenter kan levere og studasser og faglærer kan rette.
 
 ## Screenshots
-![login](uploads/c9888425f650d42dde6bfc2f8c682a38/login.png)
+![login](https://imgur.com/UeZLnV3)
 
 
 ## Installasjon
