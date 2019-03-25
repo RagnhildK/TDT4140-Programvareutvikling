@@ -77,6 +77,17 @@ public class MainTest {
         }
     }
     @org.junit.Test
+    public void sjekkSjekker() {
+        assertTrue(Check.checkDato("2019-03-02"));
+        assertFalse(Check.checkDato("2019-03-"));
+        assertTrue(Check.checkTidspunkt("12:30"));
+        assertFalse(Check.checkTidspunkt("1200"));
+        assertTrue(Check.checkTime("12:00", "13:00"));
+        assertFalse(Check.checkTime("12:00", "11:00"));
+        assertTrue(Check.future("2030-01-01"));
+        assertFalse(Check.future("1970-01-01"));
+    }
+    @org.junit.Test
     public void sjekkLogin() {
         try {
             assertTrue(UserManager.checkLogin(brukernavn, passord));
