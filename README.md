@@ -29,10 +29,10 @@ BookBoard har følgende funksjonalitet:
 ## Screenshots
 
 ![admin](https://i.imgur.com/2lfmsDy.png)
-![student](https://i.imgur.com/anq62YH.png)
-![innlevering](https://i.imgur.com/o3BemqG.png)
 ![emne](https://i.imgur.com/0lCzvde.png)
+![student](https://i.imgur.com/anq62YH.png)
 ![meldinger](https://i.imgur.com/Cnzhno0.png)
+![innlevering](https://i.imgur.com/o3BemqG.png)
 
 ## Installasjon
 
