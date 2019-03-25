@@ -31,6 +31,9 @@ BookBoard har følgende funksjonalitet:
 * Faglærer kan sende ut kunngjøringer for spesifikke emner, til alle/studenter/studasser.
 * Mulighet for et øvingssystem der faglærer kan opprette øvinger, studenter kan levere og studasser og faglærer kan rette.
 
+## Fremtidig funksjonalitet
+
+
 ## Screenshots
 
 ![admin](https://i.imgur.com/2lfmsDy.png)
