@@ -35,27 +35,55 @@ BookBoard har følgende funksjonalitet:
 
 
 ## Screenshots
+
 Admin side med mulighet for å oppretting og endring.
+
 ![admin](https://i.imgur.com/2lfmsDy.png)
+
 Hjemmeside for bruker med oversikt over emner og bookinger.
+
 ![emne](https://i.imgur.com/0lCzvde.png)
+
 Det studenten ser når han skal booke en tid.
+
 ![student](https://i.imgur.com/anq62YH.png)
+
 Kommunisering mellom brukere med meldingsystemet
+
 ![meldinger](https://i.imgur.com/Cnzhno0.png)
+
 Det studenten ser når han skal levere inn enn øving.
+
 ![innlevering](https://i.imgur.com/o3BemqG.png)
 
 ## Installasjon
 
-1. Clone reposetorien ved å skrive git clone git@gitlab.stud.idi.ntnu.no:programvareutvikling-v19/gruppe-16.git i terminalen i ønsket mappe.
+1. Clone reposetorien ved å skrive kommandoen under i ønsket mappe i terminalen:
+
+```git
+git clone git@gitlab.stud.idi.ntnu.no:programvareutvikling-v19/gruppe-16.git
+```
+
 2. Åpne prosjektet i ønsket IDEA, for eksempel IntelliJ IDEA. Og last det inn som et Maven prosjekt.
 3. Om man har tilgang til NTNU sitt nettverk kan man bruke databasen som er koblet opp.
 4. Viss ikke kan man kjøre sql scriptet (som ligger i sql/tabeller.sql) og sette opp egen database og koble seg opp mot denne ved å endre feltene i DatabaseControlleren.
-5. Nå er det bare å begynne å lese seg litt opp på de forskjellige metodene og starte å utvikle nye features.
+5. Nå er det bare å begynne å lese seg litt opp på hva de forskjellige klassene og metodene gjør.
 
 ## Tester
 
 * Testene til prosjektet finner man i src/test/java/MainTest.java, og kan kjøres direkte derfra.
-* Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test kommandoen.
+* Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test eller install kommandoene.
+
+## Hvordan bidra
+
+* Om det kunne vært aktuelt å bidra på noen som helst måte er det bare å ta kontakt.
+* Eller bare begynne å utvikle noen av de nye funksjonene som trengst i en ny branch og sende en merge request som er godt dokumentert når du er ferdig, så blir den vurdert fortløpende.
+
+## Bidrag
+
+* Agnes Marie Ockernahl
+* Ragnhild Kleiven
+* Bjørn Haugland Spangelo
+* Ingebrigt Nygård
+
 
