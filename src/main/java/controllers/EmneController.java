@@ -1,7 +1,7 @@
 package controllers;
 
 import app.Check;
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
@@ -92,7 +92,7 @@ public class EmneController {
     //Viser alle emner i en combobox
     public void showAllEmner() {
         ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getEmner();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getEmner();
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
@@ -111,11 +111,11 @@ public class EmneController {
 
     //Legger til et emne som student
     @FXML protected void addEmne(ActionEvent event){
-        if(Database.getRolle(UserManager._bruker, comboBox.getValue())!= ""){
+        if(DatabaseController.getRolle(UserManager._bruker, comboBox.getValue())!= ""){
             lblStatus.setText("Allerede meldt opp!");
         }
         else {
-            if (Database.addRolle(comboBox.getValue(), UserManager._bruker, "student")) {
+            if (DatabaseController.addRolle(comboBox.getValue(), UserManager._bruker, "student")) {
                 lblStatus.setText(UserManager._bruker + " meldt opp i " + comboBox.getValue());
             } else {
                 lblStatus.setText("Klarte ikke legge til!");
@@ -150,7 +150,7 @@ public class EmneController {
     //Henter studass informasjon til tabell
     public ObservableList<List<StringProperty>> getStudassPåSal()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMineStudassPåSal(UserManager._bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getMineStudassPåSal(UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();
@@ -170,7 +170,7 @@ public class EmneController {
     //Henter booking informajson til tabell
     public ObservableList<List<StringProperty>> getBooking()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBooking(UserManager._bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getBooking(UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();

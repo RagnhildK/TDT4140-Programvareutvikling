@@ -1,7 +1,7 @@
 package controllers;
 
 import app.Check;
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -113,13 +113,13 @@ public class StudentController {
     //Henter informasjon til tabell
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getStudassPåSal(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();
                 String key = entry.getKey();
                 ArrayList<String> values = entry.getValue();
-                ArrayList<HashMap<String, ArrayList<String>>> booking = Database.getUnikBooking(key, values.get(0), values.get(2));
+                ArrayList<HashMap<String, ArrayList<String>>> booking = DatabaseController.getUnikBooking(key, values.get(0), values.get(2));
                 if (booking.isEmpty()){
                     row.add(new SimpleStringProperty(key));
                     for (String v : values) {

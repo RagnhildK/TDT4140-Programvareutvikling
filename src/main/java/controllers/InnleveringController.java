@@ -2,7 +2,7 @@ package controllers;
 
 
 import app.Check;
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
@@ -66,7 +66,7 @@ public class InnleveringController {
                 String str = s.substring(i+1,s.length()-1);
                 lblØving.setText(str);
                 //Øvingsinformasjon
-                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getOvingID(UserManager._aktivtEmne,str);
+                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getOvingID(UserManager._aktivtEmne,str);
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         ovingID = entry.getKey();
@@ -77,22 +77,22 @@ public class InnleveringController {
                 }
                 String last = "";
                 //Henter siste innlevering informasjon
-                dbOutput = Database.getUnikInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
+                dbOutput = DatabaseController.getUnikInnlevering(DatabaseController.getMaxIDInnlevering(UserManager._bruker, ovingID));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         btnOpenFile.setVisible(true);
-                        fileLevert = Database.getInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID), str);
+                        fileLevert = DatabaseController.getInnlevering(DatabaseController.getMaxIDInnlevering(UserManager._bruker, ovingID), str);
                         ArrayList<String> values = entry.getValue();
                         last = "\n\nLevert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3);
                     }
                 }
                 //Henter siste retting og innlevering informasjon
-                dbOutput = Database.getUnikRetting(Database.getMaxIDInnlevering(UserManager._bruker, ovingID));
+                dbOutput = DatabaseController.getUnikRetting(DatabaseController.getMaxIDInnlevering(UserManager._bruker, ovingID));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         btnOpenFile.setVisible(true);
                         ArrayList<String> values = entry.getValue();
-                        fileLevert = Database.getInnlevering(Database.getMaxIDInnlevering(UserManager._bruker, ovingID), str);
+                        fileLevert = DatabaseController.getInnlevering(DatabaseController.getMaxIDInnlevering(UserManager._bruker, ovingID), str);
                         String godkjent = (values.get(5).equals("1")) ? "Ja" : "Nei";
                         last = "\n\nLevert: " + MeldingerController.getTid(values.get(2))
                                 + "\nBeskrivelse: " + values.get(3)
@@ -114,7 +114,7 @@ public class InnleveringController {
     public void showOvinger(){
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getOvinger(UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getOvinger(UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -132,7 +132,7 @@ public class InnleveringController {
             Calendar c = Calendar.getInstance();
             SimpleDateFormat f = new SimpleDateFormat("hh:mm:ss");
             if(Check.checkTime(f.format(c.getTime()),frist.substring(11))){
-                if(Database.addInnlevering(ovingID,UserManager._bruker, txtBeskrivelse.getText(), file)){
+                if(DatabaseController.addInnlevering(ovingID,UserManager._bruker, txtBeskrivelse.getText(), file)){
                     lblStatus.setText("Add success!");
                 }else {
                     lblStatus.setText("Add failed!");

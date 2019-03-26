@@ -49,9 +49,9 @@ public class UserManager {
     //Sjekker om brukernavn og passord stemmer overens med det som ligger i databasen
     public static boolean checkLogin(String username, String password) {
 
-        if(Database.checkLogin(username,password)){
+        if(DatabaseController.checkLogin(username,password)){
             System.out.println("Login success!");
-            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker(username);
+            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getBruker(username);
             if (dbOutput.isEmpty()){
                 System.err.println("Enda ikke lagt til en rolle til et fag.");
                 _bruker = username;
@@ -81,7 +81,7 @@ public class UserManager {
                 _rolle = roller;
 
                 System.out.println(rolle);
-                Database.rsToString(dbOutput);
+                DatabaseController.rsToString(dbOutput);
             }
             return true;
         }
@@ -92,7 +92,7 @@ public class UserManager {
     }
     //Oppdaterer rollene til brukeren
     public static boolean updateRoller() {
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker(_bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getBruker(_bruker);
         if (dbOutput.isEmpty()) {
             return false;
 
@@ -114,17 +114,17 @@ public class UserManager {
     }
     //Om det ikke allerede finst en booking så booker den tiden som er sendt inn
     public static boolean booking(String dato, String tidspunkt, String studass){
-        ArrayList<HashMap<String,ArrayList<String>>> booking = Database.getUnikBooking(dato, tidspunkt, studass);
+        ArrayList<HashMap<String,ArrayList<String>>> booking = DatabaseController.getUnikBooking(dato, tidspunkt, studass);
         if (!booking.isEmpty()){
             return false;
         }
-        ArrayList<HashMap<String,ArrayList<String>>> sps = Database.getUnikStudassPåSal(dato, _aktivtEmne, tidspunkt, studass);
+        ArrayList<HashMap<String,ArrayList<String>>> sps = DatabaseController.getUnikStudassPåSal(dato, _aktivtEmne, tidspunkt, studass);
 
-        return Database.addBooking(Database.getBookingID(), _bruker, dato, tidspunkt, studass, _aktivtEmne);
+        return DatabaseController.addBooking(DatabaseController.getBookingID(), _bruker, dato, tidspunkt, studass, _aktivtEmne);
     }
     //Legger til tid på sal for studass og sjekker at dette ligger innenfor oppgitt saltid.
     public static boolean addStudassPåSal(String dato, String tidspunkt, String varighet) {
-        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = Database.getSaltid(dato, _aktivtEmne);
+        ArrayList<HashMap<String,ArrayList<String>>> dbOutput = DatabaseController.getSaltid(dato, _aktivtEmne);
         int lengde = Integer.parseInt(varighet);
         boolean ok = false;
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
@@ -133,7 +133,7 @@ public class UserManager {
                 int intervall = Integer.parseInt(val.get(2));
                 while(lengde >= intervall){
                     if (Check.checkTime(val.get(0), tidspunkt) && Check.checkTime(tidspunkt, val.get(1))){
-                        ok = Database.addStudassPåSal(dato, tidspunkt, _aktivtEmne, _bruker, intervall);
+                        ok = DatabaseController.addStudassPåSal(dato, tidspunkt, _aktivtEmne, _bruker, intervall);
 
                         lengde -= intervall;
                         int hh = Integer.parseInt(tidspunkt.substring(0,2));
@@ -163,6 +163,6 @@ public class UserManager {
 
     //Legger til saltid
     public static boolean addSaltid(String dato, String fra, String til, String tid) {
-        return (Database.addSaltid(dato, fra, til, _aktivtEmne, Integer.parseInt(tid) , _bruker));
+        return (DatabaseController.addSaltid(dato, fra, til, _aktivtEmne, Integer.parseInt(tid) , _bruker));
     }
 }

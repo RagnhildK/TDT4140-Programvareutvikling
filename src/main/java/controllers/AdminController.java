@@ -1,6 +1,6 @@
 package controllers;
 
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -77,7 +77,7 @@ public class AdminController {
     }
     //Legger til bruker i databasen
     @FXML protected void addBruker(ActionEvent event) {
-        if (Database.addBruker(txtBrukernavn.getText(),txtNavn.getText(),txtPassord.getText())) {
+        if (DatabaseController.addBruker(txtBrukernavn.getText(),txtNavn.getText(),txtPassord.getText())) {
             lblStatus.setText("Add success!");
         }else {
             lblStatus.setText("Add failed!");
@@ -85,8 +85,8 @@ public class AdminController {
     }
     //Legger til emne i databasen
     @FXML protected void addEmne(ActionEvent event) {
-        if (Database.addEmne(txtEmneID.getText(),txtEmneNavn.getText()) &&
-        Database.addRolle(txtEmneID.getText(), txtFaglærer.getText(), "faglærer")) {
+        if (DatabaseController.addEmne(txtEmneID.getText(),txtEmneNavn.getText()) &&
+        DatabaseController.addRolle(txtEmneID.getText(), txtFaglærer.getText(), "faglærer")) {
             lblStatus.setText("Add success!");
         }else{
             lblStatus.setText("Add failed!");
@@ -94,15 +94,15 @@ public class AdminController {
     }
     //Endrer rolle om det finst en rolle allerede, ellers legger den til en ny
     @FXML protected void addRolle (ActionEvent event) {
-        if(Database.getRolle(txtBrukernavnRolle.getText(), txtEmneIDRolle.getText())!= ""){
-            if(Database.updateRolle(txtEmneIDRolle.getText(),txtBrukernavnRolle.getText(), txtRolle.getText())) {
+        if(DatabaseController.getRolle(txtBrukernavnRolle.getText(), txtEmneIDRolle.getText())!= ""){
+            if(DatabaseController.updateRolle(txtEmneIDRolle.getText(),txtBrukernavnRolle.getText(), txtRolle.getText())) {
                 lblStatus.setText(txtBrukernavnRolle.getText()+" har fått rollen "+txtRolle.getText());
             }else{
                 lblStatus.setText("Update failed!");
             }
         }
         else{
-            if(Database.addRolle(txtEmneIDRolle.getText(),txtBrukernavnRolle.getText(), txtRolle.getText())){
+            if(DatabaseController.addRolle(txtEmneIDRolle.getText(),txtBrukernavnRolle.getText(), txtRolle.getText())){
                 lblStatus.setText(txtBrukernavnRolle.getText()+" har fått rollen "+txtRolle.getText());
             }else{
                 lblStatus.setText("Add failed!");
@@ -122,7 +122,7 @@ public class AdminController {
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
         //Database.getBruker("all") henter informasjon om alle brukere
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker("all");
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getBruker("all");
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 //Legger informasjon fra databasen inn i en List row for så å legge det til i OservableList data.

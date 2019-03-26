@@ -1,7 +1,7 @@
 package controllers;
 
 
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
@@ -63,7 +63,7 @@ public class KunngjoringerController {
                 int i = s.indexOf("'");
                 lblTil.setText(s.substring(i+1,s.length()-1));
                 sender = s.substring(i+1,s.length()-1);
-                Database.updateUlest(sender,UserManager._bruker);
+                DatabaseController.updateUlest(sender,UserManager._bruker);
                 //update(sender);
             }
         });
@@ -91,7 +91,7 @@ public class KunngjoringerController {
 
     public void getMottakere(){
         ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBruker("all");
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getBruker("all");
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> row = new ArrayList<String>();
@@ -110,7 +110,7 @@ public class KunngjoringerController {
     public void update(String sender){
         //lblMeldinger.setPrefHeight(0);
         String data="";
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMeldinger(sender,UserManager._bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getMeldinger(sender,UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -148,10 +148,10 @@ public class KunngjoringerController {
         msg += txtMelding.getText().trim();
         for (ArrayList l : mottakere){
             if(sender.equals("alle")){
-                Database.addMelding(UserManager._bruker, l.get(0).toString(),msg);
+                DatabaseController.addMelding(UserManager._bruker, l.get(0).toString(),msg);
             }
             else if (l.get(1).equals(sender)){
-                Database.addMelding(UserManager._bruker, l.get(0).toString(),msg);
+                DatabaseController.addMelding(UserManager._bruker, l.get(0).toString(),msg);
             }
 
         }

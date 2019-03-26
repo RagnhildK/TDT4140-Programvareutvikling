@@ -1,7 +1,7 @@
 package controllers;
 
 import app.Check;
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -95,7 +95,7 @@ public class FaglaererController {
     //Henter informasjon til tabell
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getSaltid(txtDato.getText(), UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getSaltid(txtDato.getText(), UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();
@@ -117,7 +117,7 @@ public class FaglaererController {
        
         List<String> data = new ArrayList<>();
 
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getStudenter(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getStudenter(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
@@ -126,7 +126,7 @@ public class FaglaererController {
                 }
             }
         }
-        dbOutput = Database.getStudasser(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
+        dbOutput = DatabaseController.getStudasser(defaultF.format(calendar.getTime()), UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
@@ -136,10 +136,10 @@ public class FaglaererController {
             }
         }
         for(String bruker : data)  {
-            Database.addMelding(UserManager._bruker, bruker, "Saltidene den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + "\n har blitt endret. Sjekk om din saltid fortsatt står");
+            DatabaseController.addMelding(UserManager._bruker, bruker, "Saltidene den " + defaultF.format(calendar.getTime()) + " i "  + UserManager._aktivtEmne + "\n har blitt endret. Sjekk om din saltid fortsatt står");
         }
 
-        Database.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()), txtFraDelete.getText());
+        DatabaseController.deleteSaltid(UserManager._aktivtEmne,defaultF.format(calendar.getTime()), txtFraDelete.getText());
         showTable();
         
     }

@@ -1,7 +1,7 @@
 package controllers;
 
 
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import com.jfoenix.controls.*;
 import javafx.event.ActionEvent;
@@ -63,7 +63,7 @@ public class MeldingerController {
                 }
                 lblTil.setText(str);
                 sender = str;
-                Database.updateUlest(sender,UserManager._bruker);
+                DatabaseController.updateUlest(sender,UserManager._bruker);
                 update(sender);
                 showAvsendere();
             }
@@ -81,7 +81,7 @@ public class MeldingerController {
     //Viser alle brukere i comboboxen
     public void showAllBrukere() {
         ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getBrukere();
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getBrukere();
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 String key = entry.getKey();
@@ -103,7 +103,7 @@ public class MeldingerController {
     //Sjekker om det finst noen uleste meldinger og returnerer hvor mange
     public int checkUleste() {
         int i = 0;
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getAvsendere(UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -116,7 +116,7 @@ public class MeldingerController {
     }
     public int checkUleste(String bruker) {
         int i = 0;
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getAvsendere(UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -133,7 +133,7 @@ public class MeldingerController {
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
         ArrayList<String> listVarsler = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getAvsendere(UserManager._bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getAvsendere(UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -158,7 +158,7 @@ public class MeldingerController {
         lblMeldinger.setPrefHeight(0);
         lblMeldinger.setWrapText(true);
         String data="";
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getMeldinger(sender,UserManager._bruker);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getMeldinger(sender,UserManager._bruker);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -198,7 +198,7 @@ public class MeldingerController {
 
     //Sender en melding til databasen og oppdaterer meldingsvinduet
     public void sendMsg(ActionEvent event){
-        Database.addMelding(UserManager._bruker, sender,txtMelding.getText().trim());
+        DatabaseController.addMelding(UserManager._bruker, sender,txtMelding.getText().trim());
         txtMelding.setText("");
         update(sender);
     }

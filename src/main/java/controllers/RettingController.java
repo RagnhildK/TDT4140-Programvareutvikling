@@ -1,7 +1,7 @@
 package controllers;
 
 
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXListView;
@@ -59,7 +59,7 @@ public class RettingController {
                 String str = s.substring(i+1,s.length()-1);
                 lblØving.setText(str);
                 //Henter siste levering informasjon
-                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikInnlevering(innleveringer.get(str));
+                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getUnikInnlevering(innleveringer.get(str));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         innleveringID = entry.getKey();
@@ -67,19 +67,19 @@ public class RettingController {
                         ovingID = values.get(0);
                         student = values.get(1);
                         lblØving.setText(str);
-                        file = Database.getInnlevering(innleveringID, str);
+                        file = DatabaseController.getInnlevering(innleveringID, str);
                         lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2)) + "\nBeskrivelse: " + values.get(3));
                     }
                 }
                 //Henter siste retting informasjon
-                dbOutput = Database.getUnikRetting(innleveringer.get(str));
+                dbOutput = DatabaseController.getUnikRetting(innleveringer.get(str));
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         innleveringID = entry.getKey();
                         ArrayList<String> values = entry.getValue();
                         ovingID = values.get(0);
                         lblØving.setText(str);
-                        file = Database.getInnlevering(innleveringID, str);
+                        file = DatabaseController.getInnlevering(innleveringID, str);
                         String godkjent = (values.get(5).equals("1")) ? "Ja" : "Nei";
                         lblStatus.setText("Levert: " + MeldingerController.getTid(values.get(2))
                                 + "\nBeskrivelse: " + values.get(3)
@@ -96,7 +96,7 @@ public class RettingController {
     public void showInnleveringer(){
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getInnleveringer(UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getInnleveringer(UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -122,11 +122,11 @@ public class RettingController {
             i = "1";
             godkjent = "Godkjent";
         }
-        if(Database.addRetting(innleveringID, UserManager._bruker, i, txtKommentar.getText())){
+        if(DatabaseController.addRetting(innleveringID, UserManager._bruker, i, txtKommentar.getText())){
             lblStatus.setText("Add success!");
             //Sender en melding til brukeren om at innleveringen er vurdert
             String tittel = "";
-            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getUnikOving(ovingID);
+            ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getUnikOving(ovingID);
             for (HashMap<String,ArrayList<String>> set : dbOutput) {
                 for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                     ArrayList<String> values = entry.getValue();
@@ -134,7 +134,7 @@ public class RettingController {
                 }
             }
             String str = UserManager._aktivtEmne + " - " + tittel + "\nVurdering: "+ godkjent + "\nKommentar: " + txtKommentar.getText();
-            Database.addMelding(UserManager._bruker, student, str);
+            DatabaseController.addMelding(UserManager._bruker, student, str);
             checkGodkjent.setSelected(false);
             txtKommentar.setText("");
         }else {

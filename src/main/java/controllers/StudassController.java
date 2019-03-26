@@ -1,7 +1,7 @@
 package controllers;
 
 import app.Check;
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -91,7 +91,7 @@ public class StudassController {
     //Henter tabellinformasjon fra databasen
     public ObservableList<List<StringProperty>> getData()  {
         ObservableList<List<StringProperty>> data = FXCollections.observableArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getSaltid(txtDato.getText(), UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getSaltid(txtDato.getText(), UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 List<StringProperty> row = new ArrayList<>();

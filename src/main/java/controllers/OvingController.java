@@ -1,7 +1,7 @@
 package controllers;
 
 
-import app.Database;
+import app.DatabaseController;
 import app.UserManager;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
@@ -53,7 +53,7 @@ public class OvingController {
                 int i = s.indexOf("'");
                 String str = s.substring(i+1,s.length()-1);
                 lblØving.setText(str);
-                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getOvingID(UserManager._aktivtEmne,str);
+                ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getOvingID(UserManager._aktivtEmne,str);
                 for (HashMap<String,ArrayList<String>> set : dbOutput) {
                     for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                         ovingID = entry.getKey();
@@ -69,7 +69,7 @@ public class OvingController {
     public void showOvinger(){
         listView.getItems().clear();
         ArrayList<String> list = new ArrayList();
-        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = Database.getOvinger(UserManager._aktivtEmne);
+        ArrayList<HashMap<String, ArrayList<String>>> dbOutput = DatabaseController.getOvinger(UserManager._aktivtEmne);
         for (HashMap<String,ArrayList<String>> set : dbOutput) {
             for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                 ArrayList<String> values = entry.getValue();
@@ -83,7 +83,7 @@ public class OvingController {
 
     //Oppretter en øving i databasen
     @FXML public void opprett(ActionEvent event){
-        if(Database.addOving(UserManager._aktivtEmne, txtTittel.getText(), txtBeskrivelse.getText(), txtFrist.getText())){
+        if(DatabaseController.addOving(UserManager._aktivtEmne, txtTittel.getText(), txtBeskrivelse.getText(), txtFrist.getText())){
             lblStatus.setText("Add success!");
         }else {
             lblStatus.setText("Add failed!");

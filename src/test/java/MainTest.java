@@ -30,8 +30,8 @@ public class MainTest {
     @org.junit.BeforeClass
     public static void opprettEmne() {
         try {
-            Database.addEmne(fag, "Test emne");
-            ArrayList<HashMap<String, ArrayList<String>>> user = Database.getBruker("Truls");
+            DatabaseController.addEmne(fag, "Test emne");
+            ArrayList<HashMap<String, ArrayList<String>>> user = DatabaseController.getBruker("Truls");
             for (HashMap<String,ArrayList<String>> set : user) {
                 for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                     String key = entry.getKey();
@@ -48,8 +48,8 @@ public class MainTest {
         UserManager._aktivtEmne=fag;
         UserManager._bruker=brukernavn;
         try {
-            Database.addBruker(brukernavn, "Truls", passord);
-            ArrayList<HashMap<String, ArrayList<String>>> user = Database.getBruker("Truls");
+            DatabaseController.addBruker(brukernavn, "Truls", passord);
+            ArrayList<HashMap<String, ArrayList<String>>> user = DatabaseController.getBruker("Truls");
             for (HashMap<String,ArrayList<String>> set : user) {
                 for (Map.Entry<String, ArrayList<String>> entry : set.entrySet()) {
                     String key = entry.getKey();
@@ -63,7 +63,7 @@ public class MainTest {
     @org.junit.After
     public void slettBruker() {
         try {
-            assertTrue(Database.deleteBruker(brukernavn));
+            assertTrue(DatabaseController.deleteBruker(brukernavn));
         }catch(Exception e){
             fail();
         }
@@ -71,7 +71,7 @@ public class MainTest {
     @org.junit.AfterClass
     public static void slettEmne() {
         try {
-            assertTrue(Database.deleteEmne(fag));
+            assertTrue(DatabaseController.deleteEmne(fag));
         }catch(Exception e){
             fail();
         }
@@ -103,18 +103,18 @@ public class MainTest {
     }
     @org.junit.Test
     public void sjekkRolle(){
-        assertTrue(Database.updateRolle(fag,brukernavn,"student"));
+        assertTrue(DatabaseController.updateRolle(fag,brukernavn,"student"));
     }
     @org.junit.Test
     public void sjekkMelding(){
-        assertTrue(Database.addMelding(brukernavn,brukernavn,"hello"));
+        assertTrue(DatabaseController.addMelding(brukernavn,brukernavn,"hello"));
     }
     @org.junit.Test
     public void sjekkInnlevering(){
-        assertTrue(Database.addOving(UserManager._aktivtEmne,"Øving Test","Øving Test", "2030-01-01"));
+        assertTrue(DatabaseController.addOving(UserManager._aktivtEmne,"Øving Test","Øving Test", "2030-01-01"));
         File fil = new File("test.pdf");
-        assertTrue(Database.addInnlevering(Database.getMaxID("OvingID", "Oving"), brukernavn, "Øving Test", fil));
-        assertTrue(Database.addRetting(Database.getMaxID("InnleveringID", "Innlevering"), brukernavn, "1", "Ok"));
+        assertTrue(DatabaseController.addInnlevering(DatabaseController.getMaxID("OvingID", "Oving"), brukernavn, "Øving Test", fil));
+        assertTrue(DatabaseController.addRetting(DatabaseController.getMaxID("InnleveringID", "Innlevering"), brukernavn, "1", "Ok"));
     }
 
 
