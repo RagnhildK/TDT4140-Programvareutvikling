@@ -63,7 +63,7 @@ Det studenten ser når han skal levere inn enn øving.
 * Testene til prosjektet finner man i src/test/java/MainTest.java, og kan kjøres direkte derfra.
 * Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test kommandoen.
 
-## Laget av
+## Bidrag
 
 Agnes Marie Ockernahl
 Ragnhild Kleiven
