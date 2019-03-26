@@ -81,9 +81,9 @@ git clone git@gitlab.stud.idi.ntnu.no:programvareutvikling-v19/gruppe-16.git
 
 ## Bidrag
 
-Agnes Marie Ockernahl
-Ragnhild Kleiven
-Bjørn Haugland Spangelo
-Ingebrigt Nygård
+* Agnes Marie Ockernahl
+* Ragnhild Kleiven
+* Bjørn Haugland Spangelo
+* Ingebrigt Nygård
 
 
