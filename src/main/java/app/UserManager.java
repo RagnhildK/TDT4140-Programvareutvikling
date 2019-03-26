@@ -153,11 +153,10 @@ public class UserManager {
                         break;
                     }
                 }
-                return ok;
+
             }
         }
-
-        return false;
+        return ok;
     }
     // Sjekker at før faktisk er før etter
 
