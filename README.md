@@ -37,12 +37,16 @@ BookBoard har følgende funksjonalitet:
 ## Screenshots
 Admin side med mulighet for å oppretting og endring.
 ![admin](https://i.imgur.com/2lfmsDy.png)
+
 Hjemmeside for bruker med oversikt over emner og bookinger.
 ![emne](https://i.imgur.com/0lCzvde.png)
+
 Det studenten ser når han skal booke en tid.
 ![student](https://i.imgur.com/anq62YH.png)
+
 Kommunisering mellom brukere med meldingsystemet
 ![meldinger](https://i.imgur.com/Cnzhno0.png)
+
 Det studenten ser når han skal levere inn enn øving.
 ![innlevering](https://i.imgur.com/o3BemqG.png)
 
@@ -58,4 +62,12 @@ Det studenten ser når han skal levere inn enn øving.
 
 * Testene til prosjektet finner man i src/test/java/MainTest.java, og kan kjøres direkte derfra.
 * Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test kommandoen.
+
+## Laget av
+
+Agnes Marie Ockernahl
+Ragnhild Kleiven
+Bjørn Haugland Spangelo
+Ingebrigt Nygård
+
 
