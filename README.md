@@ -5,7 +5,7 @@ Applikasjonen skal også inneholde tilrettelegging for bedre kommunikasjon og le
 
 ## Build status
 
-
+![badge](https://badge.buildkite.com/sample.svg?status=passing)
 
 ## Standarder for koding
 
@@ -35,22 +35,27 @@ BookBoard har følgende funksjonalitet:
 
 
 ## Screenshots
-
+Admin side med mulighet for å oppretting og endring.
 ![admin](https://i.imgur.com/2lfmsDy.png)
+Hjemmeside for bruker med oversikt over emner og bookinger.
 ![emne](https://i.imgur.com/0lCzvde.png)
+Det studenten ser når han skal booke en tid.
 ![student](https://i.imgur.com/anq62YH.png)
+Kommunisering mellom brukere med meldingsystemet
 ![meldinger](https://i.imgur.com/Cnzhno0.png)
+Det studenten ser når han skal levere inn enn øving.
 ![innlevering](https://i.imgur.com/o3BemqG.png)
 
 ## Installasjon
 
 1. Clone reposetorien ved å skrive git clone git@gitlab.stud.idi.ntnu.no:programvareutvikling-v19/gruppe-16.git i terminalen i ønsket mappe.
-2. Åpne prosjektet i ønsket IDEA, for eksempel IntelliJ IDEA.
-3. Bruk sql-tabellene som ligger i sql/tabeller.sql, og sett opp egen database.
+2. Åpne prosjektet i ønsket IDEA, for eksempel IntelliJ IDEA. Og last det inn som et Maven prosjekt.
+3. Om man har tilgang til NTNU sitt nettverk kan man bruke databasen som er koblet opp.
+4. Viss ikke kan man kjøre sql scriptet (som ligger i sql/tabeller.sql) og sette opp egen database og koble seg opp mot denne ved å endre feltene i DatabaseControlleren.
+5. Nå er det bare å begynne å lese seg litt opp på de forskjellige metodene og starte å utvikle nye features.
 
 ## Tester
 
-Testene til prosjektet ligger i filen MainTest.java som ligger i src/test/java/MainTest.java.
-
-Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test kommandoen.
+* Testene til prosjektet finner man i src/test/java/MainTest.java, og kan kjøres direkte derfra.
+* Testene blir også kjørt om man laster inn prosjektet som et Maven prosjekt, og så kjører Maven test kommandoen.
 
