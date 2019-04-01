@@ -1,3 +1,5 @@
+CREATE DATABASE BookBoardDB;
+
  CREATE TABLE Bruker (
    BrukerNavn	  	VARCHAR(30) NOT NULL,
    Navn				VARCHAR(30),
@@ -54,15 +56,6 @@ CREATE TABLE Booking (
      REFERENCES StudassPåSal(Dato, Tidspunkt, Studass)
       ON UPDATE CASCADE
       ON DELETE CASCADE,
-   /*CONSTRAINT StudassPåSalD_FK FOREIGN KEY (StudassPåSalDato) REFERENCES StudassPåSal(Dato)
-      ON UPDATE CASCADE
-      ON DELETE CASCADE,
-   CONSTRAINT StudassPåSalT_FK FOREIGN KEY (StudassPåSalTidspunkt) REFERENCES StudassPåSal(Tidspunkt)
-      ON UPDATE CASCADE
-      ON DELETE CASCADE,
-   CONSTRAINT StudassPåSal2_FK FOREIGN KEY (StudassPåSalStudass) REFERENCES StudassPåSal(Studass)
-      ON UPDATE CASCADE
-      ON DELETE CASCADE,*/
    CONSTRAINT EmneID2_FK FOREIGN KEY (EmneID) REFERENCES Emne(EmneID)
       ON UPDATE CASCADE
       ON DELETE CASCADE);
@@ -105,6 +98,7 @@ CREATE TABLE Melding (
      Levert        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      Beskrivelse VARCHAR(200),
      Fil        LONGBLOB,
+     filtype    VARCHAR(5),
      CONSTRAINT Innlevering_PK PRIMARY KEY (InnleveringID),
         CONSTRAINT OvingID_FK FOREIGN KEY (OvingID) REFERENCES Oving(OvingID)
         ON UPDATE CASCADE
@@ -112,12 +106,6 @@ CREATE TABLE Melding (
      CONSTRAINT Student11_FK FOREIGN KEY (Student) REFERENCES Bruker(BrukerNavn)
         ON UPDATE CASCADE
         ON DELETE CASCADE);
-
- ALTER TABLE Innlevering
-   ADD COLUMN filtype VARCHAR(5);
-
-
-
 
  CREATE TABLE Retting (
       RettingID INTEGER NOT NULL AUTO_INCREMENT,
