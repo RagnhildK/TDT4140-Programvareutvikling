@@ -14,9 +14,9 @@ Vi har valgt å følge standarder beskrevet i dette dokumentet: https://google.g
 ## Teknologi
 
 * Prosjektet er kodet i java, og vi har brukt IntelliJ IDEA som programmeringsomgivelse. 
-* Vi har brukt JavaFx Scenebuilder for å designe produktet. 
-* MySQL er brukt som databaseverktøy.
-* Java 11 er brukt som SDK
+* Vi har brukt versjon 11 av Java når vi utivklet dette prosjektet.
+* Vi har brukt JavaFX og Scenebuilder for å designe produktet. 
+* Som databaseverktøy har vi brukt MySQL samt JDBC for oppkobling til databasen.
 * Maven har blitt brukt som rammeverk for å bygge prosjektet, kjøre tester og deploye til kjørbar .jar fil.
 
 ## Funksjonalitet
@@ -36,7 +36,7 @@ BookBoard har følgende funksjonalitet:
 
 ## Screenshots
 
-Admin side med mulighet for å oppretting og endring.
+Admin side med mulighet for å oppretting og endring av brukere og emner.
 
 ![admin](https://i.imgur.com/2lfmsDy.png)
 
@@ -48,7 +48,7 @@ Det studenten ser når han skal booke en tid.
 
 ![student](https://i.imgur.com/anq62YH.png)
 
-Kommunisering mellom brukere med meldingsystemet
+Kommunisering mellom brukere med meldingsystemet.
 
 ![meldinger](https://i.imgur.com/Cnzhno0.png)
 
