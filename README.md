@@ -5,7 +5,7 @@ Applikasjonen skal også inneholde tilrettelegging for bedre kommunikasjon og le
 
 ## Build status
 
-![badge](https://badge.buildkite.com/sample.svg?status=passing)
+[![pipeline status](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-16/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-16/commits/master)
 
 ## Standarder for koding
 
