@@ -45,6 +45,39 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            
+            <plugin>
+              <groupId>org.jacoco</groupId>
+              <artifactId>jacoco-maven-plugin</artifactId>
+              <version>0.7.9</version>
+              <configuration>
+                <excludes>
+                  <exclude>**/MavenApplicationKt.*</exclude>
+                </excludes>
+              </configuration>
+              <executions>
+                <execution>
+                  <id>agent-for-ut</id>
+                  <goals>
+                    <goal>prepare-agent</goal>
+                  </goals>
+                </execution>
+                <execution>
+                  <id>agent-for-it</id>
+                  <goals>
+                    <goal>prepare-agent-integration</goal>
+                  </goals>
+                </execution>
+                <execution>
+                  <id>jacoco-site</id>
+                  <phase>post-integration-test</phase>
+                  <goals>
+                    <goal>report</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            
             <!-- <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-compiler-plugin</artifactId>
