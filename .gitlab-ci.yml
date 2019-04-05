@@ -12,7 +12,7 @@ variables:
 compile-job:
   stage: build
   script:
-    - 'mvn clean compile'
+    - 'mvn install -B'
     - "cat gruppe-16/target/site/jacoco/index.html"
   artifacts:
     paths:
