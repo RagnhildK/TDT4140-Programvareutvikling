@@ -22,6 +22,7 @@ unittest-job:
   stage: test
   script:
     - ''
+    - "cat gruppe-16/target/site/jacoco/index.html"
   dependencies:
     - compile-job
   artifacts:
