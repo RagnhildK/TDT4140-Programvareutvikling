@@ -1,67 +1,44 @@
 image: maven:latest
 
-cache:
-  paths:
-    - maven.repository/
- 
+stages:
+    - build
+    - test
+    - deploy
+
 variables:
-  MAVEN_OPTS: "--batch-mode -Dmaven.repo.local=maven.repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN"
- 
-buildAndTest:
+  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+
+compile-job:
+  stage: build
   script:
-    - mvn verify
-    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/
+    - 'mvn clean compile'
+    - cat target/site/jacoco/index.html | grep -o 'Total[^%]*%' | sed -e 's/Total/Jacoco-Test-Coverage:/g'
   artifacts:
     paths:
-      - ./.jar
- 
-deployAndMove:
-  script:
-    - mvn deploy
-    - mv target/*.jar .
-  artifacts:
-    paths:
-      - ./.jar
-  only:
-    - tags
-#stages:
-#    - build
-#    - test
-#    - deploy
-
-#variables:
-#  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
-#  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
-
-#compile-job:
-#  stage: build
-#  script:
-#    - 'mvn clean compile'
-#  artifacts:
-#    paths:
-#    - target/staging
+    - target/staging
     
-#unittest-job:
-#  stage: test
-#  script:
-#    - ''
-#  dependencies:
-#    - compile-job
-#  artifacts:
-#    paths:
-#    - target/staging
+unittest-job:
+  stage: test
+  script:
+    - ''
+  dependencies:
+    - compile-job
+  artifacts:
+    paths:
+    - target/staging
 
-#createjar-job:
-#  stage: deploy
-#  script:
-#    - 'mvn assembly:single'
-#  dependencies:
-#    - unittest-job
-#  only:
-#    - master
-#  artifacts:
-#    paths:
-#    - builds
+createjar-job:
+  stage: deploy
+  script:
+    - 'mvn assembly:single'
+  dependencies:
+    - unittest-job
+  only:
+    - master
+  artifacts:
+    paths:
+    - builds
     
 # most of this taken from https://stackoverflow.com/questions/37785154/how-to-enable-maven-artifact-caching-for-gitlab-ci-runner
 
