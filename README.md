@@ -6,7 +6,7 @@ Applikasjonen skal også inneholde tilrettelegging for bedre kommunikasjon og le
 ## Build status
 
 [![pipeline status](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-16/badges/master/pipeline.svg)](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-16/commits/master)
-
+[![coverage report](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-16/badges/master/coverage.svg)](https://gitlab.stud.idi.ntnu.no/programvareutvikling-v19/gruppe-16/commits/master)
 ## Standarder for koding
 
 Vi har valgt å følge standarder beskrevet i dette dokumentet: https://google.github.io/styleguide/javaguide.html
