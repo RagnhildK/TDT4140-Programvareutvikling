@@ -21,6 +21,7 @@ unittest-job:
   stage: test
   script:
      - 'mvn test'
+     - "cat programvareutvikling-v19/gruppe-16/target/site/jacoco/index.html"
   dependencies:
     - compile-job
   artifacts:
