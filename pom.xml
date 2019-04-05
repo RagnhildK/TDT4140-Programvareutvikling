@@ -88,7 +88,16 @@
            </plugin>-->
        </plugins>
    </build>
-
+     <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+          <plugin>
+            <groupId>@project.groupId@</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>@project.version@</version>
+          </plugin>
+        </plugins>
+    </reporting>
 
 
    <dependencies>
