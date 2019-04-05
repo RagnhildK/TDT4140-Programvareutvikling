@@ -12,8 +12,7 @@ variables:
 compile-job:
   stage: build
   script:
-    - 'mvn install -B'
-    - "cat gruppe-16/target/site/jacoco/index.html"
+    - 'mvn clean compile'
   artifacts:
     paths:
     - target/staging
@@ -21,8 +20,7 @@ compile-job:
 unittest-job:
   stage: test
   script:
-    - ''
-    - "cat gruppe-16/target/site/jacoco/index.html"
+    - mvn $MAVEN_CLI_OPTS test
   dependencies:
     - compile-job
   artifacts:
