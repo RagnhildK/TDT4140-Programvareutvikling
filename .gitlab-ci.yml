@@ -14,7 +14,6 @@ buildAndTest:
   artifacts:
     paths:
       - ./.jar
-  expire_in: 5min
  
 deployAndMove:
   script:
@@ -23,7 +22,6 @@ deployAndMove:
   artifacts:
     paths:
       - ./.jar
-  expire_in: 1d
   only:
     - tags
 #stages:
