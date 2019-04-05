@@ -13,7 +13,7 @@ compile-job:
   stage: build
   script:
     - 'mvn clean compile'
-   # - "cat target/site/jacoco/index.html"
+    - "cat target/site/jacoco/index.html"
   artifacts:
     paths:
     - target/staging
