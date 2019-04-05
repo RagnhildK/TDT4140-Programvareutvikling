@@ -37,7 +37,7 @@ createjar-job:
     - master
   artifacts:
     paths:
-    - builds
+    - /builds/programvareutvikling-v19/gruppe-16/target/PU16-BookBoard 1.0.1-jar-with-dependencies.jar
     
 # most of this taken from https://stackoverflow.com/questions/37785154/how-to-enable-maven-artifact-caching-for-gitlab-ci-runner
 
